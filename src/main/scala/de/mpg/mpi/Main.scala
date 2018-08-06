@@ -35,6 +35,7 @@ object RunPipeline {
 
     }
 
+    println("Done.")
 
   }
 
