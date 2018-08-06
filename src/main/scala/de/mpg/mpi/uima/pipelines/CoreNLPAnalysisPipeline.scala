@@ -12,9 +12,10 @@ class CoreNLPAnalysisPipeline extends Pipeline {
     val posTagger = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpPosTagger])
     val lemmatizer = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpLemmatizer])
     val depParser = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpDependencyParser])
+    val ner = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpNamedEntityRecognizer])
     val coref = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpCoreferenceResolver]) // fix when single sentence broken then it brokes all document
 
-    List(tokenizer, posTagger, lemmatizer, depParser, coref)
+    List(tokenizer, posTagger, lemmatizer, ner, depParser, coref)
   }
 
 }

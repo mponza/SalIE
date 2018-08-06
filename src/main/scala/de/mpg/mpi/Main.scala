@@ -12,7 +12,7 @@ object RunPipeline {
 
   def main(args: Array[String]): Unit = {
 
-    val reader = ReaderFactory.getTextReader("/Users/marcoponza/Desktop/nyt")
+    val reader = ReaderFactory.getTextReader(args(0))
     val pipeline = new StanfordNLPAnalysisPipeline().getEngines()
 
     val batch = 100
@@ -31,7 +31,7 @@ object RunPipeline {
 
       println(jCasList.size)
       jCasList.foreach(x => SimplePipeline.runPipeline(x, pipeline:_*) )
-      //      pl.update()
+      println("Processed " + n + " documents...")
 
     }
 

@@ -12,6 +12,7 @@ class StanfordNLPAnalysisPipeline extends Pipeline {
     val posTagger = AnalysisEngineFactory.createEngineDescription(classOf[StanfordPosTagger])
     val lemmatizer = AnalysisEngineFactory.createEngineDescription(classOf[StanfordLemmatizer])
     val depParser = AnalysisEngineFactory.createEngineDescription(classOf[StanfordParser])
+    val ner = AnalysisEngineFactory.createEngineDescription(classOf[StanfordNamedEntityRecognizer])
     val coref = AnalysisEngineFactory.createEngineDescription(classOf[StanfordCoreferenceResolver]) // fix when single sentence broken then it brokes all document
 
     List(tokenizer, posTagger, lemmatizer, depParser, coref)

@@ -2,6 +2,7 @@ package de.uni_mannheim.minie.annotation;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import de.uni_mannheim.clausie.phrase.Phrase;
@@ -452,5 +453,34 @@ public class AnnotatedPhrase extends Phrase {
     }
     public ObjectOpenHashSet<IndexedWord> getDroppedWords() {
         return this.droppedWords;
+    }
+
+
+
+    //
+    // Added methods for SalIE
+
+    public int getBegin() {
+        Optional<Integer> optionalBegin = wordList.stream().map(x -> x.beginPosition()).min(Integer::compareTo);
+        if(optionalBegin.isPresent()) return optionalBegin.get();
+
+        return -1;
+    }
+
+    public int getEnd() {
+        Optional<Integer> optionalBegin = wordList.stream().map(x -> x.endPosition()).max(Integer::compareTo);
+        if(optionalBegin.isPresent()) return optionalBegin.get();
+
+        return -1;
+    }
+
+    public IndexedWord getHead(SemanticGraph semanticGraph) {
+        if(this.getRoot() == null || this.getRoot().beginPosition() < 0 || this.getRoot().endPosition() < 0) {
+            // re-compute, otherwise returns the root
+            IndexedWord word = CoreNLPUtils.getRootFromWordList(semanticGraph, this.wordList);
+            this.setRoot(word);
+        }
+
+        return this.getRoot();
     }
 }

@@ -20,7 +20,7 @@
         <featureDescription>
           <name>head</name>
           <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
+          <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
         </featureDescription>
         <featureDescription>
           <name>text</name>
