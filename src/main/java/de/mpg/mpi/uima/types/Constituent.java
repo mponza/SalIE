@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon Aug 06 18:57:40 CEST 2018
+ * Updated by JCasGen Tue Aug 07 11:49:19 CEST 2018
  * XML source: /Users/marcoponza/eclipse-workspace/DKProTest/openFactTypeSystemDescriptor.xml
  * @generated */
 public class Constituent extends Annotation {

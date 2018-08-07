@@ -11,7 +11,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon Aug 06 17:34:56 CEST 2018
+ * Updated by JCasGen Tue Aug 07 11:49:19 CEST 2018
  * @generated */
 public class OpenFact_Type extends Annotation_Type {
   /** @generated */
@@ -121,10 +121,10 @@ public class OpenFact_Type extends Annotation_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-	 * @generated
-	 * @param jcas JCas
-	 * @param casType Type 
-	 */
+   * @generated
+   * @param jcas JCas
+   * @param casType Type 
+   */
   public OpenFact_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());

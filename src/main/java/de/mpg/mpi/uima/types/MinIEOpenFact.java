@@ -9,7 +9,7 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** 
- * Updated by JCasGen Mon Aug 06 17:34:56 CEST 2018
+ * Updated by JCasGen Tue Aug 07 11:49:19 CEST 2018
  * XML source: /Users/marcoponza/eclipse-workspace/DKProTest/openFactTypeSystemDescriptor.xml
  * @generated */
 public class MinIEOpenFact extends OpenFact {
@@ -116,6 +116,50 @@ public class MinIEOpenFact extends OpenFact {
     if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_modality == null)
       jcasType.jcas.throwFeatMissing("modality", "MinIEOpenFact");
     jcasType.ll_cas.ll_setStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_modality, v);}    
+   
+    
+  //*--------------*
+  //* Feature: attribution
+
+  /** getter for attribution - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getAttribution() {
+    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_attribution == null)
+      jcasType.jcas.throwFeatMissing("attribution", "MinIEOpenFact");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_attribution);}
+    
+  /** setter for attribution - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setAttribution(String v) {
+    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_attribution == null)
+      jcasType.jcas.throwFeatMissing("attribution", "MinIEOpenFact");
+    jcasType.ll_cas.ll_setStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_attribution, v);}    
+   
+    
+  //*--------------*
+  //* Feature: quantity
+
+  /** getter for quantity - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getQuantity() {
+    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_quantity == null)
+      jcasType.jcas.throwFeatMissing("quantity", "MinIEOpenFact");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_quantity);}
+    
+  /** setter for quantity - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setQuantity(String v) {
+    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_quantity == null)
+      jcasType.jcas.throwFeatMissing("quantity", "MinIEOpenFact");
+    jcasType.ll_cas.ll_setStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_quantity, v);}    
   }
 
     

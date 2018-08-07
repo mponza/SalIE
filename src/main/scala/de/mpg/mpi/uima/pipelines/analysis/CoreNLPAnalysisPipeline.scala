@@ -1,8 +1,12 @@
-package de.mpg.mpi.uima.pipelines
+package de.mpg.mpi.uima.pipelines.analysis
 
+import de.mpg.mpi.uima.pipelines.Pipeline
 import de.tudarmstadt.ukp.dkpro.core.corenlp._
 import org.apache.uima.analysis_engine.AnalysisEngineDescription
 import org.apache.uima.fit.factory.AnalysisEngineFactory
+
+
+// Not used, to be tested
 
 class CoreNLPAnalysisPipeline extends Pipeline {
 
@@ -13,7 +17,7 @@ class CoreNLPAnalysisPipeline extends Pipeline {
     val lemmatizer = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpLemmatizer])
     val depParser = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpDependencyParser])
     val ner = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpNamedEntityRecognizer])
-    val coref = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpCoreferenceResolver]) // fix when single sentence broken then it brokes all document
+    val coref = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpCoreferenceResolver])
 
     List(tokenizer, posTagger, lemmatizer, ner, depParser, coref)
   }

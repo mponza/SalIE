@@ -30,5 +30,5 @@ libraryDependencies ++= Seq(
 //  "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default" % "20170609.1",
 //  "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-upstream-coref-en-default" % "20170609",
 
-  "com.typesafe" % "config" % "1.3.3"
+  "org.rogach" %% "scallop" % "3.1.3"
 )
