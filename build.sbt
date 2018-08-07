@@ -5,6 +5,9 @@ scalacOptions += "-target:jvm-1.8"
 scalacOptions ++= Seq("-feature", "-deprecation")
 fork in run := true
 
+//
+//resourceDirectory in (Compile, runMain) := baseDirectory.value / "src" / "main" / "resources"
+
 
 libraryDependencies ++= Seq(
   "it.unimi.dsi" % "fastutil" % "8.1.1",
@@ -24,7 +27,6 @@ libraryDependencies ++= Seq(
   "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl" % "1.9.3",
   "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl" % "1.9.3",
   "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.corenlp-gpl" % "1.9.3",
-
 
   "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.api.coref-asl" % "1.9.3",
 //  "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default" % "20170609.1",

@@ -1,6 +1,7 @@
-package de.mpg.mpi.uima.types;
 
-/* First created by JCasGen Mon Aug 06 17:34:56 CEST 2018 */
+
+/* First created by JCasGen Tue Aug 07 17:11:25 CEST 2018 */
+package de.mpg.mpi.uima.type;
 
 import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
@@ -9,8 +10,8 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** 
- * Updated by JCasGen Tue Aug 07 11:49:19 CEST 2018
- * XML source: /Users/marcoponza/eclipse-workspace/DKProTest/openFactTypeSystemDescriptor.xml
+ * Updated by JCasGen Tue Aug 07 17:14:20 CEST 2018
+ * XML source: /Users/marcoponza/eclipse-workspace/UIMA/openFactTypeSystemDescriptor.xml
  * @generated */
 public class MinIEOpenFact extends OpenFact {
   /** @generated
@@ -75,6 +76,28 @@ public class MinIEOpenFact extends OpenFact {
  
     
   //*--------------*
+  //* Feature: attribution
+
+  /** getter for attribution - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getAttribution() {
+    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_attribution == null)
+      jcasType.jcas.throwFeatMissing("attribution", "de.mpg.mpi.uima.type.MinIEOpenFact");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_attribution);}
+    
+  /** setter for attribution - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setAttribution(String v) {
+    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_attribution == null)
+      jcasType.jcas.throwFeatMissing("attribution", "de.mpg.mpi.uima.type.MinIEOpenFact");
+    jcasType.ll_cas.ll_setStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_attribution, v);}    
+   
+    
+  //*--------------*
   //* Feature: polarity
 
   /** getter for polarity - gets 
@@ -83,7 +106,7 @@ public class MinIEOpenFact extends OpenFact {
    */
   public String getPolarity() {
     if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_polarity == null)
-      jcasType.jcas.throwFeatMissing("polarity", "MinIEOpenFact");
+      jcasType.jcas.throwFeatMissing("polarity", "de.mpg.mpi.uima.type.MinIEOpenFact");
     return jcasType.ll_cas.ll_getStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_polarity);}
     
   /** setter for polarity - sets  
@@ -92,7 +115,7 @@ public class MinIEOpenFact extends OpenFact {
    */
   public void setPolarity(String v) {
     if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_polarity == null)
-      jcasType.jcas.throwFeatMissing("polarity", "MinIEOpenFact");
+      jcasType.jcas.throwFeatMissing("polarity", "de.mpg.mpi.uima.type.MinIEOpenFact");
     jcasType.ll_cas.ll_setStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_polarity, v);}    
    
     
@@ -105,7 +128,7 @@ public class MinIEOpenFact extends OpenFact {
    */
   public String getModality() {
     if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_modality == null)
-      jcasType.jcas.throwFeatMissing("modality", "MinIEOpenFact");
+      jcasType.jcas.throwFeatMissing("modality", "de.mpg.mpi.uima.type.MinIEOpenFact");
     return jcasType.ll_cas.ll_getStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_modality);}
     
   /** setter for modality - sets  
@@ -114,30 +137,8 @@ public class MinIEOpenFact extends OpenFact {
    */
   public void setModality(String v) {
     if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_modality == null)
-      jcasType.jcas.throwFeatMissing("modality", "MinIEOpenFact");
+      jcasType.jcas.throwFeatMissing("modality", "de.mpg.mpi.uima.type.MinIEOpenFact");
     jcasType.ll_cas.ll_setStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_modality, v);}    
-   
-    
-  //*--------------*
-  //* Feature: attribution
-
-  /** getter for attribution - gets 
-   * @generated
-   * @return value of the feature 
-   */
-  public String getAttribution() {
-    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_attribution == null)
-      jcasType.jcas.throwFeatMissing("attribution", "MinIEOpenFact");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_attribution);}
-    
-  /** setter for attribution - sets  
-   * @generated
-   * @param v value to set into the feature 
-   */
-  public void setAttribution(String v) {
-    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_attribution == null)
-      jcasType.jcas.throwFeatMissing("attribution", "MinIEOpenFact");
-    jcasType.ll_cas.ll_setStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_attribution, v);}    
    
     
   //*--------------*
@@ -149,7 +150,7 @@ public class MinIEOpenFact extends OpenFact {
    */
   public String getQuantity() {
     if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_quantity == null)
-      jcasType.jcas.throwFeatMissing("quantity", "MinIEOpenFact");
+      jcasType.jcas.throwFeatMissing("quantity", "de.mpg.mpi.uima.type.MinIEOpenFact");
     return jcasType.ll_cas.ll_getStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_quantity);}
     
   /** setter for quantity - sets  
@@ -158,8 +159,30 @@ public class MinIEOpenFact extends OpenFact {
    */
   public void setQuantity(String v) {
     if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_quantity == null)
-      jcasType.jcas.throwFeatMissing("quantity", "MinIEOpenFact");
+      jcasType.jcas.throwFeatMissing("quantity", "de.mpg.mpi.uima.type.MinIEOpenFact");
     jcasType.ll_cas.ll_setStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_quantity, v);}    
+   
+    
+  //*--------------*
+  //* Feature: text
+
+  /** getter for text - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getText() {
+    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_text == null)
+      jcasType.jcas.throwFeatMissing("text", "de.mpg.mpi.uima.type.MinIEOpenFact");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_text);}
+    
+  /** setter for text - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setText(String v) {
+    if (MinIEOpenFact_Type.featOkTst && ((MinIEOpenFact_Type)jcasType).casFeat_text == null)
+      jcasType.jcas.throwFeatMissing("text", "de.mpg.mpi.uima.type.MinIEOpenFact");
+    jcasType.ll_cas.ll_setStringValue(addr, ((MinIEOpenFact_Type)jcasType).casFeatCode_text, v);}    
   }
 
     

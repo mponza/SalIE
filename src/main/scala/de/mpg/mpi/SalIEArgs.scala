@@ -5,7 +5,7 @@ import org.rogach.scallop.ScallopConf
 class SalIEArgs(arguments: Seq[String]) extends ScallopConf(arguments) {
 
   // MinIE arguments
-  val minieMode = opt[String](required = true, default = Some("safe"))
+  val miniemode = opt[String](required = false, default = Some("safe"))
 
   // SalIE arguments
 //  val embeddingFilename = opt[String](required = true)
@@ -14,6 +14,8 @@ class SalIEArgs(arguments: Seq[String]) extends ScallopConf(arguments) {
 //  val coreference = opt[Boolean](required = false, default = Some(true))
 //  val clustering = opt[Boolean](required = false, default = Some(true))
 
-  val dataDir = opt[String](required = false)
+  val datadir = opt[String](required = false)
 
+
+  verify()
 }

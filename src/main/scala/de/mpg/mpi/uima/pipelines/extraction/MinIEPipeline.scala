@@ -18,7 +18,7 @@ class MinIEPipeline(conf: SalIEArgs) extends Pipeline {
     val ner = AnalysisEngineFactory.createEngineDescription(classOf[StanfordNamedEntityRecognizer])
     val coref = AnalysisEngineFactory.createEngineDescription(classOf[StanfordCoreferenceResolver])
 
-    val minie = AnalysisEngineFactory.createEngineDescription(classOf[MinIEAnalysisEngine], "mode", conf.minieMode)
+    val minie = AnalysisEngineFactory.createEngineDescription(classOf[MinIEAnalysisEngine], "mode", conf.miniemode())
 
     val printer = AnalysisEngineFactory.createEngineDescription(classOf[PrinterAnalysisEngine])
 

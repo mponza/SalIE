@@ -1,6 +1,7 @@
-package de.mpg.mpi.uima.types;
 
-/* First created by JCasGen Mon Aug 06 17:34:56 CEST 2018 */
+
+/* First created by JCasGen Tue Aug 07 17:11:25 CEST 2018 */
+package de.mpg.mpi.uima.type;
 
 import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
@@ -10,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue Aug 07 11:49:19 CEST 2018
- * XML source: /Users/marcoponza/eclipse-workspace/DKProTest/openFactTypeSystemDescriptor.xml
+ * Updated by JCasGen Tue Aug 07 17:14:20 CEST 2018
+ * XML source: /Users/marcoponza/eclipse-workspace/UIMA/openFactTypeSystemDescriptor.xml
  * @generated */
 public class OpenFact extends Annotation {
   /** @generated
@@ -84,7 +85,7 @@ public class OpenFact extends Annotation {
    */
   public Constituent getSubject() {
     if (OpenFact_Type.featOkTst && ((OpenFact_Type)jcasType).casFeat_subject == null)
-      jcasType.jcas.throwFeatMissing("subject", "OpenFact");
+      jcasType.jcas.throwFeatMissing("subject", "de.mpg.mpi.uima.type.OpenFact");
     return (Constituent)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((OpenFact_Type)jcasType).casFeatCode_subject)));}
     
   /** setter for subject - sets  
@@ -93,7 +94,7 @@ public class OpenFact extends Annotation {
    */
   public void setSubject(Constituent v) {
     if (OpenFact_Type.featOkTst && ((OpenFact_Type)jcasType).casFeat_subject == null)
-      jcasType.jcas.throwFeatMissing("subject", "OpenFact");
+      jcasType.jcas.throwFeatMissing("subject", "de.mpg.mpi.uima.type.OpenFact");
     jcasType.ll_cas.ll_setRefValue(addr, ((OpenFact_Type)jcasType).casFeatCode_subject, jcasType.ll_cas.ll_getFSRef(v));}    
    
     
@@ -106,7 +107,7 @@ public class OpenFact extends Annotation {
    */
   public Constituent getRelation() {
     if (OpenFact_Type.featOkTst && ((OpenFact_Type)jcasType).casFeat_relation == null)
-      jcasType.jcas.throwFeatMissing("relation", "OpenFact");
+      jcasType.jcas.throwFeatMissing("relation", "de.mpg.mpi.uima.type.OpenFact");
     return (Constituent)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((OpenFact_Type)jcasType).casFeatCode_relation)));}
     
   /** setter for relation - sets  
@@ -115,7 +116,7 @@ public class OpenFact extends Annotation {
    */
   public void setRelation(Constituent v) {
     if (OpenFact_Type.featOkTst && ((OpenFact_Type)jcasType).casFeat_relation == null)
-      jcasType.jcas.throwFeatMissing("relation", "OpenFact");
+      jcasType.jcas.throwFeatMissing("relation", "de.mpg.mpi.uima.type.OpenFact");
     jcasType.ll_cas.ll_setRefValue(addr, ((OpenFact_Type)jcasType).casFeatCode_relation, jcasType.ll_cas.ll_getFSRef(v));}    
    
     
@@ -128,7 +129,7 @@ public class OpenFact extends Annotation {
    */
   public Constituent getObject() {
     if (OpenFact_Type.featOkTst && ((OpenFact_Type)jcasType).casFeat_object == null)
-      jcasType.jcas.throwFeatMissing("object", "OpenFact");
+      jcasType.jcas.throwFeatMissing("object", "de.mpg.mpi.uima.type.OpenFact");
     return (Constituent)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((OpenFact_Type)jcasType).casFeatCode_object)));}
     
   /** setter for object - sets  
@@ -137,7 +138,7 @@ public class OpenFact extends Annotation {
    */
   public void setObject(Constituent v) {
     if (OpenFact_Type.featOkTst && ((OpenFact_Type)jcasType).casFeat_object == null)
-      jcasType.jcas.throwFeatMissing("object", "OpenFact");
+      jcasType.jcas.throwFeatMissing("object", "de.mpg.mpi.uima.type.OpenFact");
     jcasType.ll_cas.ll_setRefValue(addr, ((OpenFact_Type)jcasType).casFeatCode_object, jcasType.ll_cas.ll_getFSRef(v));}    
    
     
@@ -150,7 +151,7 @@ public class OpenFact extends Annotation {
    */
   public String getText() {
     if (OpenFact_Type.featOkTst && ((OpenFact_Type)jcasType).casFeat_text == null)
-      jcasType.jcas.throwFeatMissing("text", "OpenFact");
+      jcasType.jcas.throwFeatMissing("text", "de.mpg.mpi.uima.type.OpenFact");
     return jcasType.ll_cas.ll_getStringValue(addr, ((OpenFact_Type)jcasType).casFeatCode_text);}
     
   /** setter for text - sets  
@@ -159,7 +160,7 @@ public class OpenFact extends Annotation {
    */
   public void setText(String v) {
     if (OpenFact_Type.featOkTst && ((OpenFact_Type)jcasType).casFeat_text == null)
-      jcasType.jcas.throwFeatMissing("text", "OpenFact");
+      jcasType.jcas.throwFeatMissing("text", "de.mpg.mpi.uima.type.OpenFact");
     jcasType.ll_cas.ll_setStringValue(addr, ((OpenFact_Type)jcasType).casFeatCode_text, v);}    
   }
 

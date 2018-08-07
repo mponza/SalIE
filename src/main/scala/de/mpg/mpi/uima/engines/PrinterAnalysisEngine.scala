@@ -1,6 +1,6 @@
 package de.mpg.mpi.uima.engines
 
-import de.mpg.mpi.uima.types.MinIEOpenFact
+import de.mpg.mpi.uima.`type`.{MinIEOpenFact, OpenFact}
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.util.JCasUtil
 import org.apache.uima.jcas.JCas
@@ -14,7 +14,7 @@ class PrinterAnalysisEngine  extends JCasAnnotator_ImplBase {
 
   override def process(aJCas: JCas) = {
 
-    for(openFact <- JCasUtil.select(aJCas, classOf[MinIEOpenFact]).asScala) {
+    for(openFact <- JCasUtil.select(aJCas, classOf[OpenFact]).asScala) {
       logger.info(openFact.getText)
     }
 

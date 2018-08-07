@@ -5,8 +5,8 @@ import de.mpg.mpi.uima.pipelines.extraction.MinIEPipeline
 import de.mpg.mpi.uima.readers.ReaderFactory
 import de.tudarmstadt.ukp.dkpro.core.api.ner.`type`.NamedEntity
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
+import de.uni_mannheim.minie.MinIE
 import org.apache.uima.fit.factory.{AnalysisEngineFactory, JCasFactory}
-import org.apache.uima.fit.pipeline.SimplePipeline
 import org.apache.uima.fit.util.JCasUtil
 import org.apache.uima.jcas.JCas
 
@@ -16,9 +16,10 @@ object RunPipeline {
 
   def main(args: Array[String]): Unit = {
 
+
     val conf = new SalIEArgs(args)
 
-    val reader = ReaderFactory.getTextReader(conf.dataDir.getOrElse(""))
+    val reader = ReaderFactory.getTextReader(conf.datadir())
 //    val pipeline = new StanfordNLPAnalysisPipeline().getEngines()
     val pipeline = new MinIEPipeline(conf).getEngines()
 

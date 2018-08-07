@@ -1,6 +1,6 @@
 package de.mpg.mpi.uima.engines
 
-import de.mpg.mpi.uima.types.{Constituent, MinIEOpenFact}
+import de.mpg.mpi.uima.`type`.{Constituent, MinIEOpenFact}
 import de.mpg.mpi.uima.utils.SemanticSentences
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Token
@@ -10,6 +10,7 @@ import de.uni_mannheim.minie.annotation.AnnotatedPhrase
 import edu.stanford.nlp.semgraph.SemanticGraph
 import org.apache.uima.UimaContext
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
+import org.apache.uima.fit.descriptor.ConfigurationParameter
 import org.apache.uima.fit.util.JCasUtil
 import org.apache.uima.jcas.JCas
 import org.apache.uima.jcas.cas.FSArray
@@ -18,16 +19,36 @@ import org.slf4j.LoggerFactory
 import scala.collection.JavaConverters._
 
 
-class MinIEAnalysisEngine(mode: MinIE.Mode) extends JCasAnnotator_ImplBase {
+class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
 
   private val logger = LoggerFactory.getLogger(classOf[MinIEAnalysisEngine])
 
+  @ConfigurationParameter
+  var mode: String = null
 
   override def initialize(context: UimaContext): Unit = {
     super.initialize(context)
   }
 
 
+  /**
+    * Casts mode string into proper MinIE.Mode enumerator type.
+    * @return
+    */
+  private def getMinIEMode() : MinIE.Mode = {
+    if(mode.equals("agg") || mode.equals("aggressive")) return MinIE.Mode.AGGRESSIVE
+    if(mode.equals("dict") || mode.equals("dictionary")) return MinIE.Mode.DICTIONARY
+    if(mode.equals("safe")) return MinIE.Mode.SAFE
+    if(mode.equals("comp") || mode.equals("complete")) return MinIE.Mode.COMPLETE
+
+    throw new IllegalAccessException("MinIE mode parameter \"%s\" is not valid.".format(mode))
+  }
+
+
+  /**
+    * Processes a jCas and extend it with MinIE's open facts.
+    * @param jCas
+    */
   override def process(jCas: JCas) = {
     val semanticSentences = new SemanticSentences(jCas)
     val sentences = JCasUtil.select(jCas, classOf[Sentence]).asScala
@@ -36,7 +57,7 @@ class MinIEAnalysisEngine(mode: MinIE.Mode) extends JCasAnnotator_ImplBase {
       val semanticGraph = semanticSentences.getSemanticGraph(sentence)
       if(semanticGraph != null) {
 
-        val minIE = new MinIE(sentence.getCoveredText, semanticGraph, mode)
+        val minIE = new MinIE(sentence.getCoveredText, semanticGraph, getMinIEMode)
 
         val validPropositions = minIE.getPropositions.stream().forEach(
           proposition => {
@@ -189,4 +210,11 @@ class MinIEAnalysisEngine(mode: MinIE.Mode) extends JCasAnnotator_ImplBase {
 //  }
 //
 //
+}
+
+
+object MinIEAnalysisEngine {
+
+  var PARAM_MODE: String = "safe"
+
 }

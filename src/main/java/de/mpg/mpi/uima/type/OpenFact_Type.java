@@ -1,6 +1,6 @@
-package de.mpg.mpi.uima.types;
 
-/* First created by JCasGen Mon Aug 06 17:34:56 CEST 2018 */
+/* First created by JCasGen Tue Aug 07 17:11:25 CEST 2018 */
+package de.mpg.mpi.uima.type;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -11,7 +11,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Tue Aug 07 11:49:19 CEST 2018
+ * Updated by JCasGen Tue Aug 07 17:14:20 CEST 2018
  * @generated */
 public class OpenFact_Type extends Annotation_Type {
   /** @generated */
@@ -20,7 +20,7 @@ public class OpenFact_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("OpenFact");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.mpg.mpi.uima.type.OpenFact");
  
   /** @generated */
   final Feature casFeat_subject;
@@ -32,7 +32,7 @@ public class OpenFact_Type extends Annotation_Type {
    */ 
   public int getSubject(int addr) {
         if (featOkTst && casFeat_subject == null)
-      jcas.throwFeatMissing("subject", "OpenFact");
+      jcas.throwFeatMissing("subject", "de.mpg.mpi.uima.type.OpenFact");
     return ll_cas.ll_getRefValue(addr, casFeatCode_subject);
   }
   /** @generated
@@ -41,7 +41,7 @@ public class OpenFact_Type extends Annotation_Type {
    */    
   public void setSubject(int addr, int v) {
         if (featOkTst && casFeat_subject == null)
-      jcas.throwFeatMissing("subject", "OpenFact");
+      jcas.throwFeatMissing("subject", "de.mpg.mpi.uima.type.OpenFact");
     ll_cas.ll_setRefValue(addr, casFeatCode_subject, v);}
     
   
@@ -56,7 +56,7 @@ public class OpenFact_Type extends Annotation_Type {
    */ 
   public int getRelation(int addr) {
         if (featOkTst && casFeat_relation == null)
-      jcas.throwFeatMissing("relation", "OpenFact");
+      jcas.throwFeatMissing("relation", "de.mpg.mpi.uima.type.OpenFact");
     return ll_cas.ll_getRefValue(addr, casFeatCode_relation);
   }
   /** @generated
@@ -65,7 +65,7 @@ public class OpenFact_Type extends Annotation_Type {
    */    
   public void setRelation(int addr, int v) {
         if (featOkTst && casFeat_relation == null)
-      jcas.throwFeatMissing("relation", "OpenFact");
+      jcas.throwFeatMissing("relation", "de.mpg.mpi.uima.type.OpenFact");
     ll_cas.ll_setRefValue(addr, casFeatCode_relation, v);}
     
   
@@ -80,7 +80,7 @@ public class OpenFact_Type extends Annotation_Type {
    */ 
   public int getObject(int addr) {
         if (featOkTst && casFeat_object == null)
-      jcas.throwFeatMissing("object", "OpenFact");
+      jcas.throwFeatMissing("object", "de.mpg.mpi.uima.type.OpenFact");
     return ll_cas.ll_getRefValue(addr, casFeatCode_object);
   }
   /** @generated
@@ -89,7 +89,7 @@ public class OpenFact_Type extends Annotation_Type {
    */    
   public void setObject(int addr, int v) {
         if (featOkTst && casFeat_object == null)
-      jcas.throwFeatMissing("object", "OpenFact");
+      jcas.throwFeatMissing("object", "de.mpg.mpi.uima.type.OpenFact");
     ll_cas.ll_setRefValue(addr, casFeatCode_object, v);}
     
   
@@ -104,7 +104,7 @@ public class OpenFact_Type extends Annotation_Type {
    */ 
   public String getText(int addr) {
         if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "OpenFact");
+      jcas.throwFeatMissing("text", "de.mpg.mpi.uima.type.OpenFact");
     return ll_cas.ll_getStringValue(addr, casFeatCode_text);
   }
   /** @generated
@@ -113,7 +113,7 @@ public class OpenFact_Type extends Annotation_Type {
    */    
   public void setText(int addr, String v) {
         if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "OpenFact");
+      jcas.throwFeatMissing("text", "de.mpg.mpi.uima.type.OpenFact");
     ll_cas.ll_setStringValue(addr, casFeatCode_text, v);}
     
   
@@ -121,24 +121,24 @@ public class OpenFact_Type extends Annotation_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-   * @generated
-   * @param jcas JCas
-   * @param casType Type 
-   */
+	 * @generated
+	 * @param jcas JCas
+	 * @param casType Type 
+	 */
   public OpenFact_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_subject = jcas.getRequiredFeatureDE(casType, "subject", "Constituent", featOkTst);
+    casFeat_subject = jcas.getRequiredFeatureDE(casType, "subject", "de.mpg.mpi.uima.type.Constituent", featOkTst);
     casFeatCode_subject  = (null == casFeat_subject) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_subject).getCode();
 
  
-    casFeat_relation = jcas.getRequiredFeatureDE(casType, "relation", "Constituent", featOkTst);
+    casFeat_relation = jcas.getRequiredFeatureDE(casType, "relation", "de.mpg.mpi.uima.type.Constituent", featOkTst);
     casFeatCode_relation  = (null == casFeat_relation) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_relation).getCode();
 
  
-    casFeat_object = jcas.getRequiredFeatureDE(casType, "object", "Constituent", featOkTst);
+    casFeat_object = jcas.getRequiredFeatureDE(casType, "object", "de.mpg.mpi.uima.type.Constituent", featOkTst);
     casFeatCode_object  = (null == casFeat_object) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_object).getCode();
 
  

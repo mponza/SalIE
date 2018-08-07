@@ -1,6 +1,6 @@
-package de.mpg.mpi.uima.types;
 
-/* First created by JCasGen Mon Aug 06 18:57:40 CEST 2018 */
+/* First created by JCasGen Tue Aug 07 17:11:25 CEST 2018 */
+package de.mpg.mpi.uima.type;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -11,7 +11,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Tue Aug 07 11:49:19 CEST 2018
+ * Updated by JCasGen Tue Aug 07 17:14:20 CEST 2018
  * @generated */
 public class Constituent_Type extends Annotation_Type {
   /** @generated */
@@ -20,7 +20,31 @@ public class Constituent_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("Constituent");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.mpg.mpi.uima.type.Constituent");
+ 
+  /** @generated */
+  final Feature casFeat_text;
+  /** @generated */
+  final int     casFeatCode_text;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getText(int addr) {
+        if (featOkTst && casFeat_text == null)
+      jcas.throwFeatMissing("text", "de.mpg.mpi.uima.type.Constituent");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_text);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setText(int addr, String v) {
+        if (featOkTst && casFeat_text == null)
+      jcas.throwFeatMissing("text", "de.mpg.mpi.uima.type.Constituent");
+    ll_cas.ll_setStringValue(addr, casFeatCode_text, v);}
+    
+  
  
   /** @generated */
   final Feature casFeat_tokens;
@@ -32,7 +56,7 @@ public class Constituent_Type extends Annotation_Type {
    */ 
   public int getTokens(int addr) {
         if (featOkTst && casFeat_tokens == null)
-      jcas.throwFeatMissing("tokens", "Constituent");
+      jcas.throwFeatMissing("tokens", "de.mpg.mpi.uima.type.Constituent");
     return ll_cas.ll_getRefValue(addr, casFeatCode_tokens);
   }
   /** @generated
@@ -41,7 +65,7 @@ public class Constituent_Type extends Annotation_Type {
    */    
   public void setTokens(int addr, int v) {
         if (featOkTst && casFeat_tokens == null)
-      jcas.throwFeatMissing("tokens", "Constituent");
+      jcas.throwFeatMissing("tokens", "de.mpg.mpi.uima.type.Constituent");
     ll_cas.ll_setRefValue(addr, casFeatCode_tokens, v);}
     
    /** @generated
@@ -51,7 +75,7 @@ public class Constituent_Type extends Annotation_Type {
    */
   public int getTokens(int addr, int i) {
         if (featOkTst && casFeat_tokens == null)
-      jcas.throwFeatMissing("tokens", "Constituent");
+      jcas.throwFeatMissing("tokens", "de.mpg.mpi.uima.type.Constituent");
     if (lowLevelTypeChecks)
       return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_tokens), i, true);
     jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_tokens), i);
@@ -65,7 +89,7 @@ public class Constituent_Type extends Annotation_Type {
    */ 
   public void setTokens(int addr, int i, int v) {
         if (featOkTst && casFeat_tokens == null)
-      jcas.throwFeatMissing("tokens", "Constituent");
+      jcas.throwFeatMissing("tokens", "de.mpg.mpi.uima.type.Constituent");
     if (lowLevelTypeChecks)
       ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_tokens), i, v, true);
     jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_tokens), i);
@@ -83,7 +107,7 @@ public class Constituent_Type extends Annotation_Type {
    */ 
   public int getHead(int addr) {
         if (featOkTst && casFeat_head == null)
-      jcas.throwFeatMissing("head", "Constituent");
+      jcas.throwFeatMissing("head", "de.mpg.mpi.uima.type.Constituent");
     return ll_cas.ll_getRefValue(addr, casFeatCode_head);
   }
   /** @generated
@@ -92,45 +116,25 @@ public class Constituent_Type extends Annotation_Type {
    */    
   public void setHead(int addr, int v) {
         if (featOkTst && casFeat_head == null)
-      jcas.throwFeatMissing("head", "Constituent");
+      jcas.throwFeatMissing("head", "de.mpg.mpi.uima.type.Constituent");
     ll_cas.ll_setRefValue(addr, casFeatCode_head, v);}
-    
-  
- 
-  /** @generated */
-  final Feature casFeat_text;
-  /** @generated */
-  final int     casFeatCode_text;
-  /** @generated
-   * @param addr low level Feature Structure reference
-   * @return the feature value 
-   */ 
-  public String getText(int addr) {
-        if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "Constituent");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_text);
-  }
-  /** @generated
-   * @param addr low level Feature Structure reference
-   * @param v value to set 
-   */    
-  public void setText(int addr, String v) {
-        if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "Constituent");
-    ll_cas.ll_setStringValue(addr, casFeatCode_text, v);}
     
   
 
 
 
   /** initialize variables to correspond with Cas Type and Features
-   * @generated
-   * @param jcas JCas
-   * @param casType Type 
-   */
+	 * @generated
+	 * @param jcas JCas
+	 * @param casType Type 
+	 */
   public Constituent_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
+
+ 
+    casFeat_text = jcas.getRequiredFeatureDE(casType, "text", "uima.cas.String", featOkTst);
+    casFeatCode_text  = (null == casFeat_text) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_text).getCode();
 
  
     casFeat_tokens = jcas.getRequiredFeatureDE(casType, "tokens", "uima.cas.FSArray", featOkTst);
@@ -139,10 +143,6 @@ public class Constituent_Type extends Annotation_Type {
  
     casFeat_head = jcas.getRequiredFeatureDE(casType, "head", "uima.tcas.Annotation", featOkTst);
     casFeatCode_head  = (null == casFeat_head) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_head).getCode();
-
- 
-    casFeat_text = jcas.getRequiredFeatureDE(casType, "text", "uima.cas.String", featOkTst);
-    casFeatCode_text  = (null == casFeat_text) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_text).getCode();
 
   }
 }
