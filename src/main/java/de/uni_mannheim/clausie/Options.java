@@ -66,7 +66,6 @@ public class Options {
 	/**Constructs the set of options out of a conf file (clausie.conf)*/
 	public Options() {
 		try {
-			System.out.println(getClass().getResource("/clausie-resources/clausie.conf").getPath() + "\n");
 			InputStream in = getClass().getResource("/clausie-resources/clausie.conf").openStream();
 			setOptions(in);
 			in.close();		

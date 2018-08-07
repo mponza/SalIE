@@ -5,8 +5,9 @@ import de.mpg.mpi.uima.utils.SemanticSentences
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Token
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey
+import de.uni_mannheim.clausie.proposition.Proposition
 import de.uni_mannheim.minie.MinIE
-import de.uni_mannheim.minie.annotation.AnnotatedPhrase
+import de.uni_mannheim.minie.annotation.{AnnotatedPhrase, AnnotatedProposition}
 import edu.stanford.nlp.semgraph.SemanticGraph
 import org.apache.uima.UimaContext
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
@@ -17,6 +18,7 @@ import org.apache.uima.jcas.cas.FSArray
 import org.slf4j.LoggerFactory
 
 import scala.collection.JavaConverters._
+import scala.collection.mutable.ListBuffer
 
 
 class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
@@ -51,9 +53,9 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
     */
   override def process(jCas: JCas) = {
     val semanticSentences = new SemanticSentences(jCas)
-    val sentences = JCasUtil.select(jCas, classOf[Sentence]).asScala
+    val sentences = JCasUtil.select(jCas, classOf[Sentence])
 
-    for(sentence: Sentence <- sentences) {
+    for(sentence: Sentence <- sentences.asScala) {
       val semanticGraph = semanticSentences.getSemanticGraph(sentence)
       if(semanticGraph != null) {
 
@@ -83,17 +85,7 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
               openFact.setEnd(objectFact.getEnd)
 
               // semantic annotations
-              openFact.setPolarity(proposition.getPolarity.toString)
-              openFact.setModality(proposition.getModality.toString)
-              openFact.setAttribution(proposition.getAttribution.toString)
-              openFact.setQuantity(proposition.getAttribution.toString)
-
-              openFact.setText("(%s, %s, %s) [ Attribution: %s, Polarity: %s, Modality: %s, Quantity: %s ]"
-                .format(subject.getText, relation.getText, objectFact.getText,
-                  openFact.getAttribution, openFact.getPolarity,
-                  openFact.getModality, openFact.getQuantity
-                )
-              )
+              addMinIESemanticAnnotations(openFact, proposition)
 
               openFact.addToIndexes()
 
@@ -108,6 +100,44 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
 
       }
     }
+  }
+
+
+  /**
+    * Add to the open fact a set of MinIE's semantic annotations.
+    * @param openFact
+    * @param proposition
+    */
+  private def addMinIESemanticAnnotations(openFact: MinIEOpenFact, proposition: AnnotatedProposition) = {
+
+    // a better structure of these can be done...
+
+    val strSemanticAnnotations = ListBuffer.empty[String]
+
+    if(proposition.getAttribution.isValid) {
+      openFact.setAttribution(proposition.getAttribution.toString)
+      strSemanticAnnotations.append("Attribution: %s".format(openFact.getAttribution))
+    }
+    if(proposition.getModality != null) {
+      openFact.setModality(proposition.getModality.toString)
+      strSemanticAnnotations.append("Modality: %s".format(openFact.getModality))
+    }
+    if(proposition.getPolarity != null) {
+      openFact.setPolarity(proposition.getPolarity.toString)
+      strSemanticAnnotations.append("Polarity: %s".format(openFact.getPolarity))
+    }
+    if(!proposition.getAllQuantities.isEmpty) {
+      val strQuantities = proposition.getAllQuantities.asScala.map(x => x.toString) mkString ","
+      openFact.setQuantity(strQuantities)
+      strSemanticAnnotations.append("Quantities: %s".format(strQuantities))
+    }
+
+    openFact.setText("(%s, %s, %s) with [ %s ]"
+      .format(openFact.getSubject.getText, openFact.getRelation.getText, openFact.getObject.getText,
+        strSemanticAnnotations mkString ", "
+      )
+    )
+
   }
 
 

@@ -174,4 +174,13 @@ public class Attribution {
         
         return sb.toString();
     }
+
+
+    //
+    // Added Methods
+
+    public boolean isValid() {
+        return this.attributionPhrase != null && this.modality != null && this.polarity != null
+                && this.predicateVerb != null;
+    }
 }
