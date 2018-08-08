@@ -20,10 +20,6 @@ def flat_wikipedia_facts(json_wikipedia, outfilename):
     """
 
 
-    print json_wikipedia
-    print outfilename
-    print "====="
-
     #
     # Utils
 

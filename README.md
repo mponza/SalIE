@@ -20,6 +20,7 @@ and install the Python requirements:
 
     source venv/bin/activate
     pip install -r src/main/python/requirements.txt
+    pip install -r ext/entity2vec/
 
 
 
