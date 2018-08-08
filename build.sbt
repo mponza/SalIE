@@ -12,6 +12,7 @@ fork in run := true
 libraryDependencies ++= Seq(
   "it.unimi.dsi" % "fastutil" % "8.1.1",
   "it.unimi.dsi" % "dsiutils" % "2.4.2",
+  "it.unimi.dsi" % "sux4j" % "4.2.0",
 
   "net.sf.jopt-simple" % "jopt-simple" % "6.0-alpha-1",
 
