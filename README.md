@@ -23,9 +23,9 @@ and install the Python requirements:
 
 
 
-**Embeddings Generation.** Given a file of open facts in Json format (e.g. `path/to/safe-wikipedia.json`) the embeddings file
-(e.g. `path/to/glove.safe.embeddings.bin`) can be generated from scratch with:
+**Embeddings Generation & Compression.** Given a file of open facts in Json format (e.g. `path/to/safe-wikipedia.json`) the embeddings file
+(e.g. `path/to/glove.safe.embeddings` with no extension) can be generated from scratch with:
 
-    bash src/main/bash/facts2glove.sh path/to/safe-wikipedia.json path/to/glove.safe.embeddings.bin
+    bash src/main/bash/facts2glove.sh path/to/safe-wikipedia.json path/to/glove.safe.embeddings
 
 For setting up a different set of parameters just check `src/main/bash/facts2glove.sh`.
