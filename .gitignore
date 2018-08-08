@@ -261,3 +261,9 @@ pip-selfcheck.json
 
 ### Scala ###
 
+
+
+### Custom ###
+
+data/
+venv/
