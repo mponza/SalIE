@@ -1,3 +1,6 @@
 [submodule "GloVe"]
 	path = GloVe
 	url = https://github.com/stanfordnlp/GloVe
+[submodule "entity2vec"]
+	path = entity2vec
+	url = https://github.com/ot/entity2vec.git
