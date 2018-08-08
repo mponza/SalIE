@@ -1,2 +1,9 @@
 SalIE
 =====
+
+
+
+Generate GloVe Embeddings
+-------------------------
+
+    
