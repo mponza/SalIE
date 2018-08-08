@@ -1,0 +1,3 @@
+gensim==2.3.0
+baker==1.3
+progressbar==2.3

@@ -1,176 +1,122 @@
 #!/usr/bin/env bash
 
-GLOVE_DIR="somewhere/glovedir"
-TMP_DIR="somewhere/data/tmp" # flat wikipedia json, vocabulary & other stuff
+
+
+# Generates embeddings from WIKI_JSON_FILENAME to EMBEDDING_DIR
+
+
+
+#
+# Configurable Parameters
+
+GLOVE_THREADS=8
 SIZE=400
-
-WIKI_FILENAME="somewhere/agg-wikipedia.json"
-EMB_FILENAME="somewhere/embfilename.txt"
+GLOVE_MEMORY=2.0
 
 
 
-# WikipediaFilename
+#
+# Directories
+
+GLOVE_DIR="ext/GloVe"
+
+WIKI_JSON_FILENAME="$1"     # e.g. "data/wikipedia/agg-wikipedia.json"   # change me with another filename, if needed
+EMBEDDING_FILENAME="$2"     # e.g. "data/embeddings/agg-wikipedia.glove.400.bin"
+
+TMP_DIR="./data/tmp"                  # wikipedia txt, vocabulary & other temporary data
 
 
-source /var/tmp/mponza/Developer/Ambiverse/entity-linking/venv/bin/activate
+
+#
+# Support Variables
 
 
-function merge_wikifacts {
-    DIR=$1
-    CMD="python src/main/python/wikipedia/minie merge $DIR"
+
+#
+# Support Functions
+
+function flat_wikipedia_facts {
+    CMD="python src/main/python/wikipedia flat_wikipedia_facts $1 $2"
     eval $CMD
 }
 
 
-function flat_wikifacts {
-    CMD="python src/main/python/wikipedia/minie flat_minie_wikipedia $1 $2"
-    eval $CMD
-}
+
+#
+# Setting up
+
+source venv/bin/activate
+# pip install -r src/main/python/requirements.txt
+mkdir -p $TMP_DIR
 
 
 
-for MODALITY  in "${MODALITIES[@]}"
-do
+#
+# Flattering json Wikipedia into a textual file of facts
 
-    #
-    # Standard GloVe
-
-    WIKIFACTS="$WIKIMINIE/$MODALITY-wikipedia.json"
-    if [ ! -f "$WIKIFACTS" ]; then
-        echo "Merging different Wikipedia documents into unique file..."
-        WIKIDOCS="$WIKIMINIE/$MODALITY"
-        merge_wikifacts $WIKIDOCS
-    fi
-
-    FLAT_WIKIFACTS="$WIKIMINIE/flat-$MODALITY-wikipedia.txt"
-    if [ ! -f "$FLAT_WIKIFACTS" ]; then
-        echo "Flattering Wikipedia into unique file of facts..."
-        flat_wikifacts $WIKIFACTS $FLAT_WIKIFACTS
-    fi
-
-
-    cd "$GLOVEDIR"
-
-    CORPUS="$FLAT_WIKIFACTS"
-    VOCAB_FILE=vocab.txt
-    COOCCURRENCE_FILE=cooccurrence.bin
-    COOCCURRENCE_SHUF_FILE=cooccurrence.shuf.bin
-    BUILDDIR=build
-    SAVE_FILE=vectors
-    VERBOSE=2
-    MEMORY=300.0  # increase me
-    VOCAB_MIN_COUNT=5
-    MAX_ITER=15
-    WINDOW_SIZE=15
-    BINARY=2
-    NUM_THREADS=30
-    X_MAX=10
-
-    echo "$ $BUILDDIR/vocab_count -min-count $VOCAB_MIN_COUNT -verbose $VERBOSE < $CORPUS > $VOCAB_FILE"
-    $BUILDDIR/vocab_count -min-count $VOCAB_MIN_COUNT -verbose $VERBOSE < $CORPUS > $VOCAB_FILE
-    echo "$ $BUILDDIR/cooccur -memory $MEMORY -vocab-file $VOCAB_FILE -verbose $VERBOSE -window-size $WINDOW_SIZE < $CORPUS > $COOCCURRENCE_FILE"
-    $BUILDDIR/cooccur -memory $MEMORY -vocab-file $VOCAB_FILE -verbose $VERBOSE -window-size $WINDOW_SIZE < $CORPUS > $COOCCURRENCE_FILE
-    echo "$ $BUILDDIR/shuffle -memory $MEMORY -verbose $VERBOSE < $COOCCURRENCE_FILE > $COOCCURRENCE_SHUF_FILE"
-    $BUILDDIR/shuffle -memory $MEMORY -verbose $VERBOSE < $COOCCURRENCE_FILE > $COOCCURRENCE_SHUF_FILE
-
-
-    for VECTOR_SIZE in "${SIZES[@]}"
-        do
-
-            if [ ! -f "$VECTORDIR" ]; then
-                mkdir -p $VECTORDIR
-            fi
-
-            SAVE_FILE="$VECTORDIR/w2v.glove.$MODALITY.default.$VECTOR_SIZE"
-
-            echo "$ $BUILDDIR/glove -save-file $SAVE_FILE -threads $NUM_THREADS -input-file $COOCCURRENCE_SHUF_FILE -x-max $X_MAX -iter $MAX_ITER -vector-size $VECTOR_SIZE -binary $BINARY -vocab-file $VOCAB_FILE -verbose $VERBOSE"
-            $BUILDDIR/glove -save-file $SAVE_FILE -threads $NUM_THREADS -input-file $COOCCURRENCE_SHUF_FILE -x-max $X_MAX -iter $MAX_ITER -vector-size $VECTOR_SIZE -binary $BINARY -vocab-file $VOCAB_FILE -verbose $VERBOSE
-
-            cd $SRC
-
-            echo "Adding extra information to file"
-            CMD="python src/main/python/wikipedia/minie add_vector_information $SAVE_FILE.txt"
-            eval $CMD
-
-            cd "$GLOVEDIR"
-
-    done
-
-    cd "$SRC"
+WIKI_TXT_FILENAME="$TMP_DIR/$(echo "$WIKI_JSON_FILENAME" | sed "s/.*\///").txt"
+#
+#if [ ! -f "$WIKI_TXT_FILENAME" ]; then
+#    echo "Flattering Wikipedia json into unique file of textual facts..."
+#    echo "$WIKI_JSON_FILENAME -> $WIKI_TXT_FILENAME"
+#    flat_wikipedia_facts $WIKI_JSON_FILENAME $WIKI_TXT_FILENAME
+#fi
 
 
 
+#
+# Creation of GloVe embeddings
 
 
-    #
-    # Co-occurrence customization of GloVe
+echo "Compiling & Running GloVe..."
 
-    for ALGO in "${ALGOS[@]}"
-    do
+make -C $GLOVE_DIR
 
-        # cooccurrence matrix generation
+CORPUS="$WIKI_TXT_FILENAME"
+VOCAB_FILE="$TMP_DIR/vocab.txt"
+COOCCURRENCE_FILE="$TMP_DIR/cooccurrence.bin"
+COOCCURRENCE_SHUF_FILE="$TMP_DIR/cooccurrence.shuf.bin"
+BUILDDIR="$GLOVE_DIR/build"
+#EMBEDDING_FILENAME=vectors
+VERBOSE=2
+MEMORY=$GLOVE_MEMORY
+VOCAB_MIN_COUNT=5
+MAX_ITER=15
+WINDOW_SIZE=15
+BINARY=2
+NUM_THREADS=$GLOVE_THREADS
+X_MAX=10
 
-        WIKIFACTS="$WIKIMINIE/$MODALITY-wikipedia.json"  # unique wikipedia file
+#echo "$ $BUILDDIR/vocab_count -min-count $VOCAB_MIN_COUNT -verbose $VERBOSE < $CORPUS > $VOCAB_FILE"
+$BUILDDIR/vocab_count -min-count $VOCAB_MIN_COUNT -verbose $VERBOSE < $CORPUS > $VOCAB_FILE
+#echo "$ $BUILDDIR/cooccur -memory $MEMORY -vocab-file $VOCAB_FILE -verbose $VERBOSE -window-size $WINDOW_SIZE < $CORPUS > $COOCCURRENCE_FILE"
+$BUILDDIR/cooccur -memory $MEMORY -vocab-file $VOCAB_FILE -verbose $VERBOSE -window-size $WINDOW_SIZE < $CORPUS > $COOCCURRENCE_FILE
+#echo "$ $BUILDDIR/shuffle -memory $MEMORY -verbose $VERBOSE < $COOCCURRENCE_FILE > $COOCCURRENCE_SHUF_FILE"
+$BUILDDIR/shuffle -memory $MEMORY -verbose $VERBOSE < $COOCCURRENCE_FILE > $COOCCURRENCE_SHUF_FILE
 
-#        if [ ! -f "$WIKIFACTS" ]; then
-#            echo "Merging different Wikipedia documents into unique file..."
-#            WIKIDOCS="$WIKIMINIE/$MODALITY"
-#            merge_wikifacts $WIKIDOCS
-#        fi
+EMBEDDING_DIR=$(dirname "$EMBEDDING_FILENAME")
+if [ ! -f "$EMBEDDING_DIR" ]; then
+    mkdir -p $EMBEDDING_DIR
+fi
 
+echo $EMBEDDING_FILENAME
+echo $EMBEDDING_DIR
 
-        echo "Generating GloVe resources..."
-        VOCABDIR="$VOCAB/$MODALITY/$ALGO"  # where save vocabulary and coocurrence matrix of facts
-        if [ ! -f "$VOCABDIR" ]; then
-            CMD="python src/main/python/wikipedia/minie generate_words_vocabulary $WIKIFACTS $VOCABDIR $ALGO"
-            eval $CMD
-        fi
+echo "$ $BUILDDIR/glove -save-file $EMBEDDING_FILENAME -threads $NUM_THREADS -input-file $COOCCURRENCE_SHUF_FILE -x-max $X_MAX -iter $MAX_ITER -vector-size $SIZE -binary $BINARY -vocab-file $VOCAB_FILE -verbose $VERBOSE"
+$BUILDDIR/glove -save-file $EMBEDDING_FILENAME -threads $NUM_THREADS -input-file $COOCCURRENCE_SHUF_FILE -x-max $X_MAX -iter $MAX_ITER -vector-size $SIZE -binary $BINARY -vocab-file $VOCAB_FILE -verbose $VERBOSE
 
+#cd $SRC
 
-        # running glove
+#echo "Adding extra information to file"
+#CMD="python src/main/python/wikipedia/minie add_vector_information $EMBEDDING_FILENAME.txt"
+# eval $CMD
 
-        cd "$GLOVEDIR"
-
-        VOCAB_FILE="$VOCAB/$MODALITY/$ALGO/vocabulary.txt"
-        COOCCURRENCE_FILE="$VOCAB/$MODALITY/$ALGO/cooccurrence.bin"
-        COOCCURRENCE_SHUF_FILE="$VOCAB/$MODALITY/$ALGO/cooccurrence.shuf.bin"
-        BUILDDIR=build
-        VERBOSE=2
-        MEMORY=300.0  # increase me
-        VOCAB_MIN_COUNT=5
-        MAX_ITER=15
-        WINDOW_SIZE=15
-        BINARY=2
-        NUM_THREADS=30
-        X_MAX=10
+#cd "$GLOVEDIR"
 
 
-        echo "$ $BUILDDIR/shuffle -memory $MEMORY -verbose $VERBOSE < $COOCCURRENCE_FILE > $COOCCURRENCE_SHUF_FILE"
-        $BUILDDIR/shuffle -memory $MEMORY -verbose $VERBOSE < $COOCCURRENCE_FILE > $COOCCURRENCE_SHUF_FILE
 
-        for VECTOR_SIZE in "${SIZES[@]}"
-        do
+# Compress it
 
-            if [ ! -f "$VECTORDIR" ]; then
-                mkdir -p $VECTORDIR
-            fi
+#cd "$SRC"
 
-            SAVE_FILE="$VECTORDIR/w2v.glove.$MODALITY.$ALGO.$VECTOR_SIZE"
-            echo "$ $BUILDDIR/glove -save-file $SAVE_FILE -threads $NUM_THREADS -input-file $COOCCURRENCE_SHUF_FILE -x-max $X_MAX -iter $MAX_ITER -vector-size $VECTOR_SIZE -binary $BINARY -vocab-file $VOCAB_FILE -verbose $VERBOSE"
-            $BUILDDIR/glove -save-file $SAVE_FILE -threads $NUM_THREADS -input-file $COOCCURRENCE_SHUF_FILE -x-max $X_MAX -iter $MAX_ITER -vector-size $VECTOR_SIZE -binary $BINARY -vocab-file $VOCAB_FILE -verbose $VERBOSE
 
-            cd $SRC
-
-            echo "Adding extra information to file"
-            CMD="python src/main/python/wikipedia/minie add_vector_information $SAVE_FILE.txt"
-            eval $CMD
-
-            cd "$GLOVEDIR"
-
-        done
-
-        cd "$SRC"
-
-    done
-
-done
