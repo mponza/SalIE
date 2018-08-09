@@ -1,7 +1,8 @@
 package de.mpg.mpi.uima.pipelines.extraction
 
 import de.mpg.mpi.SalIEArgs
-import de.mpg.mpi.uima.engines.{MinIEAnalysisEngine, PrinterAnalysisEngine}
+import de.mpg.mpi.uima.engines.PrinterAnalysisEngine
+import de.mpg.mpi.uima.engines.minie.MinIEAnalysisEngine
 import de.mpg.mpi.uima.pipelines.Pipeline
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp._
 import org.apache.uima.analysis_engine.AnalysisEngineDescription

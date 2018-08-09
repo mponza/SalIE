@@ -1,11 +1,9 @@
-package de.mpg.mpi.uima.engines
+package de.mpg.mpi.uima.engines.minie
 
 import de.mpg.mpi.uima.`type`.{Constituent, MinIEOpenFact}
 import de.mpg.mpi.uima.utils.SemanticSentences
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Token
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.{Sentence, Token}
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey
-import de.uni_mannheim.clausie.proposition.Proposition
 import de.uni_mannheim.minie.MinIE
 import de.uni_mannheim.minie.annotation.{AnnotatedPhrase, AnnotatedProposition}
 import edu.stanford.nlp.semgraph.SemanticGraph
@@ -213,33 +211,6 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
   }
 
 
-//  protected static void addNegativeWord(AnnotatedProposition ap) {
-//    // to be tested
-//    ObjectArrayList<IndexedWord> words = ap.getPolarity().getNegativeWords();
-//    words.addAll( ap.getRelation().getWordList() );
-//
-//    words.sort(new Comparator<IndexedWord>() {
-//      @Override
-//      public int compare(IndexedWord o1, IndexedWord o2) {
-//        return Integer.compare(o1.beginPosition(), o2.beginPosition());
-//      }
-//    });
-//
-//    ap.getRelation().setWordList( words );
-//  }
-//
-//
-//
-//  protected boolean validConstituent(AnnotatedPhrase ap) {
-//
-//    // logger.info(ap.getWordList().stream().map(x -> x.toString()).collect(Collectors.joining(" ")));
-//
-//    if(ap.toString().contains("QUANT_")) return false;  // we don't wont fact in this form
-//
-//    return ap.getBegin() >= 0 && ap.getEnd() >= 0;
-//  }
-//
-//
 }
 
 

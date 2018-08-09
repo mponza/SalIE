@@ -109,10 +109,10 @@ mv "$EMBEDDING_FILENAME.txt.tmp" "$EMBEDDING_FILENAME.txt"
 
 sbt clean
 sbt compile
-sbt "run-main it.cnr.isti.hpc.Word2VecCompress $EMBEDDING_FILENAME.e0.100.tr.txt  $EMBEDDING_FILENAME.bin"
+sbt "run-main it.cnr.isti.hpc.Word2VecCompress $EMBEDDING_FILENAME.e0.100.tr.txt $EMBEDDING_FILENAME.bin"
 
 rm "$EMBEDDING_FILENAME".e0.100.*  # tr.model tr.model.syn0.npy tr.txt
-rm "$EMBEDDING_FILENAME".txt       # uncompressed file
+rm "$EMBEDDING_FILENAME".txt       # uncompressed embedding file
 
 
 
