@@ -20,6 +20,13 @@ import org.slf4j.LoggerFactory
 import scala.collection.JavaConverters._
 
 
+/**
+  * Adds MinIE open facts and its semantic annotations to the processed JCas.
+  *
+  * Warning: polarity, modality and attribution are added for sake of completeness but
+  * they are actually not used within SalIE framework. However, from a SalIEOpenFact you
+  * can easily access to them.
+  */
 class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
 
   private val logger = LoggerFactory.getLogger(classOf[MinIEAnalysisEngine])
