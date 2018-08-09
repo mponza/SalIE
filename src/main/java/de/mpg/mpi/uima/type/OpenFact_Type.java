@@ -11,7 +11,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Tue Aug 07 17:14:20 CEST 2018
+ * Updated by JCasGen Thu Aug 09 16:07:33 CEST 2018
  * @generated */
 public class OpenFact_Type extends Annotation_Type {
   /** @generated */

@@ -19,11 +19,12 @@ class MinIEFacts2SalIEFactsAnalysisEngine extends JCasAnnotator_ImplBase {
   private val logger = LoggerFactory.getLogger(classOf[MinIEFacts2SalIEFactsAnalysisEngine])
 
   override def process(jCas: JCas) = {
-    val minieFacts = JCasUtil.select(jCas, classOf[MinIEOpenFact]).asScala
-    val saliieFacts = minieFacts
-      .map(x => {
-      new SalIEOpenFact(jCas) // to be created
-    })
+    //    val minieFacts = JCasUtil.select(jCas, classOf[MinIEOpenFact]).asScala
+    //    val saliieFacts = minieFacts
+    //      .map(x => {
+    //      new SalIEOpenFact(jCas) // to be created
+    //    })
+    //  }
   }
 }
 

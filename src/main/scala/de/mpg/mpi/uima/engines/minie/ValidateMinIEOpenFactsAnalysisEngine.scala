@@ -25,7 +25,7 @@ class ValidateMinIEOpenFactsAnalysisEngine extends JCasAnnotator_ImplBase {
 
 
   private def isValidMinIEOpenFact(minIEOpenFact: MinIEOpenFact) : Boolean = {
-    if(minIEOpenFact.getQuantity != null) return false        // for salience we do not want quantity facts
+    if(minIEOpenFact.getText.contains("QUANT_")) return false // for salience we do not want uniformative facts
     minIEOpenFact.getBegin >= 0 && minIEOpenFact.getEnd >= 0  // check all positions make sense (no implicit facts)
   }
 }

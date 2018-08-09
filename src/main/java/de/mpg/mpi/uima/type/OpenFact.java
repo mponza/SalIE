@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue Aug 07 17:14:20 CEST 2018
- * XML source: /Users/marcoponza/eclipse-workspace/UIMA/openFactTypeSystemDescriptor.xml
+ * Updated by JCasGen Thu Aug 09 16:07:33 CEST 2018
+ * XML source: /Users/marcoponza/eclipse-workspace/UIMA/src/salieTypeSystemDescriptor.xml
  * @generated */
 public class OpenFact extends Annotation {
   /** @generated

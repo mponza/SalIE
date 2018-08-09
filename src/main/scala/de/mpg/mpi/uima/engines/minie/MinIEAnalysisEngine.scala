@@ -1,12 +1,14 @@
 package de.mpg.mpi.uima.engines.minie
 
-import de.mpg.mpi.uima.`type`.{Constituent, MinIEOpenFact}
+import de.mpg.mpi.uima.`type`._
 import de.mpg.mpi.uima.utils.SemanticSentences
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.{Sentence, Token}
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey
 import de.uni_mannheim.minie.MinIE
-import de.uni_mannheim.minie.annotation.{AnnotatedPhrase, AnnotatedProposition}
+import de.uni_mannheim.minie.annotation.AnnotatedPhrase
+import edu.stanford.nlp.ling.IndexedWord
 import edu.stanford.nlp.semgraph.SemanticGraph
+import it.unimi.dsi.fastutil.objects.{Object2ObjectOpenHashMap, ObjectArrayList}
 import org.apache.uima.UimaContext
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.descriptor.ConfigurationParameter
@@ -16,7 +18,6 @@ import org.apache.uima.jcas.cas.FSArray
 import org.slf4j.LoggerFactory
 
 import scala.collection.JavaConverters._
-import scala.collection.mutable.ListBuffer
 
 
 class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
@@ -35,7 +36,7 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
     * Casts mode string into proper MinIE.Mode enumerator type.
     * @return
     */
-  private def getMinIEMode() : MinIE.Mode = {
+  private def getMinIEMode : MinIE.Mode = {
     if(mode.equals("agg") || mode.equals("aggressive")) return MinIE.Mode.AGGRESSIVE
     if(mode.equals("dict") || mode.equals("dictionary")) return MinIE.Mode.DICTIONARY
     if(mode.equals("safe")) return MinIE.Mode.SAFE
@@ -53,39 +54,109 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
     val semanticSentences = new SemanticSentences(jCas)
     val sentences = JCasUtil.select(jCas, classOf[Sentence])
 
+
     for(sentence: Sentence <- sentences.asScala) {
       val semanticGraph = semanticSentences.getSemanticGraph(sentence)
       if(semanticGraph != null) {
 
         val minIE = new MinIE(sentence.getCoveredText, semanticGraph, getMinIEMode)
 
-        val validPropositions = minIE.getPropositions.stream().forEach(
+        minIE.getPropositions.stream().forEach(
           proposition => {
 
             try {
 
-              // Creation of OpenFact as proposition
+              val minieOpenFact = new MinIEOpenFact(jCas)
 
-              val openFact = new MinIEOpenFact(jCas)
 
               // subject
-              val subject = addConstituent2JCas(jCas, proposition.getSubject, semanticGraph)
-              openFact.setSubject(subject)
-              openFact.setBegin(subject.getBegin)
+
+              val subject = addMinIEConstituent2JCas(jCas, proposition.getSubject, semanticGraph)
+              minieOpenFact.setSubject(subject)
+              minieOpenFact.setBegin(subject.getBegin)
+
 
               // relation
-              val relation = addConstituent2JCas(jCas, proposition.getRelation, semanticGraph)
-              openFact.setRelation(relation)
+
+              val relation = addMinIEConstituent2JCas(jCas, proposition.getRelation, semanticGraph)
+              minieOpenFact.setRelation(relation)
+
 
               // object
-              val objectFact = addConstituent2JCas(jCas, proposition.getObject, semanticGraph)
-              openFact.setObject(objectFact)
-              openFact.setEnd(objectFact.getEnd)
 
-              // semantic annotations
-              addMinIESemanticAnnotations(openFact, proposition)
+              val objectFact = addMinIEConstituent2JCas(jCas, proposition.getObject, semanticGraph)
+              minieOpenFact.setObject(objectFact)
+              minieOpenFact.setEnd(objectFact.getEnd)
 
-              openFact.addToIndexes()
+
+              // polarity
+
+              val miniePolarity = new MinIEPolarity(jCas)
+              val (polTokens, polBegin, polEnd) = indexedWords2FSArrayBeginEnd(
+                jCas, proposition.getPolarity.getNegativeWords)
+              miniePolarity.setNegativeTokens(polTokens)
+              miniePolarity.setBegin(polBegin)
+              miniePolarity.setEnd(polEnd)
+              miniePolarity.setPolarityType(proposition.getPolarity.getType.toString)
+
+              miniePolarity.addToIndexes()
+              minieOpenFact.setPolarity(miniePolarity)
+
+
+              // modality
+
+              val minieModality = new MinIEModality(jCas)
+
+              val (certTokens, certBegin, certEnd) = indexedWords2FSArrayBeginEnd(
+                jCas, new ObjectArrayList[IndexedWord](proposition.getModality.getCertaintyWords))
+              minieModality.setCertaintyTokens(certTokens)
+
+              val (possTokens, possBegin, possEnd) = indexedWords2FSArrayBeginEnd(
+                jCas, new ObjectArrayList[IndexedWord](proposition.getModality.getPossibilityWords)
+              )
+              minieModality.setPossibilityTokens(possTokens)
+
+              minieModality.setBegin(certBegin min possBegin)
+              minieModality.setEnd(certEnd max possEnd)
+
+              minieModality.addToIndexes()
+              minieOpenFact.setModality(minieModality)
+
+
+              // attribution (to be tested)
+              val minieAttribution = new MinIEAttribution(jCas)
+
+              try {
+                if (proposition.getAttribution.isValid) {
+
+                  val attribConstituent = addMinIEConstituent2JCas(
+                    jCas, proposition.getAttribution.getAttributionPhrase,
+                    semanticGraph)
+
+                  minieAttribution.setAttributionConstituent(attribConstituent)
+                  minieAttribution.setModalityType(proposition.getModality.toString)
+                  minieAttribution.setPolarityType(proposition.getPolarity.toString)
+
+                } else {
+                  // no attribution for this proposition
+                  minieAttribution.setAttributionConstituent(null)
+                }
+
+              } catch {
+                case e: Exception =>
+                  logger.warn("Error with attribution in proposition %s in sentence %s".format(
+                    proposition, sentence.getCoveredText
+                  ))
+                  minieAttribution.setAttributionConstituent(null)
+              }
+              minieAttribution.addToIndexes()
+              minieOpenFact.setAttribution(minieAttribution)
+
+
+              // finalizing fact creation and indexing
+
+              minieOpenFact.setText(proposition.toString)
+              minieOpenFact.addToIndexes()
 
             } catch {
               case e: Exception =>
@@ -102,60 +173,91 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
 
 
   /**
-    * Add to the open fact a set of MinIE's semantic annotations.
-    * @param openFact
-    * @param proposition
-    */
-  private def addMinIESemanticAnnotations(openFact: MinIEOpenFact, proposition: AnnotatedProposition) = {
-
-    // a better structure of these can be done...
-
-    val strSemanticAnnotations = ListBuffer.empty[String]
-
-    if(proposition.getAttribution.isValid) {
-      openFact.setAttribution(proposition.getAttribution.toString)
-      strSemanticAnnotations.append("Attribution: %s".format(openFact.getAttribution))
-    }
-    if(proposition.getModality != null) {
-      openFact.setModality(proposition.getModality.toString)
-      strSemanticAnnotations.append("Modality: %s".format(openFact.getModality))
-    }
-    if(proposition.getPolarity != null) {
-      openFact.setPolarity(proposition.getPolarity.toString)
-      strSemanticAnnotations.append("Polarity: %s".format(openFact.getPolarity))
-    }
-    if(!proposition.getAllQuantities.isEmpty) {
-      val strQuantities = proposition.getAllQuantities.asScala.map(x => x.toString) mkString ","
-      openFact.setQuantity(strQuantities)
-      strSemanticAnnotations.append("Quantities: %s".format(strQuantities))
-    }
-
-    openFact.setText("(%s, %s, %s) with [ %s ]"
-      .format(openFact.getSubject.getText, openFact.getRelation.getText, openFact.getObject.getText,
-        strSemanticAnnotations mkString ", "
-      )
-    )
-
-  }
-
-
-  /**
-    * Creates and returns a constituent of class clazz given a phrase and the sentence semantic graph.
+    * Creates and returns a MinIEConstituent by properly setting its token, quantities, head and text field.
     *
     * @param jCas
     * @param phrase
     * @param semanticGraph
     * @tparam T
     */
-  private def addConstituent2JCas[T](jCas: JCas, phrase: AnnotatedPhrase, semanticGraph: SemanticGraph) = {
-    val words = phrase.getWordList
+  private def addMinIEConstituent2JCas[T](jCas: JCas, phrase: AnnotatedPhrase, semanticGraph: SemanticGraph) = {
+
+    val constituent = new MinIEConstituent(jCas)
+
+
+    // setting constituent tokens, begin and end positions
+
+    val (constTokens, constBegin, constEnd) = indexedWords2FSArrayBeginEnd(jCas, phrase.getWordList)
+
+    constituent.setTokens(constTokens)
+    constituent.setBegin(constBegin)
+    constituent.setEnd(constEnd)
+
+
+    // setting constituent quantities
+
+    val quantities = new FSArray(jCas, phrase.getQuantities.size())
+
+    phrase.getQuantities.asScala.zipWithIndex.foreach(
+      indexedPhraseQuantity => {
+        val phraseQuantity = indexedPhraseQuantity._1
+        val index = indexedPhraseQuantity._2
+
+        val minieQuantity = new MinIEQuantity(jCas)
+
+        val (quantTokens, quantBegin, quantEnd) = indexedWords2FSArrayBeginEnd(jCas, phraseQuantity.getQuantityWords)
+        minieQuantity.setQuantityTokens(quantTokens)
+        minieQuantity.setBegin(quantBegin)
+        minieQuantity.setEnd(quantEnd)
+        minieQuantity.setText(phraseQuantity.toString)
+
+        quantities.set(index, minieQuantity)
+      }
+    )
+
+    constituent.setQuantities(quantities)
+
+
+    // setting text with respect to MinIE toString
+
+    constituent.setText(phrase.toString)
+
+
+    // setting head by properly managing erroneous cases
+
+    val head = phrase.getHead(semanticGraph)
+
+    var tokenHead = new Token(jCas)
+    if(head != null && head.get(classOf[TokenKey]) == null) {
+      tokenHead.setId(head.value())
+      tokenHead.setBegin(head.beginPosition())
+      tokenHead.setEnd(head.endPosition())
+    } else {
+      tokenHead = if (head != null) { head.get(classOf[TokenKey]) } else { null }
+    }
+
+    constituent.setHead(tokenHead)
+
+
+    jCas.addFsToIndexes(constituent)
+    constituent
+  }
+
+
+  /**
+    * Given a list of IndexedWords returns the corresponding FSArray of tokens (added to the JCas), plus
+    * its begin and end indicies.
+    *
+    * @param jCas
+    * @param indexedWords
+    * @return
+    */
+  private def indexedWords2FSArrayBeginEnd(jCas: JCas, indexedWords: ObjectArrayList[IndexedWord]) : (FSArray, Int, Int) = {
     var begin = Integer.MAX_VALUE
     var end = -1
 
-    // setting constituent tokens
-
-    val tokens = new FSArray(jCas, words.size())
-    words.asScala.zipWithIndex.foreach(
+    val tokens = new FSArray(jCas, indexedWords.size())
+    indexedWords.asScala.zipWithIndex.foreach(
       indexedWord => {
 
         val word = indexedWord._1
@@ -184,30 +286,8 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
       }
     )
     tokens.addToIndexes()
-    val constituent = new Constituent(jCas, begin, end)
-    constituent.setTokens(tokens)
 
-
-    // setting text
-
-    constituent.setText(phrase.toString)
-
-
-    // setting head by properly managing erroneous cases
-
-    val head = phrase.getHead(semanticGraph)
-    var tokenHead = new Token(jCas)
-    if(head != null && head.get(classOf[TokenKey]) == null) {
-      tokenHead.setId(head.value())
-      tokenHead.setBegin(head.beginPosition())
-      tokenHead.setEnd(head.endPosition())
-    } else {
-      tokenHead = if (head != null) { head.get(classOf[TokenKey]) } else { null }
-    }
-    constituent.setHead(tokenHead)
-
-    jCas.addFsToIndexes(constituent)
-    constituent
+    (tokens, begin, end)
   }
 
 

@@ -14,7 +14,7 @@ class PrinterAnalysisEngine  extends JCasAnnotator_ImplBase {
 
   override def process(aJCas: JCas) = {
 
-    for(openFact <- JCasUtil.select(aJCas, classOf[OpenFact]).asScala) {
+    for(openFact <- JCasUtil.select(aJCas, classOf[MinIEOpenFact]).asScala) {
       logger.info(openFact.getText)
     }
 
