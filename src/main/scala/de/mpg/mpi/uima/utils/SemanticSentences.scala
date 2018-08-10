@@ -1,6 +1,6 @@
 package de.mpg.mpi.uima.utils
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.{Sentence, Token}
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp
 import edu.stanford.nlp.ling.CoreAnnotations
 import edu.stanford.nlp.semgraph.{SemanticGraph, SemanticGraphCoreAnnotations}
@@ -16,6 +16,7 @@ import org.apache.uima.fit.util.JCasUtil
   */
 class SemanticSentences(jcas: JCas) {
 
+  private val jCas = JCas
   private val sentence2semGraph = mapSentence2SemanticGraph(jcas)  // DKPro sentence to CoreNLP semantic graph
 
 
@@ -36,7 +37,7 @@ class SemanticSentences(jcas: JCas) {
 
         val begin = coreSentence.get(classOf[CoreAnnotations.CharacterOffsetBeginAnnotation])
         val end = coreSentence.get(classOf[CoreAnnotations.CharacterOffsetEndAnnotation])
-        val dkproSentence = JCasUtil.selectCovered(jCas, classOf[Sentence], begin, end).get(0)
+        val dkproSentence = JCasUtil.selectSingleAt(jCas, classOf[Sentence], begin, end) // modifyed, to be tested
 
         sent2semGraph.put(dkproSentence, semanticGraph)
     })
@@ -51,5 +52,15 @@ class SemanticSentences(jcas: JCas) {
     * @return
     */
   def getSemanticGraph(sentence: Sentence) : SemanticGraph = { sentence2semGraph.getOrDefault(sentence, null) }
+
+
+  /**
+    * Given a DkPro token it returns its semantic graph.
+    * @param token
+    * @return
+    */
+  def getSemanticGraph(token: Token) : SemanticGraph = {
+    getSemanticGraph(JCasUtil.selectCovering(jCas, classOf[Sentence], token).get(0) )
+  }
 
 }
