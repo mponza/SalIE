@@ -7,8 +7,8 @@ import scala.io.Source
 
 object StopWordUtils {
 
-  private lazy val stopWords = loadResourceAsSet("resources/stopwords/stopwords.txt")
-  private lazy val pronouns = loadResourceAsSet("resources/stopwords/pronouns.txt")
+  private lazy val stopWords = loadResourceAsSet("/stopwords/stopwords.txt")
+  private lazy val pronouns = loadResourceAsSet("/stopwords/pronouns.txt")
 
 
   private def loadResourceAsSet(filename: String) : ObjectOpenHashSet[String] = {

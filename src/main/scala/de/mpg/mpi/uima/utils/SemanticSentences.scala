@@ -16,7 +16,7 @@ import org.apache.uima.fit.util.JCasUtil
   */
 class SemanticSentences(jcas: JCas) {
 
-  private val jCas = JCas
+  private val jCas = jcas
   private val sentence2semGraph = mapSentence2SemanticGraph(jcas)  // DKPro sentence to CoreNLP semantic graph
 
 

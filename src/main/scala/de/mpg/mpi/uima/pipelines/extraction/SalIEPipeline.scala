@@ -3,7 +3,7 @@ package de.mpg.mpi.uima.pipelines.extraction
 import de.mpg.mpi.SalIEArgs
 import de.mpg.mpi.uima.engines.PrinterAnalysisEngine
 import de.mpg.mpi.uima.engines.minie.MinIEAnalysisEngine
-import de.mpg.mpi.uima.engines.salie.MinIEFacts2SalIEFactsAnalysisEngine
+import de.mpg.mpi.uima.engines.salie.{MinIEFacts2SalIEFactsAnalysisEngine, SalIEOpenFactHeadCorefAnalysisEngine}
 import de.mpg.mpi.uima.pipelines.Pipeline
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp._
 import org.apache.uima.analysis_engine.AnalysisEngineDescription
@@ -25,11 +25,13 @@ class SalIEPipeline(conf: SalIEArgs) extends Pipeline {
     val minieFacts2salieFacts =
       AnalysisEngineFactory.createEngineDescription(classOf[MinIEFacts2SalIEFactsAnalysisEngine])
 
+    val salieHeadCoref = AnalysisEngineFactory.createEngineDescription(classOf[SalIEOpenFactHeadCorefAnalysisEngine])
+
     val printer = AnalysisEngineFactory.createEngineDescription(classOf[PrinterAnalysisEngine])
 
 
     List(tokenizer, posTagger, lemmatizer, depParser, ner, coref,
-         minie, minieFacts2salieFacts, printer)
+         minie, minieFacts2salieFacts, salieHeadCoref, printer)
   }
 
 

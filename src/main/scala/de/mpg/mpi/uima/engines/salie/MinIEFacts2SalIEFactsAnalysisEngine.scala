@@ -38,8 +38,7 @@ class MinIEFacts2SalIEFactsAnalysisEngine extends JCasAnnotator_ImplBase {
     * @return
     */
   private def isValidMinIEOpenFact(minIEOpenFact: MinIEOpenFact) : Boolean = {
-    minIEOpenFact.getText.contains("QUANT_")   // quantities are usually not so informative
-
+    !minIEOpenFact.getText.contains("QUANT_")   // quantities are usually not so informative
   }
 
   /**

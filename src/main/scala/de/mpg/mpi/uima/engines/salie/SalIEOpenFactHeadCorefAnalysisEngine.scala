@@ -33,7 +33,9 @@ class SalIEOpenFactHeadCorefAnalysisEngine extends JCasAnnotator_ImplBase {
     for(corefChain <- JCasUtil.select(jCas, classOf[CoreferenceChain]).asScala) {
 
       var link = corefChain.getFirst
-      var corefTokenHead = JCasUtil.selectSingleAt(jCas, classOf[Token], link.getBegin, link.getEnd)
+      logger.info(link.toString)
+      // val corefTokenHead = JCasUtil.selectAt(jCas, classOf[Token], link.getBegin, link.getEnd).get(0)
+      var corefTokenHead = JCasUtil.selectCovered(jCas, classOf[Token], link.getBegin, link.getEnd).get(0)
 
 
       // Trying to see if coref from here to somewherelse?
@@ -71,7 +73,7 @@ class SalIEOpenFactHeadCorefAnalysisEngine extends JCasAnnotator_ImplBase {
 
     //
     // Updates open fact's subjects with the proper coreferenced tokens.
-    
+
     JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala
       .foreach(salIEOpenFact => corefSubjectSalIEOpenFact(salIEOpenFact, token2corefHead))
 
