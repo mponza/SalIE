@@ -1,7 +1,7 @@
 package de.mpg.mpi
 
 import de.mpg.mpi.uima.pipelines.analysis.StanfordNLPAnalysisPipeline
-import de.mpg.mpi.uima.pipelines.extraction.MinIEPipeline
+import de.mpg.mpi.uima.pipelines.extraction.{MinIEPipeline, SalIEPipeline}
 import de.mpg.mpi.uima.readers.ReaderFactory
 import de.tudarmstadt.ukp.dkpro.core.api.ner.`type`.NamedEntity
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
@@ -21,7 +21,8 @@ object RunPipeline {
 
     val reader = ReaderFactory.getTextReader(conf.datadir())
 //    val pipeline = new StanfordNLPAnalysisPipeline().getEngines()
-    val pipeline = new MinIEPipeline(conf).getEngines()
+  //  val pipeline = new MinIEPipeline(conf).getEngines()
+    val pipeline = new SalIEPipeline(conf).getEngines()
 
     var totnes = 0
     val batch = 5

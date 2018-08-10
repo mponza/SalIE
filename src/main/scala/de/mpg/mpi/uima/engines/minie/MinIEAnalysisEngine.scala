@@ -3,9 +3,10 @@ package de.mpg.mpi.uima.engines.minie
 import de.mpg.mpi.uima.`type`._
 import de.mpg.mpi.uima.utils.SemanticSentences
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.{Sentence, Token}
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.TokenKey
 import de.uni_mannheim.minie.MinIE
 import de.uni_mannheim.minie.annotation.AnnotatedPhrase
+import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation
 import edu.stanford.nlp.ling.IndexedWord
 import edu.stanford.nlp.semgraph.SemanticGraph
 import it.unimi.dsi.fastutil.objects.{Object2ObjectOpenHashMap, ObjectArrayList}
@@ -273,8 +274,11 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
 
         // adding constituent token
 
-        var token = new Token(jCas)
+        var token: Token = null
+        val t = word.get(classOf[TokenKey])
+        val b = word.keySet() //.containsKey(classOf[TokenKey])
         if(word.get(classOf[TokenKey]) == null) {
+          token = new Token(jCas)
           token.setId(word.value)
         } else {
           token = word.get(classOf[TokenKey])

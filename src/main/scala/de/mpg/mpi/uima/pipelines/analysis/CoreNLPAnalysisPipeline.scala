@@ -15,7 +15,7 @@ class CoreNLPAnalysisPipeline extends Pipeline {
     val tokenizer = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpSegmenter])
     val posTagger = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpPosTagger])
     val lemmatizer = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpLemmatizer])
-    val depParser = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpDependencyParser])
+    val depParser = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpDependencyParser], "mode", "BASIC")
     val ner = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpNamedEntityRecognizer])
     val coref = AnalysisEngineFactory.createEngineDescription(classOf[CoreNlpCoreferenceResolver])
 

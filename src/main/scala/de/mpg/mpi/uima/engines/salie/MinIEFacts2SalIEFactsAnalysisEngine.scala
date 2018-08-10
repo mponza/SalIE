@@ -33,33 +33,42 @@ class MinIEFacts2SalIEFactsAnalysisEngine extends JCasAnnotator_ImplBase {
 
   /**
     * SalIEOpenFact will be created only for MinIEOpenFact that satisfy this function.
+    *
     * @param minIEOpenFact
     * @return
     */
   private def isValidMinIEOpenFact(minIEOpenFact: MinIEOpenFact) : Boolean = {
-    if(minIEOpenFact.getText.contains("QUANT_")) return false // for salience we do not want uniformative facts
-    minIEOpenFact.getBegin >= 0 && minIEOpenFact.getEnd >= 0  // check all positions make sense (no implicit facts)
+    if(minIEOpenFact.getText.contains("QUANT_")) return false   // quantities are usually not so informative
+
+    // check fact is no implicit
+    isValidConstituent(minIEOpenFact.getSubject) && isValidConstituent(minIEOpenFact.getRelation) &&
+      isValidConstituent(minIEOpenFact.getObject)
+  }
+
+  private def isValidConstituent(constituent: Constituent) : Boolean = {
+    constituent.getBegin >= 0 && constituent.getEnd >= 0  // check all positions make sense (no implicit facts)
   }
 
 
   /**
     * Creates a SalIEOpenFact from a MinIEOpenFact.
+    *
     * @param jCas
-    * @param minieFact
+    * @param minieOpenFact
     * @return
     */
-  private def addSalieOpenFact(jCas: JCas, minieFact: MinIEOpenFact) = {
-    val salieOpenFact = new SalIEOpenFact(jCas, minieFact.getBegin, minieFact.getEnd)
+  private def addSalieOpenFact(jCas: JCas, minieOpenFact: MinIEOpenFact) = {
+    val salieOpenFact = new SalIEOpenFact(jCas, minieOpenFact.getBegin, minieOpenFact.getEnd)
 
 
     // setting constituents
 
-    salieOpenFact.setSubject( minieConstituent2Constituent(jCas, minieFact.getSubject.asInstanceOf[MinIEConstituent]) )
+    salieOpenFact.setSubject( minieConstituent2Constituent(jCas, minieOpenFact.getSubject.asInstanceOf[MinIEConstituent]) )
 
     salieOpenFact.setRelation( minieRelation2Constituent(
-      jCas, minieFact.getRelation.asInstanceOf[MinIEConstituent], minieFact.getPolarity.getNegativeTokens) )
+      jCas, minieOpenFact.getRelation.asInstanceOf[MinIEConstituent], minieOpenFact.getPolarity.getNegativeTokens) )
 
-    salieOpenFact.setObject( minieConstituent2Constituent(jCas, minieFact.getObject.asInstanceOf[MinIEConstituent]) )
+    salieOpenFact.setObject( minieConstituent2Constituent(jCas, minieOpenFact.getObject.asInstanceOf[MinIEConstituent]) )
 
 
     // finalizing
@@ -68,6 +77,7 @@ class MinIEFacts2SalIEFactsAnalysisEngine extends JCasAnnotator_ImplBase {
       salieOpenFact.getSubject.getText, salieOpenFact.getRelation.getText, salieOpenFact.getObject.getText)
     )
 
+    salieOpenFact.setMinieOpenFact(minieOpenFact)
 
     salieOpenFact.addToIndexes()
     salieOpenFact
@@ -123,17 +133,20 @@ class MinIEFacts2SalIEFactsAnalysisEngine extends JCasAnnotator_ImplBase {
     */
   private def copyTokens(jCas: JCas, tokens: List[FSArray]) = {
 
-    val flatTokens = tokens.flatten.map(t => t.asInstanceOf[Token]).sortBy(t => t.getBegin)
-
+    val flatTokens = tokens.flatMap(fsArray => fsArray2List(fsArray))
     val copiedTokens = new FSArray(jCas, flatTokens.size)
-
     (0 until flatTokens.size).foreach(i => copiedTokens.set(i, flatTokens(i)))
 
     copiedTokens.addToIndexes()
     copiedTokens
   }
 
-  private def copyTokens(jCas: JCas, tokens: FSArray) = copyTokens(jCas, List(tokens))
+  private def copyTokens(jCas: JCas, tokens: FSArray) : FSArray = copyTokens(jCas, List(tokens))
+
+
+  private def fsArray2List(tokens : FSArray) = {
+    (0 until tokens.size()).map(i => tokens.get(i).asInstanceOf[Token]).sortBy(token => token.getBegin).toList
+  }
 
 
   /**
