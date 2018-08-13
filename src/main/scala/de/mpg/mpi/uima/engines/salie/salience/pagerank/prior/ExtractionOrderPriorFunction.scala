@@ -1,6 +1,6 @@
-package de.mpg.mpi.uima.engines.salie.ranking.pagerank.prior
+package de.mpg.mpi.uima.engines.salie.salience.pagerank.prior
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
-import de.mpg.mpi.uima.engines.salie.ranking.pagerank.graph.SalIEOpenFactGraph
+import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
 import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap
 import org.apache.uima.fit.util.JCasUtil
@@ -14,8 +14,9 @@ class ExtractionOrderPriorFunction extends RankingPriorFunction {
   private val logger = LoggerFactory.getLogger(classOf[ExtractionOrderPriorFunction])
   private val nodeID2Prior = new Int2DoubleOpenHashMap()
 
-  override def weightNodes(salieOpenFactGraph: SalIEOpenFactGraph) = {
-    val nVertices = salieOpenFactGraph.getDirectedSparseGraph.getVertexCount
+
+  override def weightNodes(salieGraph: SalIEGraph) = {
+    val nVertices = salieGraph.getDirectedSparseGraph.getVertexCount
 
     var i = 1
     var normFactor = 0
@@ -24,14 +25,14 @@ class ExtractionOrderPriorFunction extends RankingPriorFunction {
     //
     // Computes prior for each node in the graph.
 
-    JCasUtil.select(salieOpenFactGraph.getJCas, classOf[Sentence]).asScala
+    JCasUtil.select(salieGraph.getJCas, classOf[Sentence]).asScala
       .foreach(sentence => {
 
-        JCasUtil.selectCovered(salieOpenFactGraph.getJCas, classOf[SalIEOpenFact], sentence).asScala
+        JCasUtil.selectCovered(salieGraph.getJCas, classOf[SalIEOpenFact], sentence).asScala
           .foreach(salieOpenFact => {
 
             val prior = nVertices - i
-            val nodeID = salieOpenFactGraph.getNodeID(salieOpenFact)
+            val nodeID = salieGraph.getNodeID(salieOpenFact)
             nodeID2Prior.put(nodeID, prior)
 
             normFactor += prior
@@ -41,11 +42,11 @@ class ExtractionOrderPriorFunction extends RankingPriorFunction {
 
       })
 
-    
+
     //
     // Normalizes prior
 
-    salieOpenFactGraph.getDirectedSparseGraph.getVertices.asScala
+    salieGraph.getDirectedSparseGraph.getVertices.asScala
       .foreach(nodeID => nodeID2Prior.put( nodeID, nodeID2Prior.get(nodeID) / normFactor ))
 
   }

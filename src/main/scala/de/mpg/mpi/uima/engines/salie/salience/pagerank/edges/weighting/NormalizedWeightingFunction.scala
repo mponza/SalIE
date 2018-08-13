@@ -1,7 +1,7 @@
-package de.mpg.mpi.uima.engines.salie.ranking.pagerank.edges.weighting
+package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting
 
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
-import de.mpg.mpi.uima.engines.salie.ranking.pagerank.graph.SalIEOpenFactGraph
+import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
 import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap
 import it.unimi.dsi.fastutil.longs.Long2DoubleOpenHashMap
 import org.slf4j.LoggerFactory
@@ -20,10 +20,10 @@ abstract class NormalizedWeightingFunction extends WeightingFunction {
     *
     * @param salIEGraph
     */
-  protected def initialize(salIEGraph: SalIEOpenFactGraph) : Unit = {}
+  protected def initialize(salIEGraph: SalIEGraph) : Unit = {}
 
 
-  override def weightEdges(salIEGraph: SalIEOpenFactGraph): Unit = {
+  override def weightEdges(salIEGraph: SalIEGraph): Unit = {
     initialize(salIEGraph)
     computeEdgeWeights(salIEGraph, weights)
   }
@@ -35,7 +35,7 @@ abstract class NormalizedWeightingFunction extends WeightingFunction {
     * @param salIEGraph
     * @param weights
     */
-  def computeEdgeWeights(salIEGraph: SalIEOpenFactGraph, weights: Long2DoubleOpenHashMap) : Unit = {
+  def computeEdgeWeights(salIEGraph: SalIEGraph, weights: Long2DoubleOpenHashMap) : Unit = {
 
     val normFactors = new Int2DoubleOpenHashMap()  // will contain the normalization factor for each node
 

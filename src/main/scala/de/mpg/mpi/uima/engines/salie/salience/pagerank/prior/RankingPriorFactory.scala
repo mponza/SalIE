@@ -1,4 +1,4 @@
-package de.mpg.mpi.uima.engines.salie.ranking.pagerank.prior
+package de.mpg.mpi.uima.engines.salie.salience.pagerank.prior
 
 object RankingPriorFactory {
 

@@ -1,4 +1,4 @@
-package de.mpg.mpi.uima.engines.salie.ranking.pagerank.edges.weighting.embeddings
+package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting.embeddings
 
 import java.util
 

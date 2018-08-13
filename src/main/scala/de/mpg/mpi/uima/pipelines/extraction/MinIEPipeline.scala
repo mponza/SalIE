@@ -8,7 +8,7 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp._
 import org.apache.uima.analysis_engine.AnalysisEngineDescription
 import org.apache.uima.fit.factory.AnalysisEngineFactory
 
-class MinIEPipeline(conf: SalIEArgs) extends Pipeline {
+class MinIEPipeline(config: SalIEArgs) extends Pipeline {
 
   override def getEngines() : List[AnalysisEngineDescription] = {
 
@@ -19,7 +19,7 @@ class MinIEPipeline(conf: SalIEArgs) extends Pipeline {
     val ner = AnalysisEngineFactory.createEngineDescription(classOf[StanfordNamedEntityRecognizer])
     val coref = AnalysisEngineFactory.createEngineDescription(classOf[StanfordCoreferenceResolver])
 
-    val minie = AnalysisEngineFactory.createEngineDescription(classOf[MinIEAnalysisEngine], "mode", conf.miniemode())
+    val minie = AnalysisEngineFactory.createEngineDescription(classOf[MinIEAnalysisEngine], "mode", config.miniemode())
 
     val printer = AnalysisEngineFactory.createEngineDescription(classOf[PrinterAnalysisEngine])
 

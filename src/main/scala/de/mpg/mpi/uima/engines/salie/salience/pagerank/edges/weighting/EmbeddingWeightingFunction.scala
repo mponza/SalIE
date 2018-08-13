@@ -1,8 +1,8 @@
-package de.mpg.mpi.uima.engines.salie.ranking.pagerank.edges.weighting
+package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting
 
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
-import de.mpg.mpi.uima.engines.salie.ranking.pagerank.edges.weighting.embeddings.CompressedEmbeddings
-import de.mpg.mpi.uima.engines.salie.ranking.pagerank.graph.SalIEOpenFactGraph
+import de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting.embeddings.CompressedEmbeddings
+import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
 import it.cnr.isti.hpc.LinearAlgebra
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
 import org.slf4j.LoggerFactory
@@ -23,7 +23,7 @@ class EmbeddingWeightingFunction(filename : String) extends NormalizedWeightingF
     *
     * @param salIEGraph
     */
-  override protected def initialize(salIEGraph: SalIEOpenFactGraph) = {
+  override protected def initialize(salIEGraph: SalIEGraph) = {
     salIEGraph.getDirectedSparseGraph.getVertices.asScala
       .map(
         nodeID => {

@@ -1,6 +1,6 @@
-package de.mpg.mpi.uima.engines.salie.ranking.pagerank.edges.structure
+package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.structure
 
-import de.mpg.mpi.uima.engines.salie.ranking.pagerank.graph.SalIEOpenFactGraph
+import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
 
 import scala.collection.JavaConverters._
 
@@ -13,7 +13,7 @@ class CliqueCreation extends GraphStructureCreation {
     *
     * @param salIEGraph
     */
-  override def createEdges(salIEGraph: SalIEOpenFactGraph) = {
+  override def createEdges(salIEGraph: SalIEGraph) = {
 
     salIEGraph.getDirectedSparseGraph.getVertices.asScala.foreach(
 

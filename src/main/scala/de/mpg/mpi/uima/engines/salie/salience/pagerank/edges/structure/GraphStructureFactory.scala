@@ -1,4 +1,4 @@
-package de.mpg.mpi.uima.engines.salie.ranking.pagerank.edges.structure
+package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.structure
 
 object GraphStructureFactory {
 
