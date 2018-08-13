@@ -1,6 +1,6 @@
 package de.mpg.mpi.uima.engines.salie.ranking.pagerank.edges.structure
 
-import de.mpg.mpi.uima.engines.salie.ranking.pagerank.OpenFactGraph
+import de.mpg.mpi.uima.engines.salie.ranking.pagerank.graph.SalIEOpenFactGraph
 
 trait GraphStructureCreation {
 
@@ -10,6 +10,6 @@ trait GraphStructureCreation {
     *
     * @param salIEGraph
     */
-  def createEdges(salIEGraph: OpenFactGraph)
+  def createEdges(salIEGraph: SalIEOpenFactGraph)
 
 }

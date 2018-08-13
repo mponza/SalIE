@@ -1,4 +1,4 @@
-package de.mpg.mpi.uima.engines.salie.ranking.pagerank
+package de.mpg.mpi.uima.engines.salie.ranking.pagerank.graph
 
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
 import edu.uci.ics.jung.graph.DirectedSparseGraph
@@ -16,9 +16,8 @@ import scala.collection.JavaConverters._
   *
   * @param jCas
   */
-class OpenFactGraph(jCas: JCas) {
+class SalIEOpenFactGraph(jCas: JCas) {
   private val logger = LoggerFactory.getLogger(classOf[SalIEOpenFact])
-
 
   // SalIEOpenFact - index mapping
   private val salieOpenFact2nodeID = new Object2IntOpenHashMap[SalIEOpenFact]()
@@ -52,6 +51,7 @@ class OpenFactGraph(jCas: JCas) {
     directedGraph
   }
 
+  def getJCas : JCas = jCas
   def getDirectedSparseGraph = graph
 
 

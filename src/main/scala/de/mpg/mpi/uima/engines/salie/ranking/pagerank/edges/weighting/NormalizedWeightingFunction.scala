@@ -1,8 +1,7 @@
 package de.mpg.mpi.uima.engines.salie.ranking.pagerank.edges.weighting
 
-import com.google.common.base.Function
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
-import de.mpg.mpi.uima.engines.salie.ranking.pagerank.OpenFactGraph
+import de.mpg.mpi.uima.engines.salie.ranking.pagerank.graph.SalIEOpenFactGraph
 import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap
 import it.unimi.dsi.fastutil.longs.Long2DoubleOpenHashMap
 import org.slf4j.LoggerFactory
@@ -10,10 +9,24 @@ import org.slf4j.LoggerFactory
 import scala.collection.JavaConverters._
 
 
-abstract class NormalizedWeighting extends Function[Long, Double] {
+abstract class NormalizedWeightingFunction extends WeightingFunction {
 
-  private val logger = LoggerFactory.getLogger(classOf[NormalizedWeighting])
+  private val logger = LoggerFactory.getLogger(classOf[NormalizedWeightingFunction])
   private val weights = new Long2DoubleOpenHashMap()
+
+
+  /**
+    * Preprocessing, if needed.
+    *
+    * @param salIEGraph
+    */
+  protected def initialize(salIEGraph: SalIEOpenFactGraph) : Unit = {}
+
+
+  override def weightEdges(salIEGraph: SalIEOpenFactGraph): Unit = {
+    initialize(salIEGraph)
+    computeEdgeWeights(salIEGraph, weights)
+  }
 
 
   /**
@@ -22,7 +35,7 @@ abstract class NormalizedWeighting extends Function[Long, Double] {
     * @param salIEGraph
     * @param weights
     */
-  def weightEdges(salIEGraph: OpenFactGraph, weights: Long2DoubleOpenHashMap) = {
+  def computeEdgeWeights(salIEGraph: SalIEOpenFactGraph, weights: Long2DoubleOpenHashMap) : Unit = {
 
     val normFactors = new Int2DoubleOpenHashMap()  // will contain the normalization factor for each node
 
@@ -84,7 +97,7 @@ abstract class NormalizedWeighting extends Function[Long, Double] {
 
   }
 
-  private def apply(edge: Long) = weights.get(edge)
+  def apply(edge: Long) : Double = weights.get(edge)
 
   def computeWeight(src: SalIEOpenFact, dst: SalIEOpenFact) : Double
 

@@ -92,4 +92,7 @@ class CompressedEmbeddings(filename: String) {
 
     vector
   }
+
+
+  def getDimensions() = model.dimensions()
 }
