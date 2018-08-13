@@ -31,4 +31,17 @@ object StopWordUtils {
 
 
   def isPronoun(word: String) = pronouns.contains(word.toLowerCase)
+
+
+  def text2CleanedTokenSet(text : String) : ObjectOpenHashSet[String] = {
+    val cleanedTokens = new ObjectOpenHashSet[String]()
+
+    text.split(" ")
+      .filter(token => !token.matches("[^a-zA-Z0-9 ]"))
+      .map(token => token.replaceAll("[^a-zA-Z ]", "").toLowerCase)
+      .filter(token => !isStopWord(token))
+      .foreach(token => cleanedTokens.add(token))
+
+    cleanedTokens
+  }
 }

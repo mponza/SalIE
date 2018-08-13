@@ -11,7 +11,6 @@ import it.unimi.dsi.fastutil.objects.{Object2ObjectOpenHashMap, ObjectOpenHashSe
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.util.JCasUtil
 import org.apache.uima.jcas.JCas
-import org.apache.uima.jcas.cas.FSArray
 import org.slf4j.LoggerFactory
 
 import scala.collection.JavaConverters._
@@ -127,7 +126,7 @@ class SalIEOpenFactHeadCorefAnalysisEngine extends JCasAnnotator_ImplBase {
 
     subject.setHead(subjectHead)
     Range(0, corefSubjectTokens.size).foreach(i => subject.getTokens.set(i, corefSubjectTokens(i)))
-    subject.setText( corefSubjectTokens.map(token => token.getCoveredText) mkString(" ") )
+    subject.setText( corefSubjectTokens.map(token => token.getCoveredText) mkString " " )
 
     salIEOpenFact.setText("%s %s %s".format(
       salIEOpenFact.getSubject.getText,
@@ -159,7 +158,7 @@ class SalIEOpenFactHeadCorefAnalysisEngine extends JCasAnnotator_ImplBase {
     }
 
 
-    // maybe easier by using dkpro Dependency directly
+    // maybe easier by using dkpro Dependency directly?
 
     val highestIndexedWord = semanticGraph.getIncomingEdgesSorted(indexedWord.get()).stream()
       .filter( x => x.getRelation.equals(EnglishGrammaticalRelations.NOUN_COMPOUND_MODIFIER))
