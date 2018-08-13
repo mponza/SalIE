@@ -33,5 +33,10 @@ libraryDependencies ++= Seq(
 //  "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default" % "20170609.1",
 //  "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-upstream-coref-en-default" % "20170609",
 
-  "org.rogach" %% "scallop" % "3.1.3"
+  "org.rogach" %% "scallop" % "3.1.3",
+
+  "net.sf.jung" % "jung2" % "2.0.1",
+  "net.sf.jung" % "jung-graph-impl" % "2.1.1",
+  "net.sf.jung" % "jung-algorithms" % "2.1.1",
+  "net.sf.jung" % "jung-api" % "2.1.1",
 )

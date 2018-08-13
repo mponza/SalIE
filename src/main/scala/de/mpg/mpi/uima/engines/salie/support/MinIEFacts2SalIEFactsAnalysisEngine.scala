@@ -1,4 +1,4 @@
-package de.mpg.mpi.uima.engines.salie
+package de.mpg.mpi.uima.engines.salie.support
 
 import de.mpg.mpi.uima.`type`.{Constituent, MinIEConstituent, MinIEOpenFact, SalIEOpenFact}
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Token

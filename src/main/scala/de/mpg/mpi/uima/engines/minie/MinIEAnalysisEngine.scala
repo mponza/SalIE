@@ -6,10 +6,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.{Sentence, Token}
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.TokenKey
 import de.uni_mannheim.minie.MinIE
 import de.uni_mannheim.minie.annotation.AnnotatedPhrase
-import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation
 import edu.stanford.nlp.ling.IndexedWord
 import edu.stanford.nlp.semgraph.SemanticGraph
-import it.unimi.dsi.fastutil.objects.{Object2ObjectOpenHashMap, ObjectArrayList}
+import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import org.apache.uima.UimaContext
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.descriptor.ConfigurationParameter

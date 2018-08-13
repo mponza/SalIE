@@ -1,6 +1,6 @@
-package de.mpg.mpi.uima.engines.salie
+package de.mpg.mpi.uima.engines.salie.support
 
-import de.mpg.mpi.uima.`type`.SalIEOpenFact
+import de.mpg.mpi.uima.`type`.{Constituent, SalIEOpenFact}
 import de.mpg.mpi.uima.utils.StopWordUtils
 import it.unimi.dsi.fastutil.objects.{ObjectArrayList, ObjectOpenHashSet}
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
@@ -23,11 +23,12 @@ class SalIEOpenFactPruningAnalysisEngine extends JCasAnnotator_ImplBase {
     pruneNullEmptyStringConstituentFacts(jCas)
     pruneDuplicatedFacts(jCas)
     pruneThreeTokensFacts(jCas)
+    pruneStopWordsFacts(jCas)
   }
 
 
   //
-  // (1) Null/Empty string constituent
+  // (1) Null/Empty string constituent.
 
   private def pruneNullEmptyStringConstituentFacts(jCas: JCas) = {
     JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala
@@ -55,7 +56,7 @@ class SalIEOpenFactPruningAnalysisEngine extends JCasAnnotator_ImplBase {
 
 
   //
-  // (2) Facts whose tokens are included in other facts
+  // (2) Facts whose tokens are included in other facts.
 
   /**
     * Removes facts whose (cleaned) tokens are already present within other facts.
@@ -101,5 +102,24 @@ class SalIEOpenFactPruningAnalysisEngine extends JCasAnnotator_ImplBase {
     salIEOpenFact.getSubject.getTokens().size() == 1 &&
     salIEOpenFact.getRelation.getTokens.size() == 1 &&
     salIEOpenFact.getObject.getTokens.size() == 1
+  }
+
+
+  //
+  // (4) Facts whose constituents have only stopwords.
+
+  private def pruneStopWordsFacts(jCas: JCas) = {
+    JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala
+
+      .filter(salieOpenFact =>
+         hasOnlyStopWords( salieOpenFact.getSubject ) &&
+         hasOnlyStopWords( salieOpenFact.getRelation  ) &&
+         hasOnlyStopWords( salieOpenFact.getObject )
+
+      ).foreach(salieOpenFact => salieOpenFact.removeFromIndexes())
+  }
+
+  private def hasOnlyStopWords(constituent: Constituent) = {
+    StopWordUtils.text2CleanedTokenSet( constituent.getText ).isEmpty
   }
 }

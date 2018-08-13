@@ -1,4 +1,4 @@
-package de.mpg.mpi.uima.engines.salie
+package de.mpg.mpi.uima.engines.salie.support
 
 import de.mpg.mpi.uima.`type`.{Constituent, SalIEOpenFact}
 import de.mpg.mpi.uima.utils.{SemanticSentences, StopWordUtils}
