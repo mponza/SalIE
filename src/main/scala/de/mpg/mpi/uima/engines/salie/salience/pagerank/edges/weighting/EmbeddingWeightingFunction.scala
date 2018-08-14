@@ -1,5 +1,7 @@
 package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting
 
+import java.lang.Double
+
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
 import de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting.embeddings.CompressedEmbeddings
 import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph

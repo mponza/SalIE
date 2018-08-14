@@ -3,13 +3,13 @@ package de.mpg.mpi.uima.pipelines.extraction
 import de.mpg.mpi.SalIEArgs
 import de.mpg.mpi.uima.engines.PrinterAnalysisEngine
 import de.mpg.mpi.uima.engines.minie.MinIEAnalysisEngine
-import de.mpg.mpi.uima.engines.salie.SalIEOpenFactHeadCorefAnalysisEngine
 import de.mpg.mpi.uima.engines.salie.salience.SalIESalienceAnalysisEngine
 import de.mpg.mpi.uima.engines.salie.support.{MinIEFacts2SalIEFactsAnalysisEngine, SalIEOpenFactHeadCorefAnalysisEngine}
 import de.mpg.mpi.uima.pipelines.Pipeline
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp._
 import org.apache.uima.analysis_engine.AnalysisEngineDescription
 import org.apache.uima.fit.factory.AnalysisEngineFactory
+
 
 class SalIEPipeline(config: SalIEArgs) extends Pipeline {
 
@@ -34,8 +34,8 @@ class SalIEPipeline(config: SalIEArgs) extends Pipeline {
       "graphStructure", config.graphstructure(),
       "weighting", config.weighting(),
       "rankingPrior", config.rankingprior(),
-      "alpha", config.alpha(),
-      "iterations", config.iterations()
+      "alpha", config.alpha().asInstanceOf[java.lang.Float],
+      "iterations", config.iterations().asInstanceOf[java.lang.Integer]
     )
 
     val printer = AnalysisEngineFactory.createEngineDescription(classOf[PrinterAnalysisEngine])

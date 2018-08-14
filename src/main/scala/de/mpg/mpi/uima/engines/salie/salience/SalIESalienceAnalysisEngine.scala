@@ -46,3 +46,15 @@ class SalIESalienceAnalysisEngine extends JCasAnnotator_ImplBase {
   }
 
 }
+
+
+object SalIESalienceAnalysisEngine {
+
+  val PARAM_GRAPH_STRUCTURE: String = "graphStructure"
+  val PARAM_WEIGHTING: String = "weighting"
+  val PARAM_WEIGHTING_MODEL: String = "weightingModel"
+  val PARAM_RANKING_PRIOR: String = "rankingPrior"
+  val PARAM_ALPHA: String = "alpha"
+  val PARAM_ITERATIONS: String = "iterations"
+
+}

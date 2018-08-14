@@ -32,7 +32,7 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
   private val logger = LoggerFactory.getLogger(classOf[MinIEAnalysisEngine])
 
   @ConfigurationParameter
-  var mode: String = null
+  var mode: String = "safe"
 
   override def initialize(context: UimaContext): Unit = {
     super.initialize(context)
@@ -306,6 +306,6 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
 
 object MinIEAnalysisEngine {
 
-  var PARAM_MODE: String = "safe"
+  val PARAM_MODE: String = "mode"
 
 }

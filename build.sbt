@@ -38,5 +38,5 @@ libraryDependencies ++= Seq(
   "net.sf.jung" % "jung2" % "2.0.1",
   "net.sf.jung" % "jung-graph-impl" % "2.1.1",
   "net.sf.jung" % "jung-algorithms" % "2.1.1",
-  "net.sf.jung" % "jung-api" % "2.1.1",
+  "net.sf.jung" % "jung-api" % "2.1.1"
 )

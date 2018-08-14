@@ -8,6 +8,11 @@ Setting Up
 
 
 
+
+
+
+
+
 Embeddings Wikipedia Open Facts via GloVe and Data Compression
 ---------------------------------------------------------------
 
@@ -29,3 +34,54 @@ and install the Python requirements:
     bash src/main/bash/facts2glove.sh path/to/safe-wikipedia.json path/to/glove.safe.embeddings
 
 For setting up different GloVe parameters check `src/main/bash/facts2glove.sh`.
+
+
+
+
+ROUGE Evaluation
+----------------
+
+**Setting Up.** Set up your [virtualenv](https://docs.python-guide.org/dev/virtualenvs/) environment and then install the Python requirements:
+
+    pip install -r src/main/python/requirements.txt
+
+
+Then, you have to configure [pyrouge](https://pypi.org/project/pyrouge/) by creating the file `~/.pyrouge/settings.ini`
+with the content:
+
+    [pyrouge settings]
+    home_dir = path/to/src/main/python/summarization/tools/ROUGE-1.5.5/
+    
+    
+**Evaluation.** For evaluating a set of extracted facts with respect to documents' abstracts you need to run:
+
+    python src/main/python/summarization evaluate path/to/open/facts/dir path/to/abstracts path/to/output/rouge.json
+    
+where `path/to/open/facts/dir` is the path to a directory of a set of documents, each one with the following JSON format:
+
+
+    {
+       'docID':        string      id of the document
+       'text':         string      content of the document
+       'abstract':     string      abstract of the document
+
+       'openfacts':    list        list of open facts
+
+                   [
+                       {
+                           'text':     string      text of the open fact
+                           'score':    float       salience score
+                       }
+                   ]
+    }
+    
+and the `path/to/abstracts` is the path to a directory of a set of documents, each one containing the document's abstract.
+
+
+
+
+**Known Error (and How to Fix).** Running ROUGE can raise the "Cannot open exception db file for reading" exception. For fix it, just type:
+
+    bash src/main/fixROUGE.sh
+    
+and then re-run the evaluation script.

@@ -67,7 +67,7 @@ class SalIEOpenFactPruningAnalysisEngine extends JCasAnnotator_ImplBase {
     val keptFacts = new ObjectOpenHashSet[ObjectOpenHashSet[String]]()  // an element is a set of tokens of a fact
     val toPruneFacts = new ObjectArrayList[SalIEOpenFact]()
 
-    for(sentence <- JCasUtil.select(jCas, classOf[SalIEOpenFact])) {
+    for(sentence <- JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala) {
 
       JCasUtil.selectCovered(jCas, classOf[SalIEOpenFact], sentence).asScala
         .foreach(salieOpenFact => {

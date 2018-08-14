@@ -6,6 +6,8 @@ import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap
 import org.apache.uima.fit.util.JCasUtil
 import org.slf4j.LoggerFactory
 
+import java.lang.Double
+
 import scala.collection.JavaConverters._
 
 
