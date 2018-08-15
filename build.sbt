@@ -5,6 +5,8 @@ scalacOptions += "-target:jvm-1.8"
 scalacOptions ++= Seq("-feature", "-deprecation")
 fork in run := true
 
+//javaOptions in run += "-Xmx20G"
+
 //
 //resourceDirectory in (Compile, runMain) := baseDirectory.value / "src" / "main" / "resources"
 
@@ -34,6 +36,8 @@ libraryDependencies ++= Seq(
 //  "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-upstream-coref-en-default" % "20170609",
 
   "org.rogach" %% "scallop" % "3.1.3",
+
+  "com.jsoniter" % "jsoniter" % "0.9.23",
 
   "net.sf.jung" % "jung2" % "2.0.1",
   "net.sf.jung" % "jung-graph-impl" % "2.1.1",

@@ -2,9 +2,11 @@ package de.mpg.mpi.uima.pipelines.io
 
 import de.mpg.mpi.uima.io.readers.ReaderFactory
 import de.mpg.mpi.uima.io.writers.WriterFactory
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.`type`.DocumentMetaData
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import it.unimi.dsi.logging.ProgressLogger
 import org.apache.uima.fit.factory.{AnalysisEngineFactory, JCasFactory}
+import org.apache.uima.fit.util.JCasUtil
 import org.apache.uima.jcas.JCas
 import org.slf4j.LoggerFactory
 
@@ -61,7 +63,17 @@ class IOPipeline(val ioArgs: IOPipelineArgs) {
         } else {
 
           //resources already loaded, only parallel computation
-          documents.asScala.par.foreach(jCas => ae.process(jCas) )
+          documents.asScala.par.foreach(jCas => {
+            try {
+              ae.process(jCas)
+            } catch {
+              case e: Exception =>
+
+                logger.error("Error with document %s".format(
+                  JCasUtil.selectSingle(jCas, classOf[DocumentMetaData]).getDocumentId
+                ))
+            }
+          } )
         }
 
         pl.update()

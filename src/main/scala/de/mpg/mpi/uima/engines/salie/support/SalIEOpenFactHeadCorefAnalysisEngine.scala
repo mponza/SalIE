@@ -32,7 +32,7 @@ class SalIEOpenFactHeadCorefAnalysisEngine extends JCasAnnotator_ImplBase {
     for(corefChain <- JCasUtil.select(jCas, classOf[CoreferenceChain]).asScala) {
 
       var link = corefChain.getFirst
-      logger.info(link.toString)
+//      logger.info(link.toString)
       // val corefTokenHead = JCasUtil.selectAt(jCas, classOf[Token], link.getBegin, link.getEnd).get(0)
       var corefTokenHead = JCasUtil.selectCovered(jCas, classOf[Token], link.getBegin, link.getEnd).get(0)
 
@@ -59,7 +59,12 @@ class SalIEOpenFactHeadCorefAnalysisEngine extends JCasAnnotator_ImplBase {
           link = link.getNext
           if (!link.getReferenceType.equals("NOMINAL")) {
 
-            val tokenMention = JCasUtil.selectSingleAt(jCas, classOf[Token], link.getBegin, link.getEnd)
+//            logger.info("========")
+//            logger.info(jCas.getDocumentText.substring(link.getBegin, link.getEnd))
+//            logger.info("========")
+
+
+            val tokenMention = JCasUtil.selectCovered(jCas, classOf[Token], link.getBegin, link.getEnd).get(0)
             if( StopWordUtils.isPronoun(tokenMention.getCoveredText) ) {
               token2corefHead.put(tokenMention, corefTokenHead)
             }

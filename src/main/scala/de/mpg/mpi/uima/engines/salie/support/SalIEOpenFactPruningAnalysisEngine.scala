@@ -2,7 +2,8 @@ package de.mpg.mpi.uima.engines.salie.support
 
 import de.mpg.mpi.uima.`type`.{Constituent, SalIEOpenFact}
 import de.mpg.mpi.uima.utils.StopWordUtils
-import it.unimi.dsi.fastutil.objects.{ObjectArrayList, ObjectOpenHashSet}
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
+import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.util.JCasUtil
 import org.apache.uima.jcas.JCas
@@ -21,16 +22,16 @@ class SalIEOpenFactPruningAnalysisEngine extends JCasAnnotator_ImplBase {
 
   override def process(jCas: JCas) = {
     pruneNullEmptyStringConstituentFacts(jCas)
-    pruneDuplicatedFacts(jCas)
     pruneThreeTokensFacts(jCas)
     pruneStopWordsFacts(jCas)
+    pruneIncludedFacts(jCas)
   }
 
 
   //
   // (1) Null/Empty string constituent.
 
-  private def pruneNullEmptyStringConstituentFacts(jCas: JCas) = {
+  private def pruneNullEmptyStringConstituentFacts(jCas: JCas) : Unit = {
     JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala
       .filter(salieOpenFact => hasEmptyConstituent(salieOpenFact))
       .foreach(salieOpenFact => salieOpenFact.removeFromIndexes())
@@ -45,9 +46,9 @@ class SalIEOpenFactPruningAnalysisEngine extends JCasAnnotator_ImplBase {
     }
 
     // no empty string constituent
-    if(salieOpenFact.getSubject.getText == "" ||
-      salieOpenFact.getRelation.getText == "" ||
-      salieOpenFact.getObject.getText == "") {
+    if(salieOpenFact.getSubject.getText.equals("") ||
+      salieOpenFact.getRelation.getText.equals("") ||
+      salieOpenFact.getObject.getText.equals("")) {
       return true
     }
 
@@ -56,43 +57,9 @@ class SalIEOpenFactPruningAnalysisEngine extends JCasAnnotator_ImplBase {
 
 
   //
-  // (2) Facts whose tokens are included in other facts.
+  // (2) Facts which are too short, i.e. one token for constitutent.
 
-  /**
-    * Removes facts whose (cleaned) tokens are already present within other facts.
-    *
-    * @param jCas
-    */
-  private def pruneDuplicatedFacts(jCas: JCas) = {
-    val keptFacts = new ObjectOpenHashSet[ObjectOpenHashSet[String]]()  // an element is a set of tokens of a fact
-    val toPruneFacts = new ObjectArrayList[SalIEOpenFact]()
-
-    for(sentence <- JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala) {
-
-      JCasUtil.selectCovered(jCas, classOf[SalIEOpenFact], sentence).asScala
-        .foreach(salieOpenFact => {
-
-          val factTokens = StopWordUtils.text2CleanedTokenSet(salieOpenFact.getText)
-
-          if(keptFacts.contains(factTokens)) {
-            toPruneFacts.add(salieOpenFact)
-          } else {
-            keptFacts.add(factTokens)
-          }
-
-        }
-      )
-
-    }
-
-    toPruneFacts.asScala.foreach(fact => fact.removeFromIndexes())
-  }
-
-
-  //
-  // (3) Facts which are too short, i.e. one token for constitutent.
-
-  private def pruneThreeTokensFacts(jCas: JCas) = {
+  private def pruneThreeTokensFacts(jCas: JCas) : Unit = {
     JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala
       .filter(salieOpenFact => hasOneTokenForConstituent(salieOpenFact))
       .foreach(salieOpenFact => salieOpenFact.removeFromIndexes())
@@ -106,14 +73,14 @@ class SalIEOpenFactPruningAnalysisEngine extends JCasAnnotator_ImplBase {
 
 
   //
-  // (4) Facts whose constituents have only stopwords.
+  // (3) Facts whose constituents have only stopwords.
 
-  private def pruneStopWordsFacts(jCas: JCas) = {
+  private def pruneStopWordsFacts(jCas: JCas) : Unit = {
     JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala
 
       .filter(salieOpenFact =>
-         hasOnlyStopWords( salieOpenFact.getSubject ) &&
-         hasOnlyStopWords( salieOpenFact.getRelation  ) &&
+         hasOnlyStopWords( salieOpenFact.getSubject ) ||
+         hasOnlyStopWords( salieOpenFact.getRelation  ) ||
          hasOnlyStopWords( salieOpenFact.getObject )
 
       ).foreach(salieOpenFact => salieOpenFact.removeFromIndexes())
@@ -121,5 +88,36 @@ class SalIEOpenFactPruningAnalysisEngine extends JCasAnnotator_ImplBase {
 
   private def hasOnlyStopWords(constituent: Constituent) = {
     StopWordUtils.text2CleanedTokenSet( constituent.getText ).isEmpty
+  }
+
+
+  //
+  // (4) For each sentence, it removes that facts which are fully included in another fact.
+
+  private def pruneIncludedFacts(jCas: JCas) : Unit = {
+    val facts2prune = new ObjectArrayList[SalIEOpenFact]()
+
+    for(sentence <- JCasUtil.select(jCas, classOf[Sentence]).asScala) {
+      val sentenceFacts = JCasUtil.selectCovered(jCas, classOf[SalIEOpenFact], sentence).asScala
+      for(salieOpenFact <- sentenceFacts) {
+
+        val otherSalieOpenFacts = sentenceFacts.filter(f => !f.equals(salieOpenFact)).toList
+        if(otherSalieOpenFacts.nonEmpty) {
+          // at least one more fact different from salieOpenFact
+
+          val mainFactWords = StopWordUtils.text2CleanedTokenSet(salieOpenFact.getText)
+
+          for(otherSalieOpenFact <- otherSalieOpenFacts) {
+            val otherFactWords = StopWordUtils.text2CleanedTokenSet(otherSalieOpenFact.getText)
+            otherFactWords.removeAll(mainFactWords)
+            if(otherFactWords.isEmpty) {
+              facts2prune.add(otherSalieOpenFact)
+            }
+          }
+        }
+      }
+    }
+
+    facts2prune.asScala.foreach(salieOpenFact => salieOpenFact.removeFromIndexes())
   }
 }

@@ -10,7 +10,7 @@ object RunIOPipeline {
 
     val salieArgs = new SalIEArgs(args)
 
-    val pipeline = PipelineFactory(salieArgs.pipeline())
+    val pipeline = PipelineFactory(salieArgs.pipeline(), salieArgs)
     val ioArgs = IOPipelineArgs(
       pipeline,
       salieArgs.inputdir(), salieArgs.inputformat(),

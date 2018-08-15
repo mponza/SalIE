@@ -21,7 +21,7 @@ class OpenFactData:
         #                       [
         #                           {
         #                               'text':     string      text of the open fact
-        #                               'score':    float       salience score
+        #                               'salience':    float       salience score
         #                           }
         #                       ]
         #   }
@@ -38,7 +38,7 @@ class OpenFactData:
             doc = None
             with codecs.open(filename, 'r', encoding='utf-8') as fin:
                 doc = json.load(fin)
-                doc['openfacts'] = sorted(doc['openfacts'], key=lambda fact: -fact['score']) # from most to less salient
+                doc['openfacts'] = sorted(doc['openfacts'], key=lambda fact: -fact['salience']) # from most to less salient
 
             self.docs[doc['docID']] = doc
 

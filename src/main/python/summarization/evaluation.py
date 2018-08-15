@@ -9,7 +9,7 @@ from pyrouge import Rouge155
 from openfacts import OpenFactData
 
 
-N_FACTS = [1, 2, 3, 4, 5] # [1, 2, 3, 4, 5]           # computes rouge scores with top-N_FACTS
+N_FACTS = [1, 5] # [1, 2, 3, 4, 5]           # computes rouge scores with top-N_FACTS
 TMP_ROUGE_DIR = './data/tmp/rouge'  # for tmp rouge files
 
 

@@ -2,6 +2,7 @@ package de.mpg.mpi.uima.io.writers
 
 import java.io.File
 
+import de.mpg.mpi.uima.io.writers.json.JsonOpenFactWriter
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter
 import org.apache.uima.analysis_engine.AnalysisEngineDescription
@@ -13,7 +14,17 @@ object WriterFactory {
 
   def apply(format: String, dir: String): AnalysisEngineDescription = format match {
     case "bin" => getBinCasWriter(dir)
+    case "json" => getJsonWriter(dir)
     case _ => throw new IllegalArgumentException("Cannnot instantiate %s writer".format(format))
+  }
+
+
+  def getJsonWriter(dir: String) : AnalysisEngineDescription = {
+    createDirectory(dir)
+    AnalysisEngineFactory.createEngineDescription(
+      classOf[JsonOpenFactWriter],
+      JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION, dir
+    )
   }
 
 
