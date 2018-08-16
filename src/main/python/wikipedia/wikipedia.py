@@ -79,7 +79,7 @@ class WikipediaExtractionStreaming:
                 wikidocs.append( WikipediaDocument(line) )
 
 
-                if i % n == 0:
+                if i > 0 and i % n == 0:
                     yield wikidocs
                     wikidocs = []
 

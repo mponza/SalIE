@@ -7,7 +7,7 @@ import logging
 import progressbar
 
 from wikipedia import WikipediaExtraction
-
+from wikipedia import WikipediaExtractionIterator
 
 
 @baker.command
@@ -59,12 +59,14 @@ def flat_wikipedia_facts(json_wikipedia, outfilename):
     if not os.path.isdir(outdir):
         os.makedirs(outdir)
 
-    wikipedia = WikipediaExtraction(json_wikipedia)
+    # wikipedia = WikipediaExtraction(json_wikipedia)
+    wikipedia = WikipediaExtractionIterator(json_wikipedia)
     with codecs.open(outfilename, 'w', encoding='utf-8') as fout:
 
-        bar = progressbar.ProgressBar()
-        for wikidoc in bar( wikipedia.wikidocs ):
+        # bar = progressbar.ProgressBar()
+        # for wikidoc in bar( wikipedia ):
 
+        for wikidoc in wikipedia:
             for fact in wikidoc.facts:
                 text = clean_text(fact.get_flat_text())
                 fout.write( text + u'\n' )

@@ -1,7 +1,8 @@
-package de.mpg.mpi.uima.engines.salie.salience
+package de.mpg.mpi.uima.engines.salie
 
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.SalIEPageRank
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.config.SalIEPageRankConfig
+import de.mpg.mpi.uima.engines.salie.clustering.SalIEClustering
+import de.mpg.mpi.uima.engines.salie.pagerank.config.SalIEPageRankConfig
+import de.mpg.mpi.uima.engines.salie.pagerank.SalIEPageRank
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.descriptor.ConfigurationParameter
 import org.apache.uima.jcas.JCas
@@ -11,9 +12,9 @@ import org.slf4j.LoggerFactory
 /**
   * Computes salience scores for each SalIEOpenFact via PageRank.
   */
-class SalIESalienceAnalysisEngine extends JCasAnnotator_ImplBase {
+class SalIEAnalysisEngine extends JCasAnnotator_ImplBase {
 
-  private val logger = LoggerFactory.getLogger(classOf[SalIESalienceAnalysisEngine])
+  private val logger = LoggerFactory.getLogger(classOf[SalIEAnalysisEngine])
 
 
   @ConfigurationParameter
@@ -23,7 +24,7 @@ class SalIESalienceAnalysisEngine extends JCasAnnotator_ImplBase {
   var weighting: String = "embedding"
 
   @ConfigurationParameter
-  var weightingModel: String = "data/embeddings/safe-wikipedia.bin"
+  var weightingModel: String = "path/to/model"
 
   @ConfigurationParameter
   var rankingPrior: String = "extractionOrder"
@@ -41,14 +42,19 @@ class SalIESalienceAnalysisEngine extends JCasAnnotator_ImplBase {
 
 
   override def process(jCas: JCas) = {
+    // Prominance Computation
     val saliePageRank = new SalIEPageRank(jCas, getSalIEPageRankconfig)
     saliePageRank.computePageRank()
+
+    // Open Facts Diversification
+    val salieClustering = new SalIEClustering()
+    salieClustering.diversify(jCas)
   }
 
 }
 
 
-object SalIESalienceAnalysisEngine {
+object SalIEAnalysisEngine {
 
   val PARAM_GRAPH_STRUCTURE: String = "graphStructure"
   val PARAM_WEIGHTING: String = "weighting"

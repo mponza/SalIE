@@ -1,9 +1,9 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting
+package de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting
 
 import java.lang.Double
 
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
+import de.mpg.mpi.uima.engines.salie.pagerank.graph.SalIEGraph
 import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap
 import it.unimi.dsi.fastutil.longs.Long2DoubleOpenHashMap
 import org.slf4j.LoggerFactory

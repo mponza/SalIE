@@ -3,7 +3,7 @@ package de.mpg.mpi.uima.pipelines.extraction
 import de.mpg.mpi.SalIEArgs
 import de.mpg.mpi.uima.engines.PrinterAnalysisEngine
 import de.mpg.mpi.uima.engines.minie.MinIEAnalysisEngine
-import de.mpg.mpi.uima.engines.salie.salience.SalIESalienceAnalysisEngine
+import de.mpg.mpi.uima.engines.salie.SalIEAnalysisEngine
 import de.mpg.mpi.uima.engines.salie.support.{MinIEFacts2SalIEFactsAnalysisEngine, SalIEOpenFactHeadCorefAnalysisEngine}
 import de.mpg.mpi.uima.pipelines.Pipeline
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp._
@@ -30,7 +30,7 @@ class SalIEPipeline(config: SalIEArgs) extends Pipeline {
     val salieHeadCoref = AnalysisEngineFactory.createEngineDescription(classOf[SalIEOpenFactHeadCorefAnalysisEngine])
 
     val salieSalience = AnalysisEngineFactory.createEngineDescription(
-      classOf[SalIESalienceAnalysisEngine],
+      classOf[SalIEAnalysisEngine],
       "graphStructure", config.graphstructure(),
       "weighting", config.weighting(),
       "rankingPrior", config.rankingprior(),

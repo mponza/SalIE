@@ -1,6 +1,6 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.structure
+package de.mpg.mpi.uima.engines.salie.pagerank.edges.structure
 
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
+import de.mpg.mpi.uima.engines.salie.pagerank.graph.SalIEGraph
 
 import scala.collection.JavaConverters._
 
@@ -21,10 +21,15 @@ class CliqueCreation extends GraphStructureCreation {
                 .filter(dst => !src.equals(dst))
                 .foreach(dst => {
 
+
                   // src -- [edgeID] --> dst
                   val edgeID = salIEGraph.getEdgeID(src, dst)
+                  println("Edge " + edgeID + " between src " + src + " and " + dst)
+
 
                   salIEGraph.getDirectedSparseGraph.addEdge(edgeID, src, dst)
+
+                  println("ok, added.")
 
                 })
 

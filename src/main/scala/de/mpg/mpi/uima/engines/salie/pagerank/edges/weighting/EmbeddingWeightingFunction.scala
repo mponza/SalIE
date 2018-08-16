@@ -1,10 +1,10 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting
+package de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting
 
 import java.lang.Double
 
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting.embeddings.CompressedEmbeddings
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
+import de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting.embeddings.CompressedEmbeddings
+import de.mpg.mpi.uima.engines.salie.pagerank.graph.SalIEGraph
 import it.cnr.isti.hpc.LinearAlgebra
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
 import org.slf4j.LoggerFactory
@@ -42,7 +42,7 @@ class EmbeddingWeightingFunction(filename : String) extends NormalizedWeightingF
     val size = embeddings.getDimensions()
 
     val inner = LinearAlgebra.inner(size, srcVector, 0, dstVector, 0)
-    if(inner == 0) return 0
+    if(inner == 0) return .0
 
     val srcNorm = Math.sqrt( LinearAlgebra.inner(size, srcVector, 0, srcVector, 0) )
     val dstNorm = Math.sqrt( LinearAlgebra.inner(size, dstVector, 0, dstVector, 0) )

@@ -1,4 +1,4 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank.config
+package de.mpg.mpi.uima.engines.salie.pagerank.config
 
 case class SalIEPageRankConfig(graphStructure: String,
                                weighting: String,

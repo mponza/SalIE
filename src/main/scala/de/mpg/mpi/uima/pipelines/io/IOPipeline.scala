@@ -57,6 +57,8 @@ class IOPipeline(val ioArgs: IOPipelineArgs) {
           // because pipeline need to load resources
           ae.process(documents.get(0))
 
+          return
+
           // parallel computation
           documents.subList(1, documents.size()).asScala.par.foreach(jCas => ae.process(jCas) )
 

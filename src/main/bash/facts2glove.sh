@@ -10,8 +10,8 @@
 # Configurable Parameters
 
 GLOVE_THREADS=8
-SIZE=400
-GLOVE_MEMORY=2.0
+SIZE=500
+GLOVE_MEMORY=10.0
 
 
 
@@ -21,7 +21,7 @@ GLOVE_MEMORY=2.0
 GLOVE_DIR="ext/GloVe"
 
 WIKI_JSON_FILENAME="$1"     # e.g. "data/wikipedia/agg-wikipedia.json"          change me with another filename, if needed
-EMBEDDING_FILENAME="$2"     # e.g. "data/embeddings/agg-wikipedia.glove.400"    (no extension)
+EMBEDDING_FILENAME="$2"     # e.g. "data/embeddings/agg-wikipedia.glove.500"    (no extension)
 
 TMP_DIR="./data/tmp"                  # wikipedia txt, vocabulary & other temporary data
 
@@ -40,7 +40,7 @@ function flat_wikipedia_facts {
 #
 # Setting up
 
-source venv/bin/activate
+source ~/venv/bin/activate
 # pip install -r src/main/python/requirements.txt
 mkdir -p $TMP_DIR
 
@@ -62,7 +62,7 @@ fi
 #
 # Creation of GloVe embeddings
 
-#make -C $GLOVE_DIR
+make -C $GLOVE_DIR
 
 CORPUS="$WIKI_TXT_FILENAME"
 VOCAB_FILE="$TMP_DIR/vocab.txt"
@@ -119,4 +119,5 @@ rm "$EMBEDDING_FILENAME".txt       # uncompressed embedding file
 #
 # Clean temporary files
 
-# rm -rf data/tmp
+rm data/tmp/coocc*
+rm data/tmp/vocab*

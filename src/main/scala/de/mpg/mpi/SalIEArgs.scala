@@ -34,7 +34,7 @@ class SalIEArgs(arguments: Seq[String]) extends ScallopConf(arguments) {
 
   val graphstructure = opt[String](required = false, default = Some("clique"))
   val weighting = opt[String](required = false, default = Some("embedding"))
-  val weightingmodel = opt[String](required = false, default = Some("clique"))
+  val weightingmodel = opt[String](required = false, default = Some("path/to/model"))
   val rankingprior = opt[String](required = false, default = Some("extractionOrder"))
   val alpha = opt[Float](required = false, default = Some(0.1f))
   val iterations = opt[Int](required = false, default = Some(2))

@@ -1,4 +1,4 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting.embeddings
+package de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting.embeddings
 
 import java.util
 
@@ -42,6 +42,7 @@ class CompressedEmbeddings(filename: String) {
         centroid(index) = centroid(index) + (vector(index) / vectors.size())
       })
     }
+
     centroid
   }
 

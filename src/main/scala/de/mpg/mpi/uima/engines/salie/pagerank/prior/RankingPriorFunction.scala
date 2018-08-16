@@ -1,9 +1,9 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank.prior
+package de.mpg.mpi.uima.engines.salie.pagerank.prior
 
 import java.lang.Double
 
 import com.google.common.base.Function
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
+import de.mpg.mpi.uima.engines.salie.pagerank.graph.SalIEGraph
 
 trait RankingPriorFunction extends Function[Int, Double] {
 

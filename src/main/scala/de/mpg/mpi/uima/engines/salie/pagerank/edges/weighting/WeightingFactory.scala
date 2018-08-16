@@ -1,6 +1,4 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting
-
-import com.google.common.base.Function
+package de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting
 
 object WeightingFactory {
 

@@ -1,12 +1,13 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank.prior
+package de.mpg.mpi.uima.engines.salie.pagerank.prior
+
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
 import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap
 import org.apache.uima.fit.util.JCasUtil
 import org.slf4j.LoggerFactory
-
 import java.lang.Double
+
+import de.mpg.mpi.uima.engines.salie.pagerank.graph.SalIEGraph
 
 import scala.collection.JavaConverters._
 

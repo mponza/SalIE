@@ -1,4 +1,4 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank.graph
+package de.mpg.mpi.uima.engines.salie.pagerank.graph
 
 import de.mpg.mpi.uima.`type`.SalIEOpenFact
 import edu.uci.ics.jung.graph.DirectedSparseGraph
@@ -68,7 +68,7 @@ class SalIEGraph(jCas: JCas) {
   def getSourceNodeID(edge: Long) :Int = (edge >> 32).toInt
   def getDestinationNodeID(edge: Long) : Int = edge.toInt
   def getEdgeID(srcNodeID: Int, dstNodeID: Int) = {
-    val srcShifted = (srcNodeID << 32).asInstanceOf[Long]
+    val srcShifted = srcNodeID.asInstanceOf[Long] << 32
     srcShifted | dstNodeID
   }
 

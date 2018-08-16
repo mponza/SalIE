@@ -1,10 +1,15 @@
-package de.mpg.mpi.uima.engines.salie.salience.pagerank
+package de.mpg.mpi.uima.engines.salie.pagerank
 
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.config.SalIEPageRankConfig
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.structure.GraphStructureFactory
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.edges.weighting.{WeightingFactory, WeightingFunction}
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.graph.SalIEGraph
-import de.mpg.mpi.uima.engines.salie.salience.pagerank.prior.{RankingPriorFactory, RankingPriorFunction}
+import de.mpg.mpi.uima.engines.salie.pagerank.config.SalIEPageRankConfig
+import de.mpg.mpi.uima.engines.salie.pagerank.edges.structure.GraphStructureFactory
+import de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting.{WeightingFactory, WeightingFunction}
+import de.mpg.mpi.uima.engines.salie.pagerank.graph.SalIEGraph
+import de.mpg.mpi.uima.engines.salie.pagerank.prior.{RankingPriorFactory, RankingPriorFunction}
+import de.mpg.mpi.uima.engines.salie.pagerank.config.SalIEPageRankConfig
+import de.mpg.mpi.uima.engines.salie.pagerank.edges.structure.GraphStructureFactory
+import de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting.{WeightingFactory, WeightingFunction}
+import de.mpg.mpi.uima.engines.salie.pagerank.graph.SalIEGraph
+import de.mpg.mpi.uima.engines.salie.pagerank.prior.{RankingPriorFactory, RankingPriorFunction}
 import edu.uci.ics.jung.algorithms.scoring.PageRankWithPriors
 import org.apache.uima.jcas.JCas
 import org.slf4j.LoggerFactory

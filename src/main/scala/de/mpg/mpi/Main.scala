@@ -1,11 +1,13 @@
 package de.mpg.mpi
 
+import de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting.embeddings.CompressedEmbeddings
 import de.mpg.mpi.uima.pipelines.analysis.StanfordNLPAnalysisPipeline
 import de.mpg.mpi.uima.pipelines.extraction.{MinIEPipeline, SalIEPipeline}
 import de.mpg.mpi.uima.io.readers.ReaderFactory
 import de.tudarmstadt.ukp.dkpro.core.api.ner.`type`.NamedEntity
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Sentence
 import de.uni_mannheim.minie.MinIE
+import it.cnr.isti.hpc.LinearAlgebra
 import org.apache.uima.fit.factory.{AnalysisEngineFactory, JCasFactory}
 import org.apache.uima.fit.util.JCasUtil
 import org.apache.uima.jcas.JCas
@@ -16,7 +18,29 @@ object RunPipeline {
 
   def main(args: Array[String]): Unit = {
 
-//
+    val conf = new SalIEArgs(args)
+
+    val embeddings = new CompressedEmbeddings(conf.weightingmodel())
+
+    val srcVector = embeddings.getEmbeddingVector("good bad devil")
+    val dstVector = embeddings.getEmbeddingVector("devil good bad")
+
+    val size = embeddings.getDimensions()
+
+    val inner = LinearAlgebra.inner(size, srcVector, 0, dstVector, 0)
+
+    val srcNorm = Math.sqrt( LinearAlgebra.inner(size, srcVector, 0, srcVector, 0) )
+    val dstNorm = Math.sqrt( LinearAlgebra.inner(size, dstVector, 0, dstVector, 0) )
+
+    val cosine = inner / (srcNorm * dstNorm)
+    if(cosine.isNaN) throw new IllegalArgumentException("Cosine similarity is NaN!")
+
+    val value = Math.max(0, cosine)
+
+
+    println("Cosine similarity is " + value)
+
+    //
 //    val conf = new SalIEArgs(args)
 //
 //    val reader = ReaderFactory.getTextReader(conf.inputdatadir())
