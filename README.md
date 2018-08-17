@@ -1,14 +1,30 @@
-SalIE
-=====
+![SalIE](http://pages.di.unipi.it/ponza/public/images/salie/logo.png)
+
+Welcome to SalIE - Salient Information Extraction.
+
+
 
 
 Setting Up
-----------
+-----------
+
+Download the pre-crafted embeddings from [link/to/embeddings](http://link/to/embeddings) into
+`src/main/resources/embeddings` and then compile the code with:
+
+    sbt compile
 
 
+Running
+-------
 
+Given a data collection stored in `path/to/input/data` folder, where each element is a text file, you can extract its
+salient open facts with SalIE by typing:
 
+    src/main/bash/salient-extraction.sh path/to/input/data path/to/output/data
+    
+where `path/to/output/data` is the folder on which the salient open facts (in JSON format) will be stored.
 
+For a working example just run `src/main/bash/example.sh`.
 
 
 
@@ -38,8 +54,8 @@ For setting up different GloVe parameters check `src/main/bash/facts2glove.sh`.
 
 
 
-ROUGE Evaluation
-----------------
+Evaluation
+----------
 
 **Setting Up.** Set up your [virtualenv](https://docs.python-guide.org/dev/virtualenvs/) environment and then install the Python requirements:
 
@@ -85,3 +101,21 @@ and the `path/to/abstracts` is the path to a directory of a set of documents, ea
     bash src/main/fixROUGE.sh
     
 and then re-run the evaluation script.
+
+
+
+Citation and Further Reading
+----------------------------
+
+If you find any resource (code or data) of this repository useful, please cite our paper:
+
+> [Marco Ponza](http://pages.di.unipi.it/ponza), [Luciano Del Corro](https://people.mpi-inf.mpg.de/~corrogg/), [Gerhard Waikum](http://people.mpi-inf.mpg.de/~weikum/)
+> Facts That Matter
+> *In Proceedings of the 2018 Conference of Empirical Methods in Natural Language Processing (EMNLP 2018)
+
+
+License
+-------
+The code in this repository has been released under Apache License 2.0.
+
+

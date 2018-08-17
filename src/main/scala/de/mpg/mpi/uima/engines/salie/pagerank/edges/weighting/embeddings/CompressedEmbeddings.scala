@@ -2,6 +2,7 @@ package de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting.embeddings
 
 import java.util
 
+import de.mpg.mpi.uima.utils.StopWordUtils
 import it.cnr.isti.hpc.Word2VecCompress
 import it.unimi.dsi.fastutil.io.BinIO
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
@@ -13,7 +14,10 @@ import scala.collection.JavaConverters._
 class CompressedEmbeddings(filename: String) {
 
   private val logger = LoggerFactory.getLogger(classOf[CompressedEmbeddings])
-  private val model = BinIO.loadObject(filename).asInstanceOf[Word2VecCompress]
+
+  // just to keep class simple
+  CompressedEmbeddings.filename = filename
+  private val model = CompressedEmbeddings.lazyModel
 
 
   /**
@@ -22,7 +26,7 @@ class CompressedEmbeddings(filename: String) {
     * @param text
     */
   def getEmbeddingVector(text: String) = {
-    val normWords = getNormalizedWords(text)
+    val normWords = StopWordUtils.text2NormalizedTokenSet(text)
     val vectors = getWordEmbeddingVectors(normWords)
     getCentroidEmbeddingVector(vectors)
   }
@@ -44,24 +48,6 @@ class CompressedEmbeddings(filename: String) {
     }
 
     centroid
-  }
-
-
-  /**
-    * Maps text's words into a set of normalized words.
-    *
-    * @param text
-    * @return
-    */
-  private def getNormalizedWords(text: String) : ObjectOpenHashSet[String]  = {
-    val normWords = new ObjectOpenHashSet[String]()
-
-    text.split(" ")
-      .filter(word => !word.matches("[^a-zA-Z0-9 ]"))
-      .map(word => word.toLowerCase())
-      .foreach(normWord => normWords.add(normWord))
-
-    normWords
   }
 
 
@@ -96,4 +82,17 @@ class CompressedEmbeddings(filename: String) {
 
 
   def getDimensions() = model.dimensions()
+}
+
+
+object CompressedEmbeddings {
+  private val logger = LoggerFactory.getLogger(classOf[CompressedEmbeddings])
+
+  var filename: String = ""
+  lazy val lazyModel: Word2VecCompress = {
+    logger.info("Loading embedding model from %s...".format(filename))
+    val m = BinIO.loadObject(filename).asInstanceOf[Word2VecCompress]
+    logger.info("Done.")
+    m
+  }
 }

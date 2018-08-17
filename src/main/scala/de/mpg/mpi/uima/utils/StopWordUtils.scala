@@ -34,12 +34,26 @@ object StopWordUtils {
 
 
   def text2CleanedTokenSet(text : String) : ObjectOpenHashSet[String] = {
+    // stopwords are removed!
     val cleanedTokens = new ObjectOpenHashSet[String]()
 
     text.split(" ")
       .filter(token => !token.matches("[^a-zA-Z0-9 ]"))
       .map(token => token.replaceAll("[^a-zA-Z ]", "").toLowerCase)
       .filter(token => !isStopWord(token))
+      .foreach(token => cleanedTokens.add(token))
+
+    cleanedTokens
+  }
+
+
+  def text2NormalizedTokenSet(text : String) : ObjectOpenHashSet[String] = {
+    // stopwords are not removed!
+    val cleanedTokens = new ObjectOpenHashSet[String]()
+
+    text.split(" ")
+      .filter(token => !token.matches("[^a-zA-Z0-9 ]"))
+      .map(token => token.replaceAll("[^a-zA-Z ]", "").toLowerCase)
       .foreach(token => cleanedTokens.add(token))
 
     cleanedTokens

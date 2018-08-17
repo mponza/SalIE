@@ -37,7 +37,7 @@ abstract class NormalizedWeightingFunction extends WeightingFunction {
     * @param salIEGraph
     * @param weights
     */
-  def computeEdgeWeights(salIEGraph: SalIEGraph, weights: Long2DoubleOpenHashMap) : Unit = {
+  private def computeEdgeWeights(salIEGraph: SalIEGraph, weights: Long2DoubleOpenHashMap) : Unit = {
 
     val normFactors = new Int2DoubleOpenHashMap()  // will contain the normalization factor for each node
 

@@ -21,15 +21,9 @@ class CliqueCreation extends GraphStructureCreation {
                 .filter(dst => !src.equals(dst))
                 .foreach(dst => {
 
-
                   // src -- [edgeID] --> dst
                   val edgeID = salIEGraph.getEdgeID(src, dst)
-                  println("Edge " + edgeID + " between src " + src + " and " + dst)
-
-
                   salIEGraph.getDirectedSparseGraph.addEdge(edgeID, src, dst)
-
-                  println("ok, added.")
 
                 })
 
