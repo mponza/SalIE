@@ -112,7 +112,9 @@ Citation and Further Reading
 If you find any resource (code or data) of this repository useful, please cite our paper:
 
 > [Marco Ponza](http://pages.di.unipi.it/ponza), [Luciano Del Corro](https://people.mpi-inf.mpg.de/~corrogg/), [Gerhard Waikum](http://people.mpi-inf.mpg.de/~weikum/)
+
 > Facts That Matter
+
 > *In Proceedings of the 2018 Conference of Empirical Methods in Natural Language Processing (EMNLP 2018)*
 
 
