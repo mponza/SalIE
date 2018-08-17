@@ -1,7 +1,7 @@
 ![SalIE](http://pages.di.unipi.it/ponza/public/images/salie/logo.png)
 
-Welcome to SalIE - Salient Information Extraction.
-
+SalIE - Salient Information Extraction
+=======================================
 
 
 
