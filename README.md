@@ -1,6 +1,6 @@
 ![SalIE](http://pages.di.unipi.it/ponza/public/images/salie/logo.png)
 
-Welcome to SalIE - Salient Information Extraction - a framework that addressed the extraction of salient open facts from arbitrary text.
+Welcome to SalIE - Salient Information Extraction - a framework that addresses the extraction of salient open facts from arbitrary text.
 
 
 
