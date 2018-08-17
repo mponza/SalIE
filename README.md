@@ -1,4 +1,4 @@
-![SalIE](http://pages.di.unipi.it/ponza/public/images/salie/logo.png)
+<img src="http://pages.di.unipi.it/ponza/public/images/salie/logo.png" width="400">
 
 SalIE - Salient Open Information Extraction
 ============================================
