@@ -1,6 +1,9 @@
 ![SalIE](http://pages.di.unipi.it/ponza/public/images/salie/logo.png)
 
-Welcome to SalIE - Salient Information Extraction - a framework that addresses the extraction of salient open facts from arbitrary text.
+SalIE - Salient Open Information Extraction
+============================================
+
+This repository hosts SalIE, the first framework to date addressing the extraction of salient open facts from arbitrary text.
 
 
 
@@ -110,7 +113,7 @@ If you find any resource (code or data) of this repository useful, please cite o
 
 > [Marco Ponza](http://pages.di.unipi.it/ponza), [Luciano Del Corro](https://people.mpi-inf.mpg.de/~corrogg/), [Gerhard Waikum](http://people.mpi-inf.mpg.de/~weikum/)
 > Facts That Matter
-> *In Proceedings of the 2018 Conference of Empirical Methods in Natural Language Processing (EMNLP 2018)
+> *In Proceedings of the 2018 Conference of Empirical Methods in Natural Language Processing (EMNLP 2018)*
 
 
 License
