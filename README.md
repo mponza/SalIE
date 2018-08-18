@@ -1,4 +1,4 @@
-<img src="http://pages.di.unipi.it/ponza/public/images/salie/logo.png" width="400">
+
 
 SalIE - Salient Open Information Extraction
 ============================================
@@ -24,7 +24,7 @@ where `path/to/output/data` is the folder on which the salient open facts will b
     {
         "docID":         string      document ID
         "text":          string      content of the document
-        "openfacts":     list        list of salient open facts, sorted by their decreasing salience score
+        "openfacts":     list        list of salient open facts, sorted by descending salience score
                     [
                         {
                             "text":         string      text of the open fact
