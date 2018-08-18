@@ -1,7 +1,7 @@
 package de.mpg.mpi.uima.engines.salie
 
+import de.mpg.mpi.configs.salie.SalIEPageRankConfig
 import de.mpg.mpi.uima.engines.salie.clustering.SalIEClustering
-import de.mpg.mpi.uima.engines.salie.pagerank.config.SalIEPageRankConfig
 import de.mpg.mpi.uima.engines.salie.pagerank.SalIEPageRank
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.descriptor.ConfigurationParameter

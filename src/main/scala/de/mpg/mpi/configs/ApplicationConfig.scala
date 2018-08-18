@@ -1,9 +1,15 @@
-package de.mpg.mpi
+package de.mpg.mpi.configs
 
+import de.mpg.mpi.configs.salie.{SalIEConfig, SalIEPageRankConfig}
 import org.rogach.scallop.ScallopConf
 
 
-class SalIEArgs(arguments: Seq[String]) extends ScallopConf(arguments) {
+/**
+  * Class containing the whole set of parameters that can be parsed from the command line application.
+  *
+  * @param arguments
+  */
+class ApplicationConfig(arguments: Seq[String]) extends ScallopConf(arguments) {
 
   //
   // Data arguments
@@ -41,4 +47,14 @@ class SalIEArgs(arguments: Seq[String]) extends ScallopConf(arguments) {
 
 
   verify()
+
+
+
+  def getSalIEConfig() : SalIEConfig = {
+    val pageRankConfig = new SalIEPageRankConfig(
+      graphstructure(), weighting(), weightingmodel(),
+      rankingprior(), alpha(), iterations())
+
+    new SalIEConfig(miniemode(), pageRankConfig)
+  }
 }

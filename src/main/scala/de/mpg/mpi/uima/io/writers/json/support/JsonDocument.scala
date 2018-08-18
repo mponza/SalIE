@@ -20,6 +20,7 @@ class JsonDocument(jCas: JCas) {
 
   @JsonProperty
   var openfacts: Array[JsonOpenFact] = JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala
-    .map(salieOpenFact => new JsonOpenFact(salieOpenFact)).toArray
+      .toList.sortBy(salieOpenFact => - salieOpenFact.getSalience)
+      .map(salieOpenFact => new JsonOpenFact(salieOpenFact)).toArray
 
 }

@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
 
 
+PIPELINE="pipeline-salie"
 
-
-PIPELINE="partial-salie"
-
-INPUTDIR="/home/ponza/Developer/datasets/factsalience/NYT50/smallbin"
+INPUTDIR="/home/ponza/Developer/datasets/factsalience/NYT50/bin"
 INPUTFORMAT="bin"
 
-OUTPUTDIR="/home/ponza/Developer/datasets/factsalience/NYT50/small-$PIPELINE-json"
+OUTPUTDIR="/home/ponza/Developer/datasets/factsalience/NYT50/$PIPELINE-json"
 OUTPUTFORMAT="json"
 
 MINIEMODE="agg"
-
 
 
 # runs pipeline
@@ -29,15 +26,12 @@ sbt clean compile
 sbt "run-main de.mpg.mpi.runners.RunIOPipeline $PARAMS"
 
 
-
-
-
 # runs evaluation
 
-#source ~/venv/bin/activate
-#ABSTRACTDIR="/home/ponza/Developer/datasets/factsalience/NYT50/abstracts"
-#
-#bash src/main/bash/fixROUGE.sh
-#
-#CMD="python src/main/python/summarization evaluate $OUTPUTDIR $ABSTRACTDIR out.json"
-#eval $CMD
+source ~/venv/bin/activate
+ABSTRACTDIR="/home/ponza/Developer/datasets/factsalience/NYT50/abstracts"
+
+bash src/main/bash/fixROUGE.sh
+
+CMD="python src/main/python/summarization evaluate $OUTPUTDIR $ABSTRACTDIR $PIPELINE-rouge.json"
+eval $CMD

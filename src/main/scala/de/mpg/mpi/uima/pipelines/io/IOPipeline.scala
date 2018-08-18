@@ -1,5 +1,6 @@
 package de.mpg.mpi.uima.pipelines.io
 
+import de.mpg.mpi.configs.IOPipelineConfig
 import de.mpg.mpi.uima.io.readers.ReaderFactory
 import de.mpg.mpi.uima.io.writers.WriterFactory
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.`type`.DocumentMetaData
@@ -17,18 +18,18 @@ import scala.collection.JavaConverters._
   * Runs a pipeline (ioArgs.pipeline) over a set of documents read from an input directory (ioArgs.inputDir) and
   * whose processed data is stored into a specified output directory (ioArgs.outputDir).
   *
-  * @param ioArgs
+  * @param ioConfig
   */
-class IOPipeline(val ioArgs: IOPipelineArgs) {
+class IOPipeline(val ioConfig: IOPipelineConfig) {
 
   private val logger = LoggerFactory.getLogger(classOf[IOPipeline])
 
 
   def parallelProcessing : Unit = {
 
-      val reader = ReaderFactory.apply(ioArgs.inputFormat, ioArgs.inputDir)
-      val engines = ioArgs.pipeline.getEngines
-      val writer = WriterFactory.apply(ioArgs.outputFormat, ioArgs.outputDir)
+      val reader = ReaderFactory.apply(ioConfig.inputFormat, ioConfig.inputDir)
+      val engines = ioConfig.pipeline.getEngines
+      val writer = WriterFactory.apply(ioConfig.outputFormat, ioConfig.outputDir)
 
       val ae = AnalysisEngineFactory.createEngine(
         AnalysisEngineFactory.createEngineDescription(engines :+ writer:_*)
@@ -42,7 +43,7 @@ class IOPipeline(val ioArgs: IOPipelineArgs) {
 
         // reads at most batch documents
         val documents = new ObjectArrayList[JCas]
-        while(reader.hasNext && documents.size() < ioArgs.batch) {
+        while(reader.hasNext && documents.size() < ioConfig.batch) {
           val jCas = JCasFactory.createJCas()
           reader.getNext(jCas.getCas)
           documents.add(jCas)

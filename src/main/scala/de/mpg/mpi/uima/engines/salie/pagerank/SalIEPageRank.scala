@@ -1,11 +1,6 @@
 package de.mpg.mpi.uima.engines.salie.pagerank
 
-import de.mpg.mpi.uima.engines.salie.pagerank.config.SalIEPageRankConfig
-import de.mpg.mpi.uima.engines.salie.pagerank.edges.structure.GraphStructureFactory
-import de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting.{WeightingFactory, WeightingFunction}
-import de.mpg.mpi.uima.engines.salie.pagerank.graph.SalIEGraph
-import de.mpg.mpi.uima.engines.salie.pagerank.prior.{RankingPriorFactory, RankingPriorFunction}
-import de.mpg.mpi.uima.engines.salie.pagerank.config.SalIEPageRankConfig
+import de.mpg.mpi.configs.salie.SalIEPageRankConfig
 import de.mpg.mpi.uima.engines.salie.pagerank.edges.structure.GraphStructureFactory
 import de.mpg.mpi.uima.engines.salie.pagerank.edges.weighting.{WeightingFactory, WeightingFunction}
 import de.mpg.mpi.uima.engines.salie.pagerank.graph.SalIEGraph

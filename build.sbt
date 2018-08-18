@@ -38,6 +38,7 @@ libraryDependencies ++= Seq(
   "org.rogach" %% "scallop" % "3.1.3",
 
   "com.jsoniter" % "jsoniter" % "0.9.23",
+  "com.google.code.gson" % "gson" % "2.8.5",
 
   "net.sf.jung" % "jung2" % "2.0.1",
   "net.sf.jung" % "jung-graph-impl" % "2.1.1",

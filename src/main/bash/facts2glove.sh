@@ -41,7 +41,7 @@ function flat_wikipedia_facts {
 # Setting up
 
 source ~/venv/bin/activate
-# pip install -r src/main/python/requirements.txt
+pip install -r src/main/python/requirements.txt
 mkdir -p $TMP_DIR
 
 

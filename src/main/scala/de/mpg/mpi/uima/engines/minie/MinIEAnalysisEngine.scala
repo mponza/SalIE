@@ -44,10 +44,10 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
     * @return
     */
   private def getMinIEMode : MinIE.Mode = {
-    if(mode.equals("agg") || mode.equals("aggressive")) return MinIE.Mode.AGGRESSIVE
-    if(mode.equals("dict") || mode.equals("dictionary")) return MinIE.Mode.DICTIONARY
+    if(mode.equals("agg")) return MinIE.Mode.AGGRESSIVE
+    if(mode.equals("dict")) return MinIE.Mode.DICTIONARY
     if(mode.equals("safe")) return MinIE.Mode.SAFE
-    if(mode.equals("comp") || mode.equals("complete")) return MinIE.Mode.COMPLETE
+    if(mode.equals("comp")) return MinIE.Mode.COMPLETE
 
     throw new IllegalAccessException("MinIE mode parameter \"%s\" is not valid.".format(mode))
   }

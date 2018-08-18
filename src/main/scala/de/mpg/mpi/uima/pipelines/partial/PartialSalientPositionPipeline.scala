@@ -1,6 +1,6 @@
 package de.mpg.mpi.uima.pipelines.partial
 
-import de.mpg.mpi.SalIEArgs
+import de.mpg.mpi.configs.ApplicationConfig
 import de.mpg.mpi.uima.engines.SalientPositionAnalysisEngine
 import de.mpg.mpi.uima.engines.minie.MinIEAnalysisEngine
 import de.mpg.mpi.uima.engines.salie.support.{MinIEFacts2SalIEFactsAnalysisEngine, SalIEOpenFactHeadCorefAnalysisEngine, SalIEOpenFactPruningAnalysisEngine}
@@ -9,7 +9,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription
 import org.apache.uima.fit.factory.AnalysisEngineFactory
 
 
-class PartialSalientPositionPipeline(config: SalIEArgs) extends Pipeline {
+class PartialSalientPositionPipeline(config: ApplicationConfig) extends Pipeline {
 
   override def getEngines() : List[AnalysisEngineDescription] = {
 

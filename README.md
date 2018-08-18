@@ -7,26 +7,35 @@ This repository hosts SalIE, the first framework to date addressing the extracti
 
 
 
-Setting Up
------------
-
-Download the pre-crafted embeddings from [link/to/embeddings](http://link/to/embeddings) into
-`src/main/resources/embeddings` and then compile the code with:
-
-    sbt compile
-
 
 Running
--------
+--------
 
-Given a data collection stored in `path/to/input/data` folder, where each element is a text file, you can extract its
+**Setting Up.** Download the pre-crafted embeddings from [link/to/embeddings](http://link/to/embeddings) into
+`src/main/resources/embeddings` and then you are ready for running SalIE on your data collection!
+
+**Run SalIE on a Data Collection.** Given a data collection stored in `path/to/input/data` folder, where each element is a text file, you can extract its
 salient open facts with SalIE by typing:
 
     src/main/bash/salient-extraction.sh path/to/input/data path/to/output/data
     
-where `path/to/output/data` is the folder on which the salient open facts (in JSON format) will be stored.
+where `path/to/output/data` is the folder on which the salient open facts will be stored in the following JSON format:
 
-For a working example just run `src/main/bash/example.sh`.
+    {
+        "docID":         string      document ID
+        "text":          string      content of the document
+        "openfacts":     list        list of salient open facts, sorted by their decreasing salience score
+                    [
+                        {
+                            "text":         string      text of the open fact
+                            "salience":     float       salience score   
+                        }
+                    ]          
+    }
+
+**Using SalIE within your Code.** An Example is provied in `src/main/scala/de/mpg/mpi/runners/RunExample.scala`.
+Since SalIE code is built on the top of [DkPro](https://dkpro.github.io/)/[UIMA](https://uima.apache.org/) frameworks
+(we suggest a shallow knowledge for ease the reading of the code). For more information, please check the documentation in their official websites.
 
 
 
@@ -87,8 +96,8 @@ where `path/to/open/facts/dir` is the path to a directory of a set of documents,
 
                    [
                        {
-                           'text':     string      text of the open fact
-                           'score':    float       salience score
+                           'text':        string      text of the open fact
+                           'salience':    float       salience score
                        }
                    ]
     }
