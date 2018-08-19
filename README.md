@@ -1,20 +1,32 @@
 <img src="http://pages.di.unipi.it/ponza/public/images/salie/logo.png" width="400">
 
+
+
+
 SalIE - Salient Open Information Extraction
 ============================================
+
 
 This repository hosts SalIE, the first framework to date addressing the extraction of salient open facts from arbitrary text.
 
 
 
 
-Running
+Building
 --------
 
-**Setting Up.** Download the pre-crafted embeddings from [link/to/embeddings](http://link/to/embeddings) into
-`src/main/resources/embeddings` and then you are ready for running SalIE on your data collection!
 
-**Run SalIE on a Data Collection.** Given a data collection stored in `path/to/input/data` folder, where each element is a text file, you can extract its
+**Requirements.** For running SalIE out-of-the-box, your machine needs only to have [Scala](https://www.scala-lang.org/download/) and [sbt](https://www.scala-sbt.org/) preinstalled.
+
+
+**Setting-up.** Download the pre-crafted embeddings from [link/to/embeddings](http://link/to/embeddings) with:
+
+    bash src/main/bash/download-resources.sh
+    
+that will be properely collocated into `data/embeddings` directory.
+
+
+**Running.** Given a data collection stored in `path/to/input/data` folder, where each element is a text file, you can extract its
 salient open facts with SalIE by typing:
 
     src/main/bash/salient-extraction.sh path/to/input/data path/to/output/data
@@ -33,6 +45,7 @@ where `path/to/output/data` is the folder on which the salient open facts will b
                     ]          
     }
 
+
 **Using SalIE within your Code.** An Example is provied in `src/main/scala/de/mpg/mpi/runners/RunExample.scala`.
 The code has been developed on the top of [DkPro](https://dkpro.github.io/)/[UIMA](https://uima.apache.org/) frameworks, for more information, please check the documentation in their official websites.
 
@@ -42,7 +55,8 @@ The code has been developed on the top of [DkPro](https://dkpro.github.io/)/[UIM
 Embeddings Wikipedia Open Facts via GloVe and Data Compression
 ---------------------------------------------------------------
 
-**Setting Up.** After you have clone this repository with `--recursive` option you have to install and create a 
+
+**Setting-up.** After you have clone this repository with `--recursive` option you have to install and create a 
 [virtualenv](https://docs.python-guide.org/dev/virtualenvs/) environment in the `venv` directory:
 
     virtualenv venv
@@ -53,8 +67,7 @@ and install the Python requirements:
     pip install -r src/main/python/requirements.txt
 
 
-
-**Embeddings Generation & Compression.** Given a file of open facts in JSON format (e.g. `path/to/safe-wikipedia.json`) the embeddings file
+**Embeddings Generation &#38; Compression.** Given a file of open facts in JSON format (e.g. `path/to/safe-wikipedia.json`) the embeddings file
 (e.g. `path/to/glove.safe.embeddings` with no extension) can be generated from scratch with:
 
     bash src/main/bash/facts2glove.sh path/to/safe-wikipedia.json path/to/glove.safe.embeddings
@@ -63,11 +76,11 @@ For setting up different GloVe parameters check `src/main/bash/facts2glove.sh`.
 
 
 
+Benchmark
+---------
 
-Evaluation
-----------
 
-**Setting Up.** Set up your [virtualenv](https://docs.python-guide.org/dev/virtualenvs/) environment and then install the Python requirements:
+**Setting-up.** Set up your [virtualenv](https://docs.python-guide.org/dev/virtualenvs/) environment and then install the Python requirements:
 
     pip install -r src/main/python/requirements.txt
 
@@ -104,8 +117,6 @@ where `path/to/open/facts/dir` is the path to a directory of a set of documents,
 and the `path/to/abstracts` is the path to a directory of a set of documents, each one containing the document's abstract.
 
 
-
-
 **Known Error (and How to Fix).** Running ROUGE can raise the "Cannot open exception db file for reading" exception. For fix it, just type:
 
     bash src/main/fixROUGE.sh
@@ -124,8 +135,9 @@ If you find any resource (code or data) of this repository useful, please cite o
 > *In Proceedings of the 2018 Conference of Empirical Methods in Natural Language Processing (EMNLP 2018)*
 
 
+
 License
 -------
-The code in this repository has been released under Apache License 2.0.
+The code in this repository has been released under GNU General Public License v.30.
 
 
