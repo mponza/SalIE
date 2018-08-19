@@ -43,7 +43,7 @@ object RunExample {
     ae.process(jCas)
 
 
-    // Access to open facts and print them in descending order (with respect to salience)
+    // Access to open facts and print them in descending salience order
 
     val salientOpenFacts = JCasUtil.select(jCas, classOf[SalIEOpenFact]).asScala.toList
       .sortBy(salieOpenFact => - salieOpenFact.getSalience)

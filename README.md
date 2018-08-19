@@ -7,8 +7,7 @@ SalIE - Salient Open Information Extraction
 ============================================
 
 
-This repository hosts SalIE, the first framework to date addressing the extraction of salient open facts from arbitrary text.
-
+This repository hosts SalIE, the first framework addressing the extraction of salient open facts from an arbitrary text.
 
 
 
@@ -55,6 +54,8 @@ The code has been developed on the top of [DkPro](https://dkpro.github.io/)/[UIM
 Embeddings Wikipedia Open Facts via GloVe and Data Compression
 ---------------------------------------------------------------
 
+We describe here the procedure used for generating the embedding vectors from the set of open facts extracted from the whole Wikipedia.
+
 
 **Setting-up.** After you have clone this repository with `--recursive` option you have to install and create a 
 [virtualenv](https://docs.python-guide.org/dev/virtualenvs/) environment in the `venv` directory:
@@ -70,17 +71,19 @@ and install the Python requirements:
 **Embeddings Generation &#38; Compression.** Given a file of open facts in JSON format (e.g. `path/to/safe-wikipedia.json`) the embeddings file
 (e.g. `path/to/glove.safe.embeddings` with no extension) can be generated from scratch with:
 
-    bash src/main/bash/facts2glove.sh path/to/safe-wikipedia.json path/to/glove.safe.embeddings
+    bash src/main/bash/facts2glove.sh path/to/agg-wikipedia.json path/to/agg.glove.embeddings
 
 For setting up different GloVe parameters check `src/main/bash/facts2glove.sh`.
 
 
 
-Benchmark
----------
+Evaluation
+----------
+
+If you want to evaluate the performance of SalIE on a data collection, just set-up and run the following steps.
 
 
-**Setting-up.** Set up your [virtualenv](https://docs.python-guide.org/dev/virtualenvs/) environment and then install the Python requirements:
+**Setting-up.** After the creation and activation of your [virtualenv](https://docs.python-guide.org/dev/virtualenvs/) environment, you need to install the Python requirements:
 
     pip install -r src/main/python/requirements.txt
 
@@ -92,9 +95,9 @@ with the content:
     home_dir = path/to/src/main/python/summarization/tools/ROUGE-1.5.5/
     
     
-**Evaluation.** For evaluating a set of extracted facts with respect to documents' abstracts you need to run:
+**Evaluation.** For evaluating a set of extracted salient facts with respect to documents' abstracts you need to run:
 
-    python src/main/python/summarization evaluate path/to/open/facts/dir path/to/abstracts path/to/output/rouge.json
+    python src/main/python/summarization evaluate path/to/open/facts/dir path/to/abstracts path/to/scores.json
     
 where `path/to/open/facts/dir` is the path to a directory of a set of documents, each one with the following JSON format:
 
