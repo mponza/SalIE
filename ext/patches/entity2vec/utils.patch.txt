@@ -1,0 +1,18 @@
+--- ../../entity2vec/utils.py	2018-08-19 10:57:45.000000000 +0200
++++ utils.py	2018-08-08 16:27:11.000000000 +0200
+@@ -1,12 +1,12 @@
+ import os
+ import sys
+ 
+-from ext.gensim.models import Word2Vec
++from gensim.models.keyedvectors import KeyedVectors
+ 
+ def load_word2vec_model(filename, mmap=None):
+     if filename.endswith('.bin'):
+-        model = Word2Vec.load_word2vec_format(filename, binary=True)
++        model = KeyedVectors.load_word2vec_format(filename, binary=True)
+     else:
+-        model = Word2Vec.load(filename, mmap=mmap)
++        model = KeyedVectors.load_word2vec_format(filename)
+ 
+     return model

@@ -34,8 +34,7 @@ where `path/to/output/data` is the folder on which the salient open facts will b
     }
 
 **Using SalIE within your Code.** An Example is provied in `src/main/scala/de/mpg/mpi/runners/RunExample.scala`.
-Since SalIE code is built on the top of [DkPro](https://dkpro.github.io/)/[UIMA](https://uima.apache.org/) frameworks
-(we suggest a shallow knowledge for ease the reading of the code). For more information, please check the documentation in their official websites.
+The code has been developed on the top of [DkPro](https://dkpro.github.io/)/[UIMA](https://uima.apache.org/) frameworks, for more information, please check the documentation in their official websites.
 
 
 
@@ -88,16 +87,16 @@ where `path/to/open/facts/dir` is the path to a directory of a set of documents,
 
 
     {
-       'docID':        string      id of the document
-       'text':         string      content of the document
-       'abstract':     string      abstract of the document
+       "docID":        string      id of the document
+       "text":         string      content of the document
+       "abstract":     string      abstract of the document
 
-       'openfacts':    list        list of open facts
+       "openfacts":    list        list of open facts
 
                    [
                        {
-                           'text':        string      text of the open fact
-                           'salience':    float       salience score
+                           "text":        string      text of the open fact
+                           "salience":    float       salience score
                        }
                    ]
     }

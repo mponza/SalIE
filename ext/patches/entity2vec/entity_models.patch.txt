@@ -1,0 +1,16 @@
+--- ../../entity2vec/entity_models.py	2018-08-19 10:55:39.000000000 +0200
++++ entity_models.py	2018-08-08 16:33:01.000000000 +0200
+@@ -8,7 +8,7 @@
+ import theano
+ import theano.tensor as T
+ 
+-from ext.gensim.utils import SaveLoad
++from gensim.utils import SaveLoad
+ 
+ from array_mmap_proxy import ArrayMMapProxy
+ 
+@@ -172,3 +172,4 @@
+         centroid /= np.sqrt(np.sum(centroid**2))
+         return np.dot(entity_vecs, centroid)
+ 
++
