@@ -1,4 +1,4 @@
-<img src="http://pages.di.unipi.it/ponza/public/images/salie/logo.png" width="400">
+<img src="http://pages.di.unipi.it/ponza/public/images/salie/logo.png" width="200">
 
 
 
