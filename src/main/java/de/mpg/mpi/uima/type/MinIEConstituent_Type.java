@@ -9,7 +9,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 
-/** MinIE’s AnnotatedPhrase
+/** MinIE's AnnotatedPhrase
  * Updated by JCasGen Thu Aug 09 16:07:33 CEST 2018
  * @generated */
 public class MinIEConstituent_Type extends Constituent_Type {

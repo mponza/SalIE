@@ -81,7 +81,7 @@ public class MinIEModality extends Annotation {
   //*--------------*
   //* Feature: possibilityTokens
 
-  /** getter for possibilityTokens - gets MinIE’s possibilityWords
+  /** getter for possibilityTokens - gets MinIE's possibilityWords
    * @generated
    * @return value of the feature 
    */
@@ -90,7 +90,7 @@ public class MinIEModality extends Annotation {
       jcasType.jcas.throwFeatMissing("possibilityTokens", "de.mpg.mpi.uima.type.MinIEModality");
     return (FSArray)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEModality_Type)jcasType).casFeatCode_possibilityTokens)));}
     
-  /** setter for possibilityTokens - sets MinIE’s possibilityWords 
+  /** setter for possibilityTokens - sets MinIE's possibilityWords 
    * @generated
    * @param v value to set into the feature 
    */
@@ -99,7 +99,7 @@ public class MinIEModality extends Annotation {
       jcasType.jcas.throwFeatMissing("possibilityTokens", "de.mpg.mpi.uima.type.MinIEModality");
     jcasType.ll_cas.ll_setRefValue(addr, ((MinIEModality_Type)jcasType).casFeatCode_possibilityTokens, jcasType.ll_cas.ll_getFSRef(v));}    
     
-  /** indexed getter for possibilityTokens - gets an indexed value - MinIE’s possibilityWords
+  /** indexed getter for possibilityTokens - gets an indexed value - MinIE's possibilityWords
    * @generated
    * @param i index in the array to get
    * @return value of the element at index i 
@@ -110,7 +110,7 @@ public class MinIEModality extends Annotation {
     jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEModality_Type)jcasType).casFeatCode_possibilityTokens), i);
     return (TOP)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEModality_Type)jcasType).casFeatCode_possibilityTokens), i)));}
 
-  /** indexed setter for possibilityTokens - sets an indexed value - MinIE’s possibilityWords
+  /** indexed setter for possibilityTokens - sets an indexed value - MinIE's possibilityWords
    * @generated
    * @param i index in the array to set
    * @param v value to set into the array 
@@ -125,7 +125,7 @@ public class MinIEModality extends Annotation {
   //*--------------*
   //* Feature: certaintyTokens
 
-  /** getter for certaintyTokens - gets MinIE’s certaintyWords
+  /** getter for certaintyTokens - gets MinIE's certaintyWords
    * @generated
    * @return value of the feature 
    */
@@ -134,7 +134,7 @@ public class MinIEModality extends Annotation {
       jcasType.jcas.throwFeatMissing("certaintyTokens", "de.mpg.mpi.uima.type.MinIEModality");
     return (FSArray)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEModality_Type)jcasType).casFeatCode_certaintyTokens)));}
     
-  /** setter for certaintyTokens - sets MinIE’s certaintyWords 
+  /** setter for certaintyTokens - sets MinIE's certaintyWords 
    * @generated
    * @param v value to set into the feature 
    */
@@ -143,7 +143,7 @@ public class MinIEModality extends Annotation {
       jcasType.jcas.throwFeatMissing("certaintyTokens", "de.mpg.mpi.uima.type.MinIEModality");
     jcasType.ll_cas.ll_setRefValue(addr, ((MinIEModality_Type)jcasType).casFeatCode_certaintyTokens, jcasType.ll_cas.ll_getFSRef(v));}    
     
-  /** indexed getter for certaintyTokens - gets an indexed value - MinIE’s certaintyWords
+  /** indexed getter for certaintyTokens - gets an indexed value - MinIE's certaintyWords
    * @generated
    * @param i index in the array to get
    * @return value of the element at index i 
@@ -154,7 +154,7 @@ public class MinIEModality extends Annotation {
     jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEModality_Type)jcasType).casFeatCode_certaintyTokens), i);
     return (TOP)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEModality_Type)jcasType).casFeatCode_certaintyTokens), i)));}
 
-  /** indexed setter for certaintyTokens - sets an indexed value - MinIE’s certaintyWords
+  /** indexed setter for certaintyTokens - sets an indexed value - MinIE's certaintyWords
    * @generated
    * @param i index in the array to set
    * @param v value to set into the array 

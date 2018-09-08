@@ -94,6 +94,8 @@ $BUILDDIR/glove -save-file $EMBEDDING_FILENAME -threads $NUM_THREADS -input-file
 #
 # Gensim format, so it can be easily compressed
 
+echo "Covnerting GloVe format into Word2Vec format..."
+
 python -m gensim.scripts.glove2word2vec --input "$EMBEDDING_FILENAME.txt" --output "$EMBEDDING_FILENAME.txt.tmp"
 rm "$EMBEDDING_FILENAME.txt"
 mv "$EMBEDDING_FILENAME.txt.tmp" "$EMBEDDING_FILENAME.txt"
@@ -103,6 +105,8 @@ mv "$EMBEDDING_FILENAME.txt.tmp" "$EMBEDDING_FILENAME.txt"
 #
 # Compressing embeddings
 
+echo "Compressing embeddings...."
+
 # bash src/main/patch.sh    # be sure that *.py files in entity2vec have been patched
 
 ./ext/entity2vec/model_quantization.py quant "$EMBEDDING_FILENAME.txt"  $EMBEDDING_FILENAME
@@ -111,15 +115,15 @@ sbt clean
 sbt compile
 sbt "run-main it.cnr.isti.hpc.Word2VecCompress $EMBEDDING_FILENAME.e0.100.tr.txt $EMBEDDING_FILENAME.bin"
 
-rm "$EMBEDDING_FILENAME".e0.100.*  # tr.model tr.model.syn0.npy tr.txt
-rm "$EMBEDDING_FILENAME".txt       # uncompressed embedding file
+#rm "$EMBEDDING_FILENAME".e0.100.*  # tr.model tr.model.syn0.npy tr.txt
+#rm "$EMBEDDING_FILENAME".txt       # uncompressed embedding file
 
 
 
 #
 # Clean temporary files
-
-rm data/tmp/coocc*
-rm data/tmp/vocab*
-
-rm -rf data/tmp/
+#
+#rm data/tmp/coocc*
+#rm data/tmp/vocab*
+#
+#rm -rf data/tmp/

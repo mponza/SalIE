@@ -12,7 +12,7 @@ import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
-/** MinIE’s Polarity
+/** MinIE's Polarity
  * Updated by JCasGen Thu Aug 09 16:07:33 CEST 2018
  * XML source: /Users/marcoponza/eclipse-workspace/UIMA/src/salieTypeSystemDescriptor.xml
  * @generated */
@@ -81,7 +81,7 @@ public class MinIEPolarity extends Annotation {
   //*--------------*
   //* Feature: negativeTokens
 
-  /** getter for negativeTokens - gets MinIE’s negativeWords
+  /** getter for negativeTokens - gets MinIE's negativeWords
    * @generated
    * @return value of the feature 
    */
@@ -90,7 +90,7 @@ public class MinIEPolarity extends Annotation {
       jcasType.jcas.throwFeatMissing("negativeTokens", "de.mpg.mpi.uima.type.MinIEPolarity");
     return (FSArray)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEPolarity_Type)jcasType).casFeatCode_negativeTokens)));}
     
-  /** setter for negativeTokens - sets MinIE’s negativeWords 
+  /** setter for negativeTokens - sets MinIE's negativeWords 
    * @generated
    * @param v value to set into the feature 
    */
@@ -99,7 +99,7 @@ public class MinIEPolarity extends Annotation {
       jcasType.jcas.throwFeatMissing("negativeTokens", "de.mpg.mpi.uima.type.MinIEPolarity");
     jcasType.ll_cas.ll_setRefValue(addr, ((MinIEPolarity_Type)jcasType).casFeatCode_negativeTokens, jcasType.ll_cas.ll_getFSRef(v));}    
     
-  /** indexed getter for negativeTokens - gets an indexed value - MinIE’s negativeWords
+  /** indexed getter for negativeTokens - gets an indexed value - MinIE's negativeWords
    * @generated
    * @param i index in the array to get
    * @return value of the element at index i 
@@ -110,7 +110,7 @@ public class MinIEPolarity extends Annotation {
     jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEPolarity_Type)jcasType).casFeatCode_negativeTokens), i);
     return (TOP)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEPolarity_Type)jcasType).casFeatCode_negativeTokens), i)));}
 
-  /** indexed setter for negativeTokens - sets an indexed value - MinIE’s negativeWords
+  /** indexed setter for negativeTokens - sets an indexed value - MinIE's negativeWords
    * @generated
    * @param i index in the array to set
    * @param v value to set into the array 

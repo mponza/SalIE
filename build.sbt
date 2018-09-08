@@ -1,17 +1,20 @@
 name := "SalIE"
 version := "0.1"
 scalaVersion := "2.12.6"
+
 scalacOptions += "-target:jvm-1.8"
-scalacOptions ++= Seq("-feature", "-deprecation")
+scalacOptions ++= Seq("-feature", "-deprecation", "-encoding", "UTF-8")
+
 fork in run := true
 
-//javaOptions in run += "-Xmx20G"
+javaOptions in run ++= Seq("-encoding", "UTF-8")//"-Xmx20G"
 
 //
 //resourceDirectory in (Compile, runMain) := baseDirectory.value / "src" / "main" / "resources"
 
 
 libraryDependencies ++= Seq(
+
   "it.unimi.dsi" % "fastutil" % "8.1.1",
   "it.unimi.dsi" % "dsiutils" % "2.4.2",
   "it.unimi.dsi" % "sux4j" % "4.2.0",

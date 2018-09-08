@@ -79,7 +79,7 @@ public class MinIEAttribution extends Annotation {
   //*--------------*
   //* Feature: attributionConstituent
 
-  /** getter for attributionConstituent - gets MinIE’s attributionPhrase
+  /** getter for attributionConstituent - gets MinIE's attributionPhrase
    * @generated
    * @return value of the feature 
    */
@@ -88,7 +88,7 @@ public class MinIEAttribution extends Annotation {
       jcasType.jcas.throwFeatMissing("attributionConstituent", "de.mpg.mpi.uima.type.MinIEAttribution");
     return (Constituent)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEAttribution_Type)jcasType).casFeatCode_attributionConstituent)));}
     
-  /** setter for attributionConstituent - sets MinIE’s attributionPhrase 
+  /** setter for attributionConstituent - sets MinIE's attributionPhrase 
    * @generated
    * @param v value to set into the feature 
    */

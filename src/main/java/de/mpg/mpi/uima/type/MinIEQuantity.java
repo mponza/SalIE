@@ -81,7 +81,7 @@ public class MinIEQuantity extends Annotation {
   //*--------------*
   //* Feature: quantityTokens
 
-  /** getter for quantityTokens - gets MinIE’s qWords
+  /** getter for quantityTokens - gets MinIE's qWords
    * @generated
    * @return value of the feature 
    */
@@ -90,7 +90,7 @@ public class MinIEQuantity extends Annotation {
       jcasType.jcas.throwFeatMissing("quantityTokens", "de.mpg.mpi.uima.type.MinIEQuantity");
     return (FSArray)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEQuantity_Type)jcasType).casFeatCode_quantityTokens)));}
     
-  /** setter for quantityTokens - sets MinIE’s qWords 
+  /** setter for quantityTokens - sets MinIE's qWords 
    * @generated
    * @param v value to set into the feature 
    */
@@ -99,7 +99,7 @@ public class MinIEQuantity extends Annotation {
       jcasType.jcas.throwFeatMissing("quantityTokens", "de.mpg.mpi.uima.type.MinIEQuantity");
     jcasType.ll_cas.ll_setRefValue(addr, ((MinIEQuantity_Type)jcasType).casFeatCode_quantityTokens, jcasType.ll_cas.ll_getFSRef(v));}    
     
-  /** indexed getter for quantityTokens - gets an indexed value - MinIE’s qWords
+  /** indexed getter for quantityTokens - gets an indexed value - MinIE's qWords
    * @generated
    * @param i index in the array to get
    * @return value of the element at index i 
@@ -110,7 +110,7 @@ public class MinIEQuantity extends Annotation {
     jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEQuantity_Type)jcasType).casFeatCode_quantityTokens), i);
     return (TOP)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((MinIEQuantity_Type)jcasType).casFeatCode_quantityTokens), i)));}
 
-  /** indexed setter for quantityTokens - sets an indexed value - MinIE’s qWords
+  /** indexed setter for quantityTokens - sets an indexed value - MinIE's qWords
    * @generated
    * @param i index in the array to set
    * @param v value to set into the array 

@@ -11,7 +11,7 @@ import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.cas.TOP;
 
 
-/** MinIE’s AnnotatedPhrase
+/** MinIE's AnnotatedPhrase
  * Updated by JCasGen Thu Aug 09 16:07:33 CEST 2018
  * XML source: /Users/marcoponza/eclipse-workspace/UIMA/src/salieTypeSystemDescriptor.xml
  * @generated */

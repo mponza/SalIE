@@ -10,7 +10,7 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** MinIE’s Polarity
+/** MinIE's Polarity
  * Updated by JCasGen Thu Aug 09 16:07:33 CEST 2018
  * @generated */
 public class MinIEPolarity_Type extends Annotation_Type {
