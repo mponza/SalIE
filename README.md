@@ -18,9 +18,12 @@ Building
 **Requirements.** For running SalIE out-of-the-box, your machine needs only to have [Scala](https://www.scala-lang.org/download/) and [sbt](https://www.scala-sbt.org/) preinstalled.
 
 
-**Setting-up.** Download the pre-crafted embeddings from [link/to/embeddings](http://link/to/embeddings) with:
+**Setting-up.** Download this repository recursively, apply the patch and downlaod the pre-crafted embeddings from [link/to/embeddings](http://link/to/embeddings) with:
 
-    bash src/main/bash/download-resources.sh
+    git clone --recursive https://github.com/mponza/SalIE
+    cd SalIE
+    bash src/main/bash/patch.sh
+    bash src/main/download-resources.sh
     
 that will be properely collocated into `data/embeddings` directory.
 

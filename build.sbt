@@ -3,11 +3,11 @@ version := "0.1"
 scalaVersion := "2.12.6"
 
 scalacOptions += "-target:jvm-1.8"
-scalacOptions ++= Seq("-feature", "-deprecation", "-encoding", "UTF-8")
+scalacOptions ++= Seq("-feature", "-deprecation")
 
 fork in run := true
 
-javaOptions in run ++= Seq("-encoding", "UTF-8")//"-Xmx20G"
+//javaOptions in run += "-Xmx20G"
 
 //
 //resourceDirectory in (Compile, runMain) := baseDirectory.value / "src" / "main" / "resources"
