@@ -121,3 +121,5 @@ rm "$EMBEDDING_FILENAME".txt       # uncompressed embedding file
 
 rm data/tmp/coocc*
 rm data/tmp/vocab*
+
+rm -rf data/tmp/

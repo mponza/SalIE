@@ -128,6 +128,48 @@ and then re-run the evaluation script.
 
 
 
+
+Dataset of Wikipedia Open Facts
+-------------------------------
+
+You can download the Wikipedia dataset (dump of August 2017) containing the whole set of extracted open facts with different MinIE's modes (i.e., [aggressive](https://groviera1.di.unipi.it:5001/sharing/cOjx6zNww), [safe](https://groviera1.di.unipi.it:5001/sharing/qhbO2EVZQ), [dictionary](https://groviera1.di.unipi.it:5001/sharing/qJ37mLhXz) and [complete](https://groviera1.di.unipi.it:5001/sharing/yDLeBdm5t)).
+Each file size is about 9GB (compressed) and each line is a Wikipedia page with the following JSON format:
+
+    {
+        "wikiID":       string      id of the Wikipedia page
+        "text":         string      raw text of the Wikipedia page
+        
+        "sentences":    list        list of sentences containing the extracted open facts
+        
+                [
+                    {
+                        "text":     string      sentence text
+                        "begin":    int         begin character offset of the sentence in the Wikipedia text
+                        "end":      int         end character offset of the sentence in the Wikipedia text
+                        
+                        "openFacts":    list    list of open facts extracted from the sentence (warning: F of facts is uppercase here!)
+                                    [
+                                        {
+                                            "subject":
+                                                {
+                                                    "text":     string      text of the subject
+                                                    "head":     string      head of the subject
+                                                    "begin":    int         begin character offset of the subject
+                                                    "end":      int         end character offset of the subject
+                                                }
+                                                
+                                            "relation":     same object structure of subject
+                                            "object":       same object structure of subject
+                                        }
+                                    ]
+                    }
+                ]
+    }
+
+
+
+
+
 Citation and Further Reading
 ----------------------------
 
