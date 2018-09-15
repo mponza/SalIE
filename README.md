@@ -15,10 +15,10 @@ Building
 --------
 
 
-**Requirements.** For running SalIE out-of-the-box, your machine needs only to have [Scala](https://www.scala-lang.org/download/) and [sbt](https://www.scala-sbt.org/) preinstalled.
+**Requirements.** For running SalIE out-of-the-box, your machine needs only to have Java and [sbt](https://www.scala-sbt.org/) preinstalled.
 
 
-**Setting-up.** Download this repository recursively, apply the patch and downlaod the pre-crafted embeddings from [link/to/embeddings](http://link/to/embeddings) with:
+**Setting-up.** Download this repository recursively, apply the patch and downlaod the pre-crafted embeddings with:
 
     git clone --recursive https://github.com/mponza/SalIE
     cd SalIE
@@ -72,7 +72,7 @@ and install the Python requirements:
 
 
 **Embeddings Generation &#38; Compression.** Given a file of open facts in JSON format (e.g., `path/to/agg-wikipedia.json`, 
-see [this](#Dataset of Wikipedia Open Facts) section for the description of the format), the  output embeddings file (e.g., `path/to/agg-wikipedia.glove`) can be generated from scratch with:
+section Dataset of Wikipedia Open Facts for the description of the format), the  output embeddings file (e.g., `path/to/agg-wikipedia.glove`) can be generated from scratch with:
 
     bash src/main/bash/facts2glove.sh path/to/agg-wikipedia.json path/to/agg-wikipedia.glove
     
