@@ -135,7 +135,7 @@ and the `path/to/abstracts` is the path to a directory of a set of documents, ea
 and then re-run the evaluation script.
 
 
-**NYT Data Collection.** This dataset can be bought from [LDC](https://catalog.ldc.upenn.edu/ldc2008t19), while the document IDs used in our testbed can be downloaded [here](https://groviera1.di.unipi.it:5001/sharing/a4BAg9gf4).
+**NYT Dataset.** This dataset can be bought from [LDC](https://catalog.ldc.upenn.edu/ldc2008t19), while the document IDs used in our testbed can be downloaded [here](https://groviera1.di.unipi.it:5001/sharing/a4BAg9gf4).
 
 
 
@@ -143,7 +143,7 @@ and then re-run the evaluation script.
 Dataset of Wikipedia Open Facts
 -------------------------------
 
-You can download the datasets containing the set of open facts extracted from Wikipedia (dump of August 2017) with different MinIE's modes: [aggressive](https://groviera1.di.unipi.it:5001/sharing/cOjx6zNww), [safe](https://groviera1.di.unipi.it:5001/sharing/qhbO2EVZQ), [dictionary](https://groviera1.di.unipi.it:5001/sharing/qJ37mLhXz) and [complete](https://groviera1.di.unipi.it:5001/sharing/yDLeBdm5t)).
+You can download the datasets containing the set of open facts extracted from Wikipedia (dump of August 2017) with different MinIE's modes: [aggressive](https://groviera1.di.unipi.it:5001/sharing/cOjx6zNww), [safe](https://groviera1.di.unipi.it:5001/sharing/qhbO2EVZQ), [dictionary](https://groviera1.di.unipi.it:5001/sharing/qJ37mLhXz) and [complete](https://groviera1.di.unipi.it:5001/sharing/yDLeBdm5t).
 Each file size is about 9GB (compressed) and each line is a Wikipedia page with the following JSON format:
 
     {
