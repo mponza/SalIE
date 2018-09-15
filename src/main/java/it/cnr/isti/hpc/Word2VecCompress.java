@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.objects.Object2LongFunction;
 import it.unimi.dsi.io.InputBitStream;
 import it.unimi.dsi.io.OutputBitStream;
 import it.unimi.dsi.logging.ProgressLogger;
+import it.unimi.dsi.sux4j.mph.GOVMinimalPerfectHashFunction;
 import it.unimi.dsi.sux4j.mph.MinimalPerfectHashFunction;
 import it.unimi.dsi.sux4j.util.EliasFanoMonotoneLongBigList;
 import it.unimi.dsi.util.ShiftAddXorSignedStringMap;
@@ -173,6 +174,7 @@ public class Word2VecCompress implements Serializable {
 			for (int i = 0; i < numWords; ++i) {
 				pl.lightUpdate();
 				indexToWord.add(lines.readLine().trim());
+
 			}
 			pl.done();
 
@@ -206,11 +208,13 @@ public class Word2VecCompress implements Serializable {
 
 		// logger.debug("Golomb moduli {}", golombModuli);
 
+
 		ShiftAddXorSignedStringMap dictionaryHash = new ShiftAddXorSignedStringMap(
 				indexToWord.iterator(),
 				new MinimalPerfectHashFunction.Builder<CharSequence>()
 						.keys(indexToWord)
 						.transform(TransformationStrategies.utf16()).build());
+
 		int[] permutation = new int[numWords];
 		for (int i = 0; i < numWords; ++i) {
 			int newPos = dictionaryHash.get(indexToWord.get(i)).intValue();

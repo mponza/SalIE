@@ -7,7 +7,7 @@ SalIE - Salient Open Information Extraction
 ============================================
 
 
-This repository hosts SalIE, the first framework addressing the extraction of salient open facts from an arbitrary text.
+This repository hosts a refactored and cleaned version of SalIE, the first framework addressing the extraction of *salient open facts* from arbitrary text.
 
 
 
@@ -71,12 +71,12 @@ and install the Python requirements:
     pip install -r src/main/python/requirements.txt
 
 
-**Embeddings Generation &#38; Compression.** Given a file of open facts in JSON format (e.g. `path/to/safe-wikipedia.json`) the embeddings file
-(e.g. `path/to/glove.safe.embeddings` with no extension) can be generated from scratch with:
+**Embeddings Generation &#38; Compression.** Given a file of open facts in JSON format (e.g., `path/to/agg-wikipedia.json`, 
+see [this](#Dataset of Wikipedia Open Facts) section for the description of the format), the  output embeddings file (e.g., `path/to/agg-wikipedia.glove`) can be generated from scratch with:
 
-    bash src/main/bash/facts2glove.sh path/to/agg-wikipedia.json path/to/agg.glove.embeddings
-
-For setting up different GloVe parameters check `src/main/bash/facts2glove.sh`.
+    bash src/main/bash/facts2glove.sh path/to/agg-wikipedia.json path/to/agg-wikipedia.glove
+    
+In this example, the output filename will be `path/to/agg-wikipedia.glove.bin`. For setting up different GloVe parameters check `src/main/bash/facts2glove.sh`.
 
 
 
@@ -128,6 +128,9 @@ and the `path/to/abstracts` is the path to a directory of a set of documents, ea
     bash src/main/fixROUGE.sh
     
 and then re-run the evaluation script.
+
+
+**NYT Data Collection.** This dataset can be bought from [LDC](https://catalog.ldc.upenn.edu/ldc2008t19), while the document IDs used in our testbed can be downloaded [here](https://groviera1.di.unipi.it:5001/sharing/a4BAg9gf4).
 
 
 

@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+#
+# Example script for running SalIE aggressive mode and evaluate it.
+# INPUTDIR is now a preprocessed dataset saved in bcas format.
 
-PIPELINE="pipeline-salie"
+PIPELINE="partial-salie"
 
 INPUTDIR="/home/ponza/Developer/datasets/factsalience/NYT50/bin"
 INPUTFORMAT="bin"
