@@ -6,7 +6,7 @@ SalIE - Salient Open Information Extraction
 ============================================
 
 
-This repository hosts a refactored and cleaned version of SalIE, the first framework addressing the extraction of *salient open facts* from arbitrary text.
+This repository hosts SalIE, the first framework addressing the extraction of *salient open facts* from arbitrary text.
 
 
 
@@ -25,6 +25,7 @@ Building
     
 Then download the precrafted embeddings from [here](https://groviera1.di.unipi.it:5001/sharing/kk1Y1KerQ) in `path/to/downloaded/zip` and unzip the archive into `data/embeddings` with:
     
+    mkdir -p data/embeddings
     unzip path/to/downloaded/zip -d data/embeddings
  
 Now you are ready to run SalIE.
@@ -37,7 +38,7 @@ salient open facts with SalIE by typing:
     
  
     
-where ``minieMode` can be `agg`, `safe`, `dict` or `comp` (for, respectively, aggressive, safe, dictionary and complete mode) and `path/to/output/data` is the folder on which the salient open facts will be stored in the following JSON format:
+where `minieMode` can be `agg`, `safe`, `dict` or `comp` (for, respectively, aggressive, safe, dictionary and complete MinIE's mode) and `path/to/output/data` is the folder on which the salient open facts will be stored in the following JSON format:
 
     {
         "docID":         string      document ID
@@ -142,7 +143,7 @@ and then re-run the evaluation script.
 Dataset of Wikipedia Open Facts
 -------------------------------
 
-You can download the Wikipedia dataset (dump of August 2017) containing the whole set of extracted open facts with different MinIE's modes (i.e., [aggressive](https://groviera1.di.unipi.it:5001/sharing/cOjx6zNww), [safe](https://groviera1.di.unipi.it:5001/sharing/qhbO2EVZQ), [dictionary](https://groviera1.di.unipi.it:5001/sharing/qJ37mLhXz) and [complete](https://groviera1.di.unipi.it:5001/sharing/yDLeBdm5t)).
+You can download the datasets containing the set of open facts extracted from Wikipedia (dump of August 2017) with different MinIE's modes: [aggressive](https://groviera1.di.unipi.it:5001/sharing/cOjx6zNww), [safe](https://groviera1.di.unipi.it:5001/sharing/qhbO2EVZQ), [dictionary](https://groviera1.di.unipi.it:5001/sharing/qJ37mLhXz) and [complete](https://groviera1.di.unipi.it:5001/sharing/yDLeBdm5t)).
 Each file size is about 9GB (compressed) and each line is a Wikipedia page with the following JSON format:
 
     {
