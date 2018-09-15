@@ -2,7 +2,6 @@
 
 
 
-
 SalIE - Salient Open Information Extraction
 ============================================
 
@@ -18,22 +17,27 @@ Building
 **Requirements.** For running SalIE out-of-the-box, your machine needs only to have Java and [sbt](https://www.scala-sbt.org/) preinstalled.
 
 
-**Setting-up.** Download this repository recursively, apply the patch and downlaod the pre-crafted embeddings with:
+**Setting-up.** Download this repository recursively, apply the patch with:
 
     git clone --recursive https://github.com/mponza/SalIE
     cd SalIE
     bash src/main/bash/patch.sh
-    bash src/main/download-resources.sh
     
-that will be properely collocated into `data/embeddings` directory.
+Then download the precrafted embeddings from [here](https://groviera1.di.unipi.it:5001/sharing/kk1Y1KerQ) in `path/to/downloaded/zip` and unzip the archive into `data/embeddings` with:
+    
+    unzip path/to/downloaded/zip -d data/embeddings
+ 
+Now you are ready to run SalIE.
 
 
-**Running.** Given a data collection stored in `path/to/input/data` folder, where each element is a text file, you can extract its
+**Running.** Given a data collection stored in `path/to/input/data` folder, where each element of the folder is a text file (i.e., `.txt`), you can extract its
 salient open facts with SalIE by typing:
 
-    src/main/bash/salient-extraction.sh path/to/input/data path/to/output/data
+    src/main/bash/salient-extraction.sh path/to/input/data path/to/output/data minieMode
     
-where `path/to/output/data` is the folder on which the salient open facts will be stored in the following JSON format:
+ 
+    
+where ``minieMode` can be `agg`, `safe`, `dict` or `comp` (for, respectively, aggressive, safe, dictionary and complete mode) and `path/to/output/data` is the folder on which the salient open facts will be stored in the following JSON format:
 
     {
         "docID":         string      document ID
@@ -57,7 +61,7 @@ The code has been developed on the top of [DkPro](https://dkpro.github.io/)/[UIM
 Embeddings Wikipedia Open Facts via GloVe and Data Compression
 ---------------------------------------------------------------
 
-We describe here the procedure used for generating the embedding vectors from the set of open facts extracted from the whole Wikipedia.
+We describe here the procedure used for generating the embedding vectors from the set of open facts extracted from the whole Wikipedia. If you have generted your own emebddings, you can easily adapt this procedure to plug them into SalIE.
 
 
 **Setting-up.** After you have clone this repository with `--recursive` option you have to install and create a 

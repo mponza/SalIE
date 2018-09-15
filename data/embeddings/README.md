@@ -1,0 +1,1 @@
+Download in this directory the pre-crafted embeddings.

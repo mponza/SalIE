@@ -130,7 +130,7 @@ class MinIEAnalysisEngine extends JCasAnnotator_ImplBase {
               minieOpenFact.setModality(minieModality)
 
 
-              // attribution (to be tested)
+              // attribution (not currently used in SalIE)
               val minieAttribution = new MinIEAttribution(jCas)
 
               try {

@@ -14,6 +14,8 @@ javaOptions += "-Dfile.encoding=UTF8"
 //resourceDirectory in (Compile, runMain) := baseDirectory.value / "src" / "main" / "resources"
 
 
+logLevel := Level.Error
+
 libraryDependencies ++= Seq(
 
   "it.unimi.dsi" % "fastutil" % "8.1.1",
