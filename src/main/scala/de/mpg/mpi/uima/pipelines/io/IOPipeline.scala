@@ -6,6 +6,7 @@ import de.mpg.mpi.uima.io.writers.WriterFactory
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.`type`.DocumentMetaData
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import it.unimi.dsi.logging.ProgressLogger
+import org.apache.uima.analysis_engine.{AnalysisEngine, AnalysisEngineDescription}
 import org.apache.uima.fit.factory.{AnalysisEngineFactory, JCasFactory}
 import org.apache.uima.fit.util.JCasUtil
 import org.apache.uima.jcas.JCas
@@ -59,22 +60,10 @@ class IOPipeline(val ioConfig: IOPipelineConfig) {
           ae.process(documents.get(0))
 
           // parallel computation
-          documents.subList(1, documents.size()).asScala.par.foreach(jCas => ae.process(jCas) )
+          processParallelDocuments(ae, documents, 1, documents.size())
 
         } else {
-
-          //resources already loaded, only parallel computation
-          documents.asScala.par.foreach(jCas => {
-            try {
-              ae.process(jCas)
-            } catch {
-              case e: Exception =>
-
-                logger.error("Error with document %s".format(
-                  JCasUtil.selectSingle(jCas, classOf[DocumentMetaData]).getDocumentId
-                ))
-            }
-          } )
+          processParallelDocuments(ae, documents)
         }
 
         pl.update()
@@ -83,4 +72,21 @@ class IOPipeline(val ioConfig: IOPipelineConfig) {
 
   }
 
+  def processParallelDocuments(ae: AnalysisEngine, documents: ObjectArrayList[JCas], begin: Int, end: Int): Unit = {
+    // resources already loaded, only parallel computation
+    documents.subList(begin, end).asScala.par.foreach(jCas => {
+      try {
+        ae.process(jCas)
+      } catch {
+        case e: Exception =>
+          logger.error("Error with document %s".format(
+            JCasUtil.selectSingle(jCas, classOf[DocumentMetaData]).getDocumentId
+          ))
+      }
+    })
+  }
+
+  def processParallelDocuments(ae: AnalysisEngine, documents: ObjectArrayList[JCas]): Unit = {
+    processParallelDocuments(ae, documents, 0, documents.size())
+  }
 }
