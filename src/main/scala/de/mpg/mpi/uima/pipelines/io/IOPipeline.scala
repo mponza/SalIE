@@ -79,6 +79,7 @@ class IOPipeline(val ioConfig: IOPipelineConfig) {
         ae.process(jCas)
       } catch {
         case e: Exception =>
+          // needs better catching coreference exceptions
           logger.error("Error with document %s".format(
             JCasUtil.selectSingle(jCas, classOf[DocumentMetaData]).getDocumentId
           ))

@@ -2,7 +2,7 @@
 
 
 INPUTDIR=$1
-INPUTFORMAT="txt"
+INPUTFORMAT="txt" # bin for cas already brocessed (filenames ending with bcas)
 
 OUTPUTDIR=$2
 OUTPUTFORMAT="json"

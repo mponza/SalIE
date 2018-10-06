@@ -126,6 +126,7 @@ where `path/to/open/facts/dir` is the path to a directory of a set of documents,
     }
     
 and the `path/to/abstracts` is the path to a directory of a set of documents, each one containing the document's abstract.
+On the NYT dataset results are slightly different from the ones in the paper because minor changes for this release.
 
 
 **Known Error (and How to Fix).** Running ROUGE can raise the "Cannot open exception db file for reading" exception. For fix it, just type:
