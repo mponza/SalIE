@@ -194,18 +194,18 @@ If you find any resource (code or data) of this repository useful, please cite o
 
 In the following we list other relevant papers describing the tools we used in this work.
 
-[MinIE](https://github.com/gkiril/minie), the open information extraction tool default used by SalIE:
+* [MinIE](https://github.com/gkiril/minie), the open information extraction tool default used by SalIE:
 
-> Kiril Gashteovski, Rainer Gemulla and Luciano Del Corro <br />
-> MinIE: Minimizing Facts in Open Information Extraction <br />
-> *In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing (EMNLP 2017)*
+    > Kiril Gashteovski, Rainer Gemulla and Luciano Del Corro <br />
+    > MinIE: Minimizing Facts in Open Information Extraction <br />
+    > *In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing (EMNLP 2017)*
 
 
-[Algorithms](https://github.com/ot/entity2vec) used for compressing word embeddings:
+* [Algorithms](https://github.com/ot/entity2vec) used for compressing word embeddings:
 
-> Roi Blanco, Giuseppe Ottaviano and Meij, Edgar <br />
-> Fast and Space-Efficient Entity Linking for Queries <br />
-> *In Proceedings of the Eighth ACM International Conference on Web Search and Data Mining (WSDM 2015)*
+    > Roi Blanco, Giuseppe Ottaviano and Meij, Edgar <br />
+    > Fast and Space-Efficient Entity Linking for Queries <br />
+    > *In Proceedings of the Eighth ACM International Conference on Web Search and Data Mining (WSDM 2015)*
 
 
 
