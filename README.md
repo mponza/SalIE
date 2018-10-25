@@ -136,7 +136,7 @@ On the NYT dataset results are slightly different from the ones in the paper bec
 and then re-run the evaluation script.
 
 
-**NYT Dataset.** This dataset can be bought from [LDC](https://catalog.ldc.upenn.edu/ldc2008t19), while the document IDs used in our testbed can be downloaded [here](https://groviera1.di.unipi.it:5001/sharing/a4BAg9gf4).
+**NYT Dataset.** This dataset can be bought from [LDC](https://catalog.ldc.upenn.edu/ldc2008t19), while the document IDs used in our testbed can be downloaded [here](https://drive.google.com/file/d/14hvLuTq5qvKN9qhjTpsl1hjYKQKKmExn).
 
 
 
