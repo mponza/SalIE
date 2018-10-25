@@ -23,7 +23,7 @@ Building
     cd SalIE
     bash src/main/bash/patch.sh
     
-Then download the precrafted embeddings from [here](https://groviera1.di.unipi.it:5001/sharing/kk1Y1KerQ) in `path/to/downloaded/zip` and unzip the archive into `data/embeddings` with:
+Then download the precrafted embeddings from [here](https://drive.google.com/file/d/1dzQpRnwLqTSX10QY4wWkQe8sF8XKwqnR) in `path/to/downloaded/zip` and unzip the archive into `data/embeddings` with:
     
     mkdir -p data/embeddings
     unzip path/to/downloaded/zip -d data/embeddings
@@ -144,7 +144,7 @@ and then re-run the evaluation script.
 Dataset of Wikipedia Open Facts
 -------------------------------
 
-You can download the datasets containing the set of open facts extracted from Wikipedia (dump of August 2017) with different MinIE's modes: [aggressive](https://groviera1.di.unipi.it:5001/sharing/cOjx6zNww), [safe](https://groviera1.di.unipi.it:5001/sharing/qhbO2EVZQ), [dictionary](https://groviera1.di.unipi.it:5001/sharing/qJ37mLhXz) and [complete](https://groviera1.di.unipi.it:5001/sharing/yDLeBdm5t).
+You can download the datasets containing the set of open facts extracted from Wikipedia (dump of August 2017) with different MinIE's modes: [aggressive](https://drive.google.com/file/d/1CL9f5PkeEGwvWLNHkrhkIpFInFqpBiP3), [safe](https://drive.google.com/file/d/1iGUoF-j-VYu93Kak4ZNK43iexBcrRFv7), [dictionary](https://drive.google.com/file/d/1kvMdPAsGjwaD1AvfN6nrkAwKfz42d-54) and [complete](https://drive.google.com/file/d/103WYLJerZMOr3lcbndOZv0od2hEFuHTQ).
 Each file size is about 9GB (compressed) and each line is a Wikipedia page with the following JSON format:
 
     {
@@ -203,7 +203,7 @@ In the following we list other relevant papers describing the tools we used in t
 
 * [Algorithms](https://github.com/ot/entity2vec) used for compressing word embeddings:
 
-    > Roi Blanco, Giuseppe Ottaviano and Meij, Edgar <br />
+    > Roi Blanco, Giuseppe Ottaviano and Edgar Meij <br />
     > Fast and Space-Efficient Entity Linking for Queries <br />
     > *In Proceedings of the Eighth ACM International Conference on Web Search and Data Mining (WSDM 2015)*
 
