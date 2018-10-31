@@ -62,7 +62,7 @@ The code has been developed on the top of [DkPro](https://dkpro.github.io/)/[UIM
 Embeddings Wikipedia Open Facts via GloVe and Data Compression
 ---------------------------------------------------------------
 
-We describe here the procedure used for generating the embedding vectors from the set of open facts extracted from the whole Wikipedia. If you have generted your own emebddings, you can easily adapt this procedure to plug them into SalIE.
+We describe here the procedure used for generating the embedding vectors from the set of open facts extracted from the whole Wikipedia. If you have generated your own embeddings, you can easily adapt this procedure to plug them into SalIE.
 
 
 **Setting-up.** After you have clone this repository with `--recursive` option you have to install and create a 
@@ -211,6 +211,6 @@ In the following we list other relevant papers describing the tools we used in t
 
 License
 -------
-The code in this repository has been released under GNU General Public License v.30.
+The code in this repository has been released under GNU General Public License v.3.0
 
 
