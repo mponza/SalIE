@@ -26,7 +26,7 @@ Building
 Then download the precrafted embeddings from [here](https://drive.google.com/file/d/1dzQpRnwLqTSX10QY4wWkQe8sF8XKwqnR) in `path/to/downloaded/zip` and unzip the archive into `data/embeddings` with:
     
     mkdir -p data/embeddings
-    unzip path/to/downloaded/zip -d data/embeddings
+    unzip path/to/downloaded/zip -d data
  
 Now you are ready to run SalIE.
 
